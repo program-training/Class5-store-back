@@ -2,7 +2,8 @@ import UserInterface from "../interfaces/ProductsInterface";
 import { v1 as uuid1 } from "uuid";
 import { comparePassword, generateUserPassword } from "../helpers/bcrypt";
 import {
-  getCollectionFromJsonFile,
+  getProductByIdFromJsonFile,
+  getProductsFromJsonFile,
   modifyCollection,
 } from "../../dataAccess/jsonfileDAL";
 import chalk from "chalk";
@@ -18,7 +19,7 @@ type UserResult = Promise<UserInterface | null>;
 
 export const getProducts = async () => {
   try {
-    const products = await getAllProductsFromMongoDB();
+    const products = await getProductsFromJsonFile();
     return products;
   } catch (error) {
     console.log(chalk.redBright(error));
@@ -28,7 +29,7 @@ export const getProducts = async () => {
 
 export const getProduct = async (productId: string) => {
   try {
-    const getProductFromMDB = await getProductById(productId);
+    const getProductFromMDB = await getProductByIdFromJsonFile(productId);
     console.log(getProductFromMDB);
     return getProductFromMDB;
   } catch (error) {
