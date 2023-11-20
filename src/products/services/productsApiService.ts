@@ -4,7 +4,6 @@ import { comparePassword, generateUserPassword } from "../helpers/bcrypt";
 import {
   getProductByIdFromJsonFile,
   getProductsFromJsonFile,
-  modifyCollection,
 } from "../../dataAccess/jsonfileDAL";
 import chalk from "chalk";
 import userValidation from "../models/joi/userValidation";
@@ -27,7 +26,7 @@ export const getProducts = async () => {
   }
 };
 
-export const getProduct = async (productId: string) => {
+export const getProduct = async (productId: number) => {
   try {
     const getProductFromMDB = await getProductByIdFromJsonFile(productId);
     console.log(getProductFromMDB);
