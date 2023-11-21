@@ -9,8 +9,9 @@ router.use("/api/products", productsRoutes);
 // router.use("/api/categories", categoriesRoutes);
 router.use("/api/orders", orderRouters);
 
-router.use("*", (req: Request, res: Response) =>
-  res.status(404).send("Page not found!")
-);
+router.use("*", (req: Request, res: Response) => {
+  console.log(req);
+  res.status(404).send("Page not found!");
+});
 
 export default router;

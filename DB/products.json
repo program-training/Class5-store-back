@@ -1,7 +1,7 @@
 {
   "products": [
     {
-      "id": "1",
+      "id": 1,
       "name": "Blue T-Shirt",
       "salePrice": 19.99,
       "quantity": 50,
@@ -12,7 +12,7 @@
       "imageAlt": "Blue t-shirt"
     },
     {
-      "id": "2",
+      "id": 2,
       "name": "Yoga Mat",
       "salePrice": 29.99,
       "quantity": 30,
@@ -24,7 +24,7 @@
       "imageAlt": "Yoga mat"
     },
     {
-      "id": "3",
+      "id": 3,
       "name": "Wireless Headphones",
       "salePrice": 99.99,
       "quantity": 12,
@@ -35,7 +35,7 @@
       "imageAlt": "Wireless headphones"
     },
     {
-      "id": "4",
+      "id": 4,
       "name": "Coffee Maker",
       "salePrice": 79.99,
       "quantity": 8,
@@ -46,7 +46,7 @@
       "imageAlt": "Coffee maker"
     },
     {
-      "id": "5",
+      "id": 5,
       "name": "Digital Camera",
       "salePrice": 399.99,
       "quantity": 5,
@@ -57,7 +57,7 @@
       "imageAlt": "Digital camera"
     },
     {
-      "id": "6",
+      "id": 6,
       "name": "Leather Belt",
       "salePrice": 49.99,
       "quantity": 23,
@@ -68,7 +68,7 @@
       "imageAlt": "Leather belt"
     },
     {
-      "id": "7",
+      "id": 7,
       "name": "Phone Case",
       "salePrice": 19.99,
       "quantity": 40,
@@ -79,7 +79,7 @@
       "imageAlt": "Phone case"
     },
     {
-      "id": "8",
+      "id": 8,
       "name": "Smart Watch",
       "salePrice": 249.99,
       "quantity": 15,

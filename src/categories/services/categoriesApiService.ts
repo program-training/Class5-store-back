@@ -2,6 +2,10 @@ import UserInterface from "../interfaces/CategoryInterface";
 import { v1 as uuid1 } from "uuid";
 import { comparePassword, generateUserPassword } from "../helpers/bcrypt";
 import { getProductsFromJsonFile } from "../../dataAccess/jsonfileDAL";
+// import {
+//   getCollectionFromJsonFile,
+//   modifyCollection,
+// } from "../../dataAccess/jsonfileDAL";
 import chalk from "chalk";
 import userValidation from "../models/joi/userValidation";
 import { getDataFromDummy } from "../../dataAccess/dummyjson";
