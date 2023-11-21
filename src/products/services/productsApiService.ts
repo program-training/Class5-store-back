@@ -36,3 +36,44 @@ export const getProduct = async (productId: number) => {
     return Promise.reject(error);
   }
 };
+
+export const decreaseProduct = async (
+  productId: string,
+  quantityToSubtract: number
+) => {
+  try {
+    if (!productId) {
+      throw new Error("Invalid productId");
+    }
+    const productDetailsResponse = await fetch(`/api/products/${productId}`);
+
+    if (!productDetailsResponse.ok) {
+      throw new Error("Failed to fetch product details");
+    }
+
+    const productData = await productDetailsResponse.json();
+
+    let currentStockQuantity = productData.quantityInStock;
+    currentStockQuantity -= quantityToSubtract;
+
+    const updateStockResponse = await fetch(
+      `/api/products/${productId}/stock`,
+      {
+        method: "PUT",
+        // headers: {
+        //   "Content-Type": "application/json",
+        // },
+        // body: JSON.stringify({ quantityInStock: currentStockQuantity }),
+      }
+    );
+
+    if (!updateStockResponse.ok) {
+      throw new Error("Failed to update product stock");
+    }
+
+    return true;
+  } catch (error) {
+    console.error("Error decreasing product stock quantity:", error);
+    return Promise.reject(error);
+  }
+};

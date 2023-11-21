@@ -1,7 +1,7 @@
 {
   "products": [
     {
-      "_id": 1,
+      "id": 1,
       "name": "Blue T-Shirt",
       "salePrice": 19.99,
       "quantity": 50,
@@ -17,7 +17,7 @@
       "supplier": "T-Shirts Inc."
     },
     {
-      "_id": 2,
+      "id": 2,
       "name": "Yoga Mat",
       "salePrice": 29.99,
       "quantity": 30,
@@ -33,7 +33,7 @@
       "supplier": "Active Lifestyle Co."
     },
     {
-      "_id": 3,
+      "id": 3,
       "name": "Wireless Headphones",
       "salePrice": 99.99,
       "quantity": 12,
@@ -49,7 +49,7 @@
       "supplier": "Audio Shop"
     },
     {
-      "_id": 4,
+      "id": 4,
       "name": "Coffee Maker",
       "salePrice": 79.99,
       "quantity": 8,
@@ -65,7 +65,7 @@
       "supplier": "Home Goods"
     },
     {
-      "_id": 5,
+      "id": 5,
       "name": "Digital Camera",
       "salePrice": 399.99,
       "quantity": 5,
@@ -81,7 +81,7 @@
       "supplier": "Cameras & Co."
     },
     {
-      "_id": 6,
+      "id": 6,
       "name": "Leather Belt",
       "salePrice": 49.99,
       "quantity": 23,
@@ -97,7 +97,7 @@
       "supplier": "Belts & More"
     },
     {
-      "_id": 7,
+      "id": 7,
       "name": "Phone Case",
       "salePrice": 19.99,
       "quantity": 40,
@@ -113,7 +113,7 @@
       "supplier": "Mobile Accessories"
     },
     {
-      "_id": 8,
+      "id": 8,
       "name": "Smart Watch",
       "salePrice": 249.99,
       "quantity": 15,
