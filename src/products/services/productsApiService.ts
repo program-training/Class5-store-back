@@ -9,10 +9,6 @@ import chalk from "chalk";
 import userValidation from "../models/joi/userValidation";
 import { getDataFromDummy } from "../../dataAccess/dummyjson";
 import { addDataToJsonPlaceHolder } from "../../dataAccess/jsonPlaceHolder";
-import {
-  getAllProductsFromMongoDB,
-  getProductById,
-} from "../../dataAccess/mongoose";
 
 type UserResult = Promise<UserInterface | null>;
 

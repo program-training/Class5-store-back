@@ -3,7 +3,7 @@ export const UserSchema = new Schema(
   {
     isAdmin: {
       type: Boolean,
-      required: false
+      required: false,
     },
     email: {
       type: String,
@@ -18,4 +18,5 @@ export const UserSchema = new Schema(
   },
   { versionKey: "" }
 );
-export const User = mongoose.model("user", UserSchema);
+const User = mongoose.model("user", UserSchema);
+export default User;
