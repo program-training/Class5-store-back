@@ -1,108 +1,93 @@
 {
-   "products":[ {
-        "id": 1,
-        "name": "Blue T-Shirt",
-        "salePrice": 19.99,
-        "quantity": 50,
-        "description": "Cotton short sleeve t-shirt",
-        "category": "Apparel",
-        "discountPercentage": 0,
-        "image": {
-          "url": "https://cdn.discordapp.com/attachments/1061944547246088242/1175870410601009272/meir_asulin_Cotton_short_sleeve_t-shirt_blue_71fa9687-e15c-4961-ba15-eac5122b3c51.png",
-          "alt": "Blue t-shirt"
-        }
-      },
-      {
-        "id": 2,
-        "name": "Yoga Mat",
-        "salePrice": 29.99,
-        "quantity": 30,
-        "description": "6mm thick yoga and exercise mat",
-        "category": "Fitness",
-        "discountPercentage": 10,
-        "image": {
-          "url": "https://cdn.discordapp.com/attachments/1061944547246088242/1175870681997660352/meir_asulin_6mm_thick_yoga_and_exercise_mat._yoga_mat_d9619d02-199c-448d-8b54-255f760e5a3e.png",
-          "alt": "Yoga mat"
-        }
-      },
-      {
-        "id": 3,
-        "name": "Wireless Headphones",
-        "salePrice": 99.99,
-        "quantity": 12,
-        "description": "Bluetooth over-ear headphones",
-        "category": "Electronics",
-        "discountPercentage": 0,
-        "image": {
-          "url": "https://cdn.discordapp.com/attachments/1061944547246088242/1175872330061316229/meir_asulin_Wireless_Headphones._Bluetooth_over-ear_headphones._400d5722-da66-4549-8017-9de6650b5a2f.png",
-          "alt": "Wireless headphones"
-        }
-      },
-      {
-        "id": 3,
-        "name": "Coffee Maker",
-        "salePrice": 79.99,
-        "quantity": 8,
-        "description": "Programmable coffee maker with 12 cup capacity",
-        "category": "Home",
-        "discountPercentage": 20,
-        "image": {
-          "url": "https://cdn.discordapp.com/attachments/1061944547246088242/1175872947689369650/meir_asulin_Programmable_coffee_machine_and_coffee_cup_b3a96e0d-dafe-4906-969a-80406be67d00.png",
-          "alt": "Coffee maker"
-        }
-      },
-      {
-        "id": 4,
-        "name": "Digital Camera",
-        "salePrice": 399.99,
-        "quantity": 5,
-        "description": "DSLR camera with 18-55mm lens",
-        "category": "Electronics",
-        "discountPercentage": 0,
-        "image": {
-          "url": "https://cdn.discordapp.com/attachments/1061944547246088242/1175873302359703655/meir_asulin_digital_camera__._DSLR_camera_with_18-55mm_lens_6e80d73b-6bd0-4a7c-b614-51c286a50c1d.png",
-          "alt": "Digital camera"
-        }
-      },
-      {
-        "id": 5,
-        "name": "Leather Belt",
-        "salePrice": 49.99,
-        "quantity": 23,
-        "description": "Genuine leather belt",
-        "category": "Apparel",
-        "discountPercentage": 0,
-        "image": {
-          "url": "https://cdn.discordapp.com/attachments/1061944547246088242/1175873274731839699/meir_asulin_Genuine_leather_belt_fc788609-20f9-47d0-8a00-131f8793a8c4.png",
-          "alt": "Leather belt"
-        }
-      },
-      {
-        "id": 6,
-        "name": "Phone Case",
-        "salePrice": 19.99,
-        "quantity": 40,
-        "description": "Protective case for iPhone 12",
-        "category": "Electronics",
-        "discountPercentage": 0,
-        "image": {
-          "url": "https://cdn.discordapp.com/attachments/1061944547246088242/1175873553091022889/meir_asulin_phone_case__._Protective_case_for_iPhone_12_10d77e32-9445-4e40-bee0-5233d2eff0bc.png",
-          "alt": "Phone case"
-        }
-      },
-      {
-        "id": 7,
-        "name": "Smart Watch",
-        "salePrice": 249.99,
-        "quantity": 15,
-        "description": "Fitness tracker with heart rate monitor",
-        "category": "Electronics",
-        "discountPercentage": 10,
-        "image": {
-          "url": "https://cdn.discordapp.com/attachments/1061944547246088242/1175873865373728908/meir_asulin_smart_watch__._Fitness_tracker_with_heart_rate_moni_59b2c259-c8bb-4f24-ab12-b199531b3efc.png",
-          "alt": "Smart watch"
-        }
-    }]
-}
+  "products": [
+    {
+      "id": "1",
+      "name": "Blue T-Shirt",
+      "salePrice": 19.99,
+      "quantity": 50,
+      "description": "Cotton short sleeve t-shirt",
+      "category": "Apparel",
+      "discountPercentage": 0,
+      "imageUrl": "https://cdn.discordapp.com/attachments/1061944547246088242/1175870410601009272/meir_asulin_Cotton_short_sleeve_t-shirt_blue_71fa9687-e15c-4961-ba15-eac5122b3c51.png",
+      "imageAlt": "Blue t-shirt"
+    },
+    {
+      "id": "2",
+      "name": "Yoga Mat",
+      "salePrice": 29.99,
+      "quantity": 30,
+      "description": "6mm thick yoga and exercise mat",
+      "category": "Fitness",
+      "discountPercentage": 10,
 
-  
+      "imageUrl": "https://cdn.discordapp.com/attachments/1061944547246088242/1175870681997660352/meir_asulin_6mm_thick_yoga_and_exercise_mat._yoga_mat_d9619d02-199c-448d-8b54-255f760e5a3e.png",
+      "imageAlt": "Yoga mat"
+    },
+    {
+      "id": "3",
+      "name": "Wireless Headphones",
+      "salePrice": 99.99,
+      "quantity": 12,
+      "description": "Bluetooth over-ear headphones",
+      "category": "Electronics",
+      "discountPercentage": 0,
+      "imageUrl": "https://cdn.discordapp.com/attachments/1061944547246088242/1175872330061316229/meir_asulin_Wireless_Headphones._Bluetooth_over-ear_headphones._400d5722-da66-4549-8017-9de6650b5a2f.png",
+      "imageAlt": "Wireless headphones"
+    },
+    {
+      "id": "4",
+      "name": "Coffee Maker",
+      "salePrice": 79.99,
+      "quantity": 8,
+      "description": "Programmable coffee maker with 12 cup capacity",
+      "category": "Home",
+      "discountPercentage": 20,
+      "imageUrl": "https://cdn.discordapp.com/attachments/1061944547246088242/1175872947689369650/meir_asulin_Programmable_coffee_machine_and_coffee_cup_b3a96e0d-dafe-4906-969a-80406be67d00.png",
+      "imageAlt": "Coffee maker"
+    },
+    {
+      "id": "5",
+      "name": "Digital Camera",
+      "salePrice": 399.99,
+      "quantity": 5,
+      "description": "DSLR camera with 18-55mm lens",
+      "category": "Electronics",
+      "discountPercentage": 0,
+      "imageUrl": "https://cdn.discordapp.com/attachments/1061944547246088242/1175873302359703655/meir_asulin_digital_camera__._DSLR_camera_with_18-55mm_lens_6e80d73b-6bd0-4a7c-b614-51c286a50c1d.png",
+      "imageAlt": "Digital camera"
+    },
+    {
+      "id": "6",
+      "name": "Leather Belt",
+      "salePrice": 49.99,
+      "quantity": 23,
+      "description": "Genuine leather belt",
+      "category": "Apparel",
+      "discountPercentage": 0,
+      "imageUrl": "https://cdn.discordapp.com/attachments/1061944547246088242/1175873274731839699/meir_asulin_Genuine_leather_belt_fc788609-20f9-47d0-8a00-131f8793a8c4.png",
+      "imageAlt": "Leather belt"
+    },
+    {
+      "id": "7",
+      "name": "Phone Case",
+      "salePrice": 19.99,
+      "quantity": 40,
+      "description": "Protective case for iPhone 12",
+      "category": "Electronics",
+      "discountPercentage": 0,
+      "imageUrl": "https://cdn.discordapp.com/attachments/1061944547246088242/1175873553091022889/meir_asulin_phone_case__._Protective_case_for_iPhone_12_10d77e32-9445-4e40-bee0-5233d2eff0bc.png",
+      "imageAlt": "Phone case"
+    },
+    {
+      "id": "8",
+      "name": "Smart Watch",
+      "salePrice": 249.99,
+      "quantity": 15,
+      "description": "Fitness tracker with heart rate monitor",
+      "category": "Electronics",
+      "discountPercentage": 10,
+      "imageUrl": "https://cdn.discordapp.com/attachments/1061944547246088242/1175873865373728908/meir_asulin_smart_watch__._Fitness_tracker_with_heart_rate_moni_59b2c259-c8bb-4f24-ab12-b199531b3efc.png",
+      "imageAlt": "Smart watch"
+    }
+  ]
+}
