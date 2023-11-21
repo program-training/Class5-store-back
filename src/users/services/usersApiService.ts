@@ -86,7 +86,9 @@ export const editUser = async (
     if (users instanceof Error)
       throw new Error("Oops... Could not get the users from the Database");
 
-    const index = users.findIndex((user) => user._id === userId);
+    const index = users.findIndex(
+      (user: { _id: string }) => user._id === userId
+    );
     if (index === -1) throw new Error("Could not find user with this ID!");
 
     const usersCopy = [...users];
@@ -109,9 +111,11 @@ export const deleteUser = async (userId: string) => {
     if (users instanceof Error)
       throw new Error("Oops... Could not get the users from the Database");
 
-    const user = users.find((user) => user._id === userId);
+    const user = users.find((user: { _id: string }) => user._id === userId);
     if (!user) throw new Error("Could not find user with this ID!");
-    const filteredUser = users.filter((user) => user._id !== userId);
+    const filteredUser = users.filter(
+      (user: { _id: string }) => user._id !== userId
+    );
 
     const data = await modifyCollection("users", filteredUser);
     if (!data)

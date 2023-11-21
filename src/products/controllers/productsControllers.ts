@@ -16,7 +16,7 @@ export const handleGetProducts = async (req: Request, res: Response) => {
 export const handleGetProduct = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const product = await getProduct(id);
+    const product = await getProduct(+id);
     return res.send(product);
   } catch (error) {
     handleError(res, error);
