@@ -1,25 +1,17 @@
-import UserInterface from "../interfaces/UserInterface";
-import {
-  getUsers,
-  getUser,
-  register,
-  editUser,
-  deleteUser,
-  login,
-  addProductToUser,
-} from "../services/usersApiService";
+import UserInterface from "../interfaces/userIntarface";
+import { getUser, register } from "../services/usersApiService";
 import { handleError } from "../../utils/handleErrors";
 import userValidation from "../models/joi/userValidation";
 import { Request, Response } from "express";
 
-export const handleGetUsers = async (req: Request, res: Response) => {
-  try {
-    const users = await getUsers();
-    return res.send(users);
-  } catch (error) {
-    handleError(res, error);
-  }
-};
+// export const handleGetUsers = async (req: Request, res: Response) => {
+//   try {
+//     const users = await getUsers();
+//     return res.send(users);
+//   } catch (error) {
+//     handleError(res, error);
+//   }
+// };
 
 export const handleGetUser = async (req: Request, res: Response) => {
   try {
@@ -45,55 +37,55 @@ export const handleUserRegistration = async (req: Request, res: Response) => {
   }
 };
 
-export const handleEditUser = async (req: Request, res: Response) => {
-  try {
-    const { id } = req.params;
-    const user: UserInterface = req.body;
+// export const handleEditUser = async (req: Request, res: Response) => {
+//   try {
+//     const { id } = req.params;
+//     const user: UserInterface = req.body;
 
-    const { error } = userValidation(user);
-    if (error?.details[0].message) throw new Error(error?.details[0].message);
+//     const { error } = userValidation(user);
+//     if (error?.details[0].message) throw new Error(error?.details[0].message);
 
-    const userFromDB = await editUser(id, user);
-    return res.send(userFromDB);
-  } catch (error) {
-    handleError(res, error);
-  }
-};
+//     const userFromDB = await editUser(id, user);
+//     return res.send(userFromDB);
+//   } catch (error) {
+//     handleError(res, error);
+//   }
+// };
 
-export const handleDeleteUser = async (req: Request, res: Response) => {
-  try {
-    const { id } = req.params;
-    const user = await deleteUser(id);
-    return res.send(user);
-  } catch (error) {
-    handleError(res, error);
-  }
-};
+// export const handleDeleteUser = async (req: Request, res: Response) => {
+//   try {
+//     const { id } = req.params;
+//     const user = await deleteUser(id);
+//     return res.send(user);
+//   } catch (error) {
+//     handleError(res, error);
+//   }
+// };
 
-export const handleLogin = async (req: Request, res: Response) => {
-  try {
-    const userFromClient: UserInterface = req.body;
+// export const handleLogin = async (req: Request, res: Response) => {
+//   try {
+//     const userFromClient: UserInterface = req.body;
 
-    const { error } = userValidation(userFromClient);
-    if (error?.details[0].message) throw new Error(error?.details[0].message);
+//     const { error } = userValidation(userFromClient);
+//     if (error?.details[0].message) throw new Error(error?.details[0].message);
 
-    const token = await login(userFromClient);
-    return res.send(token);
-  } catch (error) {
-    handleError(res, error, 401);
-  }
-};
+//     const token = await login(userFromClient);
+//     return res.send(token);
+//   } catch (error) {
+//     handleError(res, error, 401);
+//   }
+// };
 
-export const handleAddProductToUser = async (req: Request, res: Response) => {
-  try {
-    const { id } = req.params;
-    const { product } = req.query;
+// export const handleAddProductToUser = async (req: Request, res: Response) => {
+//   try {
+//     const { id } = req.params;
+//     const { product } = req.query;
 
-    const userWithProduct = await addProductToUser(id, String(product));
-    if (!userWithProduct)
-      throw new Error("Could not add this product to this user");
-    return res.send(userWithProduct);
-  } catch (error) {
-    handleError(res, error);
-  }
-};
+//     const userWithProduct = await addProductToUser(id, String(product));
+//     if (!userWithProduct)
+//       throw new Error("Could not add this product to this user");
+//     return res.send(userWithProduct);
+//   } catch (error) {
+//     handleError(res, error);
+//   }
+// };

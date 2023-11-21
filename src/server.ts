@@ -13,12 +13,7 @@ import cors from "./cors/cors";
 // };
 
 // app.use(cors(corsOptions));
-import {
-  connectToDatabase,
-  getAllUsersFromMongoDB,
-  getUserById,
-  insertUsers,
-} from "./dataAccess/mongoose";
+import { connectToDatabase } from "./dataAccess/mongoose";
 
 app.use(morgan);
 app.use(cors);
