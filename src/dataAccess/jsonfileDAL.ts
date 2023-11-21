@@ -5,20 +5,15 @@ import { handleJsonfileError } from "../utils/handleErrors";
 const DB_URL = path.join(__dirname, "../../DB/products.json");
 
 type Product = {
-  id: number;
+  id: string;
   name: string;
   salePrice: number;
   quantity: number;
   description: string;
   category: string;
   discountPercentage: number;
-  image: {
-    url: string;
-    alt: string;
-  };
-  isForSale: boolean;
-  costPrice: number;
-  supplier: string;
+  imageArl: string;
+  imageAlt: string;
 };
 
 //פונקציה שמקבלת מוצרים מתוך הjson file ומעבירה הלאה
@@ -31,7 +26,7 @@ export const getProductsFromJsonFile = async () => {
   }
 };
 
-export const getProductByIdFromJsonFile = async (id: number) => {
+export const getProductByIdFromJsonFile = async (id: string) => {
   try {
     const result = await getProductsFromJsonFile();
     // Find the product by ID
