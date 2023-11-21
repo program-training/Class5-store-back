@@ -1,6 +1,6 @@
 {
    "products":[ {
-        "_id": "655a2290a25763c663aa16bc",
+        "id": 1,
         "name": "Blue T-Shirt",
         "salePrice": 19.99,
         "quantity": 50,
@@ -16,7 +16,7 @@
         "supplier": "T-Shirts Inc."
       },
       {
-        "_id": "655a2290a25763c663aa16bd",
+        "id": 2,
         "name": "Yoga Mat",
         "salePrice": 29.99,
         "quantity": 30,
@@ -32,7 +32,7 @@
         "supplier": "Active Lifestyle Co."
       },
       {
-        "_id": "655a2290a25763c663aa16be",
+        "id": 3,
         "name": "Wireless Headphones",
         "salePrice": 99.99,
         "quantity": 12,
@@ -48,7 +48,7 @@
         "supplier": "Audio Shop"
       },
       {
-        "_id": "655a2290a25763c663aa16bf",
+        "id": 3,
         "name": "Coffee Maker",
         "salePrice": 79.99,
         "quantity": 8,
@@ -64,7 +64,7 @@
         "supplier": "Home Goods"
       },
       {
-        "_id": "655a2290a25763c663aa16c0",
+        "id": 4,
         "name": "Digital Camera",
         "salePrice": 399.99,
         "quantity": 5,
@@ -80,7 +80,7 @@
         "supplier": "Cameras & Co."
       },
       {
-        "_id": "655a2290a25763c663aa16c1",
+        "id": 5,
         "name": "Leather Belt",
         "salePrice": 49.99,
         "quantity": 23,
@@ -96,7 +96,7 @@
         "supplier": "Belts & More"
       },
       {
-        "_id": "655a2290a25763c663aa16c2",
+        "id": 6,
         "name": "Phone Case",
         "salePrice": 19.99,
         "quantity": 40,
@@ -112,7 +112,7 @@
         "supplier": "Mobile Accessories"
       },
       {
-        "_id": "655a2290a25763c663aa16c3",
+        "id": 7,
         "name": "Smart Watch",
         "salePrice": 249.99,
         "quantity": 15,
