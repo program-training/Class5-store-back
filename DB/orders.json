@@ -1,1 +1,104 @@
-{"orders":[]}
+{
+  "orders": [
+    {
+      "id": 1,
+      "products": [
+        {
+          "productId": 101,
+          "productName": "Product A",
+          "quantity": 2
+        },
+        {
+          "productId": 102,
+          "productName": "Product B",
+          "quantity": 1
+        }
+      ],
+      "status": "pending",
+      "email": "user1@example.com",
+      "price": 150,
+      "orderTime": "2023-11-20T08:00:00Z",
+      "shippingDetails": {
+        "address": "123 Main Street",
+        "contactNumber": "123-456-7890"
+      }
+    },
+    {
+      "id": 2,
+      "products": [
+        {
+          "productId": 103,
+          "productName": "Product C",
+          "quantity": 3
+        }
+      ],
+      "status": "shipped",
+      "email": "user2@example.com",
+      "price": 200,
+      "orderTime": "2023-11-19T12:30:00Z",
+      "shippingDetails": {
+        "address": "456 Elm Street",
+        "contactNumber": "987-654-3210"
+      }
+    },
+    {
+      "id": 3,
+      "products": [
+        {
+          "productId": 104,
+          "productName": "Product D",
+          "quantity": 1
+        },
+        {
+          "productId": 105,
+          "productName": "Product E",
+          "quantity": 2
+        }
+      ],
+      "status": "processing",
+      "email": "user3@example.com",
+      "price": 300,
+      "orderTime": "2023-11-18T15:45:00Z",
+      "shippingDetails": {
+        "address": "789 Oak Avenue",
+        "contactNumber": "333-999-7777"
+      }
+    },
+    {
+      "id": 4,
+      "products": [
+        {
+          "productId": 106,
+          "productName": "Product F",
+          "quantity": 1
+        }
+      ],
+      "status": "delivered",
+      "email": "user4@example.com",
+      "price": 80,
+      "orderTime": "2023-11-17T10:00:00Z",
+      "shippingDetails": {
+        "address": "567 Maple Lane",
+        "contactNumber": "555-123-4567"
+      }
+    },
+    {
+      "id": 5,
+      "products": [
+        {
+          "productId": 107,
+          "productName": "Product G",
+          "quantity": 4
+        }
+      ],
+      "status": "completed",
+      "email": "user5@example.com",
+      "price": 400,
+      "orderTime": "2023-11-16T09:30:00Z",
+      "shippingDetails": {
+        "address": "321 Pine Street",
+        "contactNumber": "999-888-7777"
+      }
+    }
+  ]
+}
