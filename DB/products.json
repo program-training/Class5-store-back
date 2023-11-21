@@ -10,10 +10,7 @@
         "image": {
           "url": "https://cdn.discordapp.com/attachments/1061944547246088242/1175870410601009272/meir_asulin_Cotton_short_sleeve_t-shirt_blue_71fa9687-e15c-4961-ba15-eac5122b3c51.png",
           "alt": "Blue t-shirt"
-        },
-        "isForSale": true,
-        "costPrice": 15,
-        "supplier": "T-Shirts Inc."
+        }
       },
       {
         "id": 2,
@@ -26,10 +23,7 @@
         "image": {
           "url": "https://cdn.discordapp.com/attachments/1061944547246088242/1175870681997660352/meir_asulin_6mm_thick_yoga_and_exercise_mat._yoga_mat_d9619d02-199c-448d-8b54-255f760e5a3e.png",
           "alt": "Yoga mat"
-        },
-        "isForSale": true,
-        "costPrice": 20,
-        "supplier": "Active Lifestyle Co."
+        }
       },
       {
         "id": 3,
@@ -42,10 +36,7 @@
         "image": {
           "url": "https://cdn.discordapp.com/attachments/1061944547246088242/1175872330061316229/meir_asulin_Wireless_Headphones._Bluetooth_over-ear_headphones._400d5722-da66-4549-8017-9de6650b5a2f.png",
           "alt": "Wireless headphones"
-        },
-        "isForSale": true,
-        "costPrice": 70,
-        "supplier": "Audio Shop"
+        }
       },
       {
         "id": 3,
@@ -58,10 +49,7 @@
         "image": {
           "url": "https://cdn.discordapp.com/attachments/1061944547246088242/1175872947689369650/meir_asulin_Programmable_coffee_machine_and_coffee_cup_b3a96e0d-dafe-4906-969a-80406be67d00.png",
           "alt": "Coffee maker"
-        },
-        "isForSale": true,
-        "costPrice": 60,
-        "supplier": "Home Goods"
+        }
       },
       {
         "id": 4,
@@ -74,10 +62,7 @@
         "image": {
           "url": "https://cdn.discordapp.com/attachments/1061944547246088242/1175873302359703655/meir_asulin_digital_camera__._DSLR_camera_with_18-55mm_lens_6e80d73b-6bd0-4a7c-b614-51c286a50c1d.png",
           "alt": "Digital camera"
-        },
-        "isForSale": true,
-        "costPrice": 320,
-        "supplier": "Cameras & Co."
+        }
       },
       {
         "id": 5,
@@ -90,10 +75,7 @@
         "image": {
           "url": "https://cdn.discordapp.com/attachments/1061944547246088242/1175873274731839699/meir_asulin_Genuine_leather_belt_fc788609-20f9-47d0-8a00-131f8793a8c4.png",
           "alt": "Leather belt"
-        },
-        "isForSale": true,
-        "costPrice": 30,
-        "supplier": "Belts & More"
+        }
       },
       {
         "id": 6,
@@ -106,10 +88,7 @@
         "image": {
           "url": "https://cdn.discordapp.com/attachments/1061944547246088242/1175873553091022889/meir_asulin_phone_case__._Protective_case_for_iPhone_12_10d77e32-9445-4e40-bee0-5233d2eff0bc.png",
           "alt": "Phone case"
-        },
-        "isForSale": true,
-        "costPrice": 10,
-        "supplier": "Mobile Accessories"
+        }
       },
       {
         "id": 7,
@@ -122,9 +101,8 @@
         "image": {
           "url": "https://cdn.discordapp.com/attachments/1061944547246088242/1175873865373728908/meir_asulin_smart_watch__._Fitness_tracker_with_heart_rate_moni_59b2c259-c8bb-4f24-ab12-b199531b3efc.png",
           "alt": "Smart watch"
-        },
-        "isForSale": true,
-        "costPrice": 200,
-        "supplier": "Wearable Devices"
+        }
     }]
 }
+
+  
