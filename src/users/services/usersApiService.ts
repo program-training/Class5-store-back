@@ -2,8 +2,8 @@ import UserInterface from "../interfaces/UserInterface";
 import { v1 as uuid1 } from "uuid";
 import { comparePassword, generateUserPassword } from "../helpers/bcrypt";
 import {
-  getCollectionFromJsonFile,
-  modifyCollection,
+  getProductsFromJsonFile,
+  modifyProducts,
 } from "../../dataAccess/jsonfileDAL";
 import chalk from "chalk";
 import userValidation from "../models/joi/userValidation";
@@ -66,10 +66,7 @@ export const register = async (user: UserInterface): UserResult => {
     await insertUsers(user);
     // users.push({ ...user });
 
-    await modifyCollection(
-      "users",
-      users as unknown as Record<string, unknown>[]
-    );
+    await modifyProducts("users");
     return user;
   } catch (error) {
     console.log(chalk.redBright(error));
@@ -82,18 +79,20 @@ export const editUser = async (
   userForUpdate: UserInterface
 ): UserResult => {
   try {
-    const users = await getCollectionFromJsonFile("users");
+    const users = await getProductsFromJsonFile();
     if (users instanceof Error)
       throw new Error("Oops... Could not get the users from the Database");
 
-    const index = users.findIndex((user) => user._id === userId);
+    const index = users.findIndex(
+      (user: { _id: string }) => user._id === userId
+    );
     if (index === -1) throw new Error("Could not find user with this ID!");
 
     const usersCopy = [...users];
     const userToUpdate = { ...usersCopy[index], ...userForUpdate };
     usersCopy[index] = userToUpdate;
 
-    const data = await modifyCollection("users", usersCopy);
+    const data = await modifyProducts("users");
     if (!data)
       throw new Error("Oops... something went wrong Could not Edit this user");
     return userToUpdate;
@@ -105,15 +104,17 @@ export const editUser = async (
 
 export const deleteUser = async (userId: string) => {
   try {
-    const users = await getCollectionFromJsonFile("users");
+    const users = await getProductsFromJsonFile();
     if (users instanceof Error)
       throw new Error("Oops... Could not get the users from the Database");
 
-    const user = users.find((user) => user._id === userId);
+    const user = users.find((user: { _id: string }) => user._id === userId);
     if (!user) throw new Error("Could not find user with this ID!");
-    const filteredUser = users.filter((user) => user._id !== userId);
+    const filteredUser = users.filter(
+      (user: { _id: string }) => user._id !== userId
+    );
 
-    const data = await modifyCollection("users", filteredUser);
+    const data = await modifyProducts("users");
     if (!data)
       throw new Error("Oops... something went wrong Could not Edit this user");
 
