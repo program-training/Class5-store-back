@@ -12,7 +12,7 @@ export const getProducts = async () => {
   }
 };
 
-export const getProduct = async (productId: string) => {
+export const getProduct = async (productId: number) => {
   try {
     const getProductFromMDB = await getProductByIdFromJsonFile(productId);
     console.log(getProductFromMDB);

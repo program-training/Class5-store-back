@@ -29,10 +29,10 @@ export const getOrderByUserIdFromJsonFile = async (id: string) => {
   }
 };
 
-export const addOrdersToDb = async (documents: Record<string, unknown>[]) => {
+export const registerOrderToDb = async (order: ordersInterface) => {
   try {
     const data = await getOrdersFromJsonFile();
-    const newData = { ...data.orders, documents };
+    const newData = { ...data.orders, order };
     await jsonfile.writeFile(DB_URL, newData);
     return newData;
   } catch (error) {
