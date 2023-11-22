@@ -1,6 +1,7 @@
 import { handleError } from "../../utils/handleErrors";
 import { Request, Response } from "express";
-import { getOrdersFromDb, getOrderByUserId } from "../service/orderService";
+import { getOrdersFromDb, getOrderByUserId, registerOrderService } from "../service/orderService";
+import OrderFromClientInterface from "../interfaces/OrderFromClientInterface";
 
 
 export const handleGetOrders = async (req: Request, res: Response) => {
@@ -21,3 +22,13 @@ export const handleGetOrderByUserId = async (req: Request, res: Response) => {
     handleError(res, error);
   }
 };
+
+export const handleRegisterOrder = async (req: Request, res: Response) => {
+  try {
+    const order =  req.body as OrderFromClientInterface
+    const registeredOrder = registerOrderService(order)
+    res.send(registeredOrder)
+  } catch (error) {
+    handleError(res, error);
+  }
+}

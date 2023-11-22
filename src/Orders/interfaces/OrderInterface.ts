@@ -4,11 +4,12 @@ interface ordersInterface {
   userId: string;
   id: number;
   products: ProductInterface[];
-  status: string;
+  status: "pending" | "processing" | "shipped" | "delivered" | "completed";
   email: string;
   price: number;
   orderTime: Date;
   shippingDetails: {
+    // orderType: "standard"| "express" | "pickup"
     address: string;
     contactNumber: string;
   };
