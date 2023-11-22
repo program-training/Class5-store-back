@@ -1,20 +1,8 @@
-import UserInterface from "../interfaces/ProductsInterface";
-import { v1 as uuid1 } from "uuid";
-import { comparePassword, generateUserPassword } from "../helpers/bcrypt";
 import {
   getProductByIdFromJsonFile,
   getProductsFromJsonFile,
 } from "../../dataAccess/jsonfileDAL";
 import chalk from "chalk";
-import userValidation from "../models/joi/userValidation";
-import { getDataFromDummy } from "../../dataAccess/dummyjson";
-import { addDataToJsonPlaceHolder } from "../../dataAccess/jsonPlaceHolder";
-import {
-  getAllProductsFromMongoDB,
-  getProductById,
-} from "../../dataAccess/mongoose";
-
-type UserResult = Promise<UserInterface | null>;
 
 export const getProducts = async () => {
   try {
@@ -37,43 +25,30 @@ export const getProduct = async (productId: number) => {
   }
 };
 
-export const decreaseProduct = async (
-  productId: string,
-  quantityToSubtract: number
+export const updateProductQuantity = async (
+  productId: number,
+  quantity: number
 ) => {
   try {
-    if (!productId) {
-      throw new Error("Invalid productId");
-    }
-    const productDetailsResponse = await fetch(`/api/products/${productId}`);
+    const products = await getProductsFromJsonFile();
+    return new Promise((resolve) => {
+      const productIndex = products.find(
+        (product: { id: number }) => product.id === productId
+      );
 
-    if (!productDetailsResponse.ok) {
-      throw new Error("Failed to fetch product details");
-    }
+      if (productIndex !== -1) {
+        const updatedProduct = {
+          ...products[productIndex],
+          quantity: products[productIndex].quantity - quantity,
+        };
 
-    const productData = await productDetailsResponse.json();
-
-    let currentStockQuantity = productData.quantityInStock;
-    currentStockQuantity -= quantityToSubtract;
-
-    const updateStockResponse = await fetch(
-      `/api/products/${productId}/stock`,
-      {
-        method: "PUT",
-        // headers: {
-        //   "Content-Type": "application/json",
-        // },
-        // body: JSON.stringify({ quantityInStock: currentStockQuantity }),
+        products[productIndex] = updatedProduct;
+        resolve(updatedProduct);
+      } else {
+        resolve(undefined);
       }
-    );
-
-    if (!updateStockResponse.ok) {
-      throw new Error("Failed to update product stock");
-    }
-
-    return true;
+    });
   } catch (error) {
-    console.error("Error decreasing product stock quantity:", error);
-    return Promise.reject(error);
+    throw new Error("Error updating product quantity");
   }
 };

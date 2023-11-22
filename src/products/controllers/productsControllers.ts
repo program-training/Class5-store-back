@@ -1,11 +1,9 @@
-import UserInterface from "../interfaces/ProductsInterface";
 import {
   getProducts,
   getProduct,
-  decreaseProduct,
+  updateProductQuantity,
 } from "../services/productsApiService";
 import { handleError } from "../../utils/handleErrors";
-import userValidation from "../models/joi/userValidation";
 import { Request, Response } from "express";
 
 export const handleGetProducts = async (req: Request, res: Response) => {
@@ -26,11 +24,22 @@ export const handleGetProduct = async (req: Request, res: Response) => {
     handleError(res, error);
   }
 };
-export const handleDecreaseProduct = async (req: Request, res: Response) => {
+
+export const handleSubtractQuantity = async (req: Request, res: Response) => {
   try {
-    const { id, quantityToSubtract } = req.params;
-    const DecreaseProduct = await decreaseProduct(id, +quantityToSubtract);
-    return res.send(DecreaseProduct);
+    const productId = parseInt(req.params.productId);
+    const { quantity } = req.body;
+
+    const product = await updateProductQuantity(productId, quantity);
+
+    if (!product) {
+      return res.status(404).send({ error: "Product not found" });
+    }
+
+    return res.status(200).send({
+      message: "Quantity subtracted successfully",
+      updatedQuantity: product,
+    });
   } catch (error) {
     handleError(res, error);
   }
