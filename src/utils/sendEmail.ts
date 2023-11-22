@@ -33,7 +33,7 @@ const sendEmail = async (email: string, userId: string) => {
         from: process.env.USER_EMAIL,
         to: email,
         subject: `hello to see your order details click on the link` ,
-        text: `http://demo/order-detalis/${userId}`,
+        text: `http://localhost:5173/order-detalis/${userId}`,
       })}
      catch (error) {
         return Promise.reject(error)
