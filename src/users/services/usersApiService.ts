@@ -1,5 +1,5 @@
-import UserInterface from "../interfaces/userIntarface";
 import { getUserByIdFromDb,registerUserToDb } from "../dal/usersDal";
+import UserInterface from "../interfaces/userInterface";
 import User from "../models/mongoose/UserSchema";
 
 export const getUser = async (userId: string) => {
