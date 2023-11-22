@@ -1,12 +1,9 @@
-import chalk from "chalk";
-import { handleError, handleJsonfileError } from "../../utils/handleErrors";
 import {
   getOrderByUserIdFromJsonFile,
   getOrdersFromJsonFile,
 } from "../dal/orderDal";
-import ordersInterface from "../interfaces/OrderInterface";
 
-export const getAllOrders = async () => {
+export const getOrdersFromDb = async () => {
   try {
     const AllOrders = await getOrdersFromJsonFile();
     return AllOrders;
