@@ -1,16 +1,9 @@
-import { v1 as uuid1 } from "uuid";
-import { comparePassword, generateUserPassword } from "../helpers/bcrypt";
 import {
   getProductsFromJsonFile,
   modifyProducts,
 } from "../../dataAccess/jsonfileDAL";
 import chalk from "chalk";
-import userValidation from "../models/joi/userValidation";
-import { getDataFromDummy } from "../../dataAccess/dummyjson";
-import { addDataToJsonPlaceHolder } from "../../dataAccess/jsonPlaceHolder";
-
-import { generateAuthToken } from "../helpers/token";
-import UserInterface from "../interfaces/userIntarface";
+import UserInterface from "../interfaces/userInterface";
 import { getUserById, insertUsers } from "../dal/usersDal";
 import User from "../models/mongoose/UserSchema";
 
@@ -35,8 +28,6 @@ export const register = async (user: UserInterface): UserResult => {
     const userRegistered = await User.find({ email: user.email });
     if (userRegistered) throw new Error("This user is allready registered!");
     await insertUsers(user);
-    // users.push({ ...user });
-
     await modifyProducts("users");
     return user;
   } catch (error) {

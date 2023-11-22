@@ -10,11 +10,6 @@ export const UserSchema = new Schema(
       required: true,
       minLength: 5,
     },
-    password: {
-      type: String,
-      required: true,
-      minLength: 7,
-    },
   },
   { versionKey: "" }
 );

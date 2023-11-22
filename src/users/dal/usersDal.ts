@@ -1,4 +1,4 @@
-import UserInterface from "../interfaces/userIntarface";
+import UserInterface from "../interfaces/userInterface";
 import User from "../models/mongoose/UserSchema";
 
 export const getUserById = async (id: string) => {

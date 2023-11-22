@@ -1,4 +1,4 @@
-import UserInterface from "../interfaces/userIntarface";
+import UserInterface from "../interfaces/userInterface";
 import { getUser, register } from "../services/usersApiService";
 import { handleError } from "../../utils/handleErrors";
 import userValidation from "../models/joi/userValidation";
