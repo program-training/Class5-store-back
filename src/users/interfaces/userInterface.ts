@@ -1,7 +1,8 @@
 interface UserInterface {
-    _id: string;
-    email: string;
-    admin?: true
+  _id: string;
+  email: string;
+  admin?: true;
+  password?: string;
 }
 
-export default UserInterface
+export default UserInterface;

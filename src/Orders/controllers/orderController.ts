@@ -1,12 +1,12 @@
 import { handleError } from "../../utils/handleErrors";
 import { Request, Response } from "express";
-import { getAllOrders, getOrderByUserId } from "../service/orderService";
+import { getOrdersFromDb, getOrderByUserId } from "../service/orderService";
 
 
 export const handleGetOrders = async (req: Request, res: Response) => {
   try {
-    const Orders = await getAllOrders();
-    return res.send(Orders);
+    const Orders = await getOrdersFromDb();
+    return res.status(200).send(Orders);
   } catch (error) {
     handleError(res, error);
   }

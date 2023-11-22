@@ -19,3 +19,4 @@ app.listen(PORT, () => {
     .then((message) => console.log(message))
     .catch((error) => console.log(error.message));
 });
+export default app;

@@ -1,7 +1,19 @@
-import { getUserByIdFromDb,registerUserToDb } from "../dal/usersDal";
+import {
+  getUserByIdFromDb,
+  registerUserToDb,
+  getUsersFromDb,
+} from "../dal/usersDal";
 import UserInterface from "../interfaces/userInterface";
 import User from "../models/mongoose/UserSchema";
 
+export const getUsers = async () => {
+  try {
+    const users = await getUsersFromDb();
+    return users;
+  } catch (error) {
+    return Error;
+  }
+};
 export const getUser = async (userId: string) => {
   try {
     const getUserFromMDB = await getUserByIdFromDb(userId);
@@ -14,7 +26,7 @@ export const getUser = async (userId: string) => {
 export const register = async (user: UserInterface) => {
   try {
     const userRegistered = await User.find({ email: user.email });
-    if (userRegistered) throw new Error("This user is already registered!");
+    if (userRegistered) return userRegistered;
     await registerUserToDb(user);
     return user;
   } catch (error) {
