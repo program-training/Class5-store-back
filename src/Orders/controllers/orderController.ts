@@ -5,7 +5,7 @@ import { Request, Response } from "express";
 export const handleGetOrders = async (req: Request, res: Response) => {
   try {
     const Orders = await getOrdersFromDb();
-    return res.send(Orders);
+    return res.status(200).send(Orders);
   } catch (error) {
     handleError(res, error);
   }

@@ -40,3 +40,4 @@ app.listen(PORT, () => {
   //   .then(() => console.log(chalk.magentaBright("Initial Users Created!")))
   //   .catch((error) => console.log(error));
 });
+export default app;

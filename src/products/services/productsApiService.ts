@@ -36,3 +36,12 @@ export const getProduct = async (productId: number) => {
     return Promise.reject(error);
   }
 };
+
+export const checkQuantity = async (
+  productId: number,
+  objectsArray: any,
+  quantity: number
+) => {
+  try {
+  } catch (error) {}
+};
