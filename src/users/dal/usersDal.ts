@@ -13,6 +13,8 @@ export const registerUserToDb = async (user: UserInterface) => {
   try {
     const newUser = new User(user);
     const userFromDB = await newUser.save();
+    console.log(userFromDB);
+    
     return userFromDB;
   } catch (error) {
     if (error instanceof Error) return Promise.reject(error);
