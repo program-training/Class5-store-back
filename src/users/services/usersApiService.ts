@@ -3,7 +3,7 @@ import {
   modifyProducts,
 } from "../../dataAccess/jsonfileDAL";
 import chalk from "chalk";
-import UserInterface from "../interfaces/userInterface";
+import UserInterface from "../interfaces/UserInterface";
 import { getUserById, insertUsers } from "../dal/usersDal";
 import User from "../models/mongoose/UserSchema";
 
