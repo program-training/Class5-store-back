@@ -21,3 +21,12 @@ export const getProduct = async (productId: string) => {
     return Promise.reject(error);
   }
 };
+
+export const checkQuantity = async (
+  productId: number,
+  objectsArray: any,
+  quantity: number
+) => {
+  try {
+  } catch (error) {}
+};

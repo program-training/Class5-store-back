@@ -10,6 +10,8 @@ const userValidation = (user: UserInterface) => {
       )
       .rule({ message: 'user "mail" mast be a valid mail' })
       .required(),
+    isAdmin: Joi.bool().allow(),
+    password: Joi.string().allow(),
   });
   return schema.validate(user);
 };
