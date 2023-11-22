@@ -4,8 +4,6 @@ import UserInterface from "../../interfaces/UserInterface";
 const userValidation = (user: UserInterface) => {
   const schema = Joi.object({
     _id: Joi.string().allow(""),
-    first_name: Joi.string().required(),
-    last_name: Joi.string().required(),
     email: Joi.string()
       .ruleset.pattern(
         /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/

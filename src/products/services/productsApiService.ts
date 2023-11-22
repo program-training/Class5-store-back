@@ -14,7 +14,7 @@ export const getProducts = async () => {
   }
 };
 
-export const getProduct = async (productId: number) => {
+export const getProduct = async (productId: string) => {
   try {
     const getProductFromMDB = await getProductByIdFromJsonFile(productId);
     console.log(getProductFromMDB);
