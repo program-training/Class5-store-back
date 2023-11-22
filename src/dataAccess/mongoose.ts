@@ -1,15 +1,17 @@
 import mongoose, { ObjectId } from "mongoose";
-import { User } from "../users/models/mongoose/UserSchema";
+import  User  from "../users/models/mongoose/UserSchema";
 import UserInterface from "../users/interfaces/UserInterface";
 import { Product } from "../products/models/mongoose/ProductSchema";
 import { Category } from "../categories/models/mongoose/CategorySchema";
 // import CategoryInterface from "../categories/interfaces/CategoryInterface";
 // var ObjectId1 = require("mongoose").Types.ObjectId;
+import dotenv from "dotenv"
+dotenv.config()
 
 export const connectToDatabase = async () => {
   try {
     await mongoose.connect(
-      "mongodb+srv://8a:123456789Aa@cluster0.5yelxyu.mongodb.net/project-11-12-23"
+      process.env.MONGO_URI || "mongodb+srv://8a:123456789Aa@cluster0.5yelxyu.mongodb.net/project-11-12-23"
     );
     return "Connected to MongoDB";
   } catch (error) {

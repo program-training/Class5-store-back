@@ -10,12 +10,9 @@ export const UserSchema = new Schema(
       required: true,
       minLength: 5,
     },
-    password: {
-      type: String,
-      required: true,
-      minLength: 7,
-    },
   },
   { versionKey: "" }
 );
-export const User = mongoose.model("user", UserSchema);
+const User = mongoose.model("user", UserSchema);
+
+export default User

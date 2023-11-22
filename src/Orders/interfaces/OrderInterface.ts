@@ -1,6 +1,7 @@
-import ProductInterface from "../../products/interfaces/productInterface";
+import ProductInterface from "../../products/interfaces/ProductInterface";
 
-interface ordersInterface {
+interface OrdersInterface {
+  userId: string;
   id: number;
   products: ProductInterface[];
   status: string;
@@ -13,4 +14,4 @@ interface ordersInterface {
   };
 }
 
-export default ordersInterface;
+export default OrdersInterface;

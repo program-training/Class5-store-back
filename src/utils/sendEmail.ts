@@ -27,12 +27,12 @@ const transporter = createTransport({
   },
 });
 
-const sendEmail = async (email: string, id: string, name: string) => {
+const sendEmail = async (email: string, id: string) => {
     try {
       const info = await transporter.sendMail({
         from: process.env.USER_EMAIL,
         to: email,
-        subject: `hello ${name} to see your order details click on the link` ,
+        subject: `hello to see your order details click on the link` ,
         text: `http://demo/order-detalis/${id}`,
       })}
      catch (error) {

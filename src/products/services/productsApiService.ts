@@ -1,20 +1,9 @@
-import UserInterface from "../interfaces/ProductsInterface";
-import { v1 as uuid1 } from "uuid";
-import { comparePassword, generateUserPassword } from "../helpers/bcrypt";
 import {
   getProductByIdFromJsonFile,
   getProductsFromJsonFile,
-} from "../../dataAccess/jsonfileDAL";
+} from "../dal/productsDal";
 import chalk from "chalk";
-import userValidation from "../models/joi/userValidation";
-import { getDataFromDummy } from "../../dataAccess/dummyjson";
-import { addDataToJsonPlaceHolder } from "../../dataAccess/jsonPlaceHolder";
-import {
-  getAllProductsFromMongoDB,
-  getProductById,
-} from "../../dataAccess/mongoose";
-
-type UserResult = Promise<UserInterface | null>;
+import ProductInterface from "../interfaces/ProductInterface";
 
 export const getProducts = async () => {
   try {
@@ -26,7 +15,7 @@ export const getProducts = async () => {
   }
 };
 
-export const getProduct = async (productId: string) => {
+export const getProductById = async (productId: string) => {
   try {
     const getProductFromMDB = await getProductByIdFromJsonFile(productId);
     console.log(getProductFromMDB);
@@ -37,43 +26,66 @@ export const getProduct = async (productId: string) => {
   }
 };
 
-export const decreaseProduct = async (
-  productId: string,
-  quantityToSubtract: number
-) => {
+type OrderFromClient = {
+  productId: string;
+  requiredQuantity: number
+}
+export const getProductsInStock = async (arr: OrderFromClient[]) => {
   try {
-    if (!productId) {
-      throw new Error("Invalid productId");
-    }
-    const productDetailsResponse = await fetch(`/api/products/${productId}`);
-
-    if (!productDetailsResponse.ok) {
-      throw new Error("Failed to fetch product details");
-    }
-
-    const productData = await productDetailsResponse.json();
-
-    let currentStockQuantity = productData.quantityInStock;
-    currentStockQuantity -= quantityToSubtract;
-
-    const updateStockResponse = await fetch(
-      `/api/products/${productId}/stock`,
-      {
-        method: "PUT",
-        // headers: {
-        //   "Content-Type": "application/json",
-        // },
-        // body: JSON.stringify({ quantityInStock: currentStockQuantity }),
-      }
-    );
-
-    if (!updateStockResponse.ok) {
-      throw new Error("Failed to update product stock");
-    }
-
-    return true;
+    const products = await getProductsFromJsonFile() as ProductInterface[];
+    const productsExist = products.filter((product) => {
+      return arr.some((order) => {
+        if (order.productId === product.id && product.quantity - order.requiredQuantity >= 0) {
+          return true
+        }
+        return false;
+      });
+    })
+    if (arr.length !== productsExist.length) throw new Error("some product is out of stock")
+    return productsExist
   } catch (error) {
-    console.error("Error decreasing product stock quantity:", error);
-    return Promise.reject(error);
+    return Promise.reject(error); 
   }
-};
+} 
+
+
+// export const decreaseProduct = async (
+//   productId: string,
+//   quantityToSubtract: number
+// ) => {
+//   try {
+//     if (!productId) {
+//       throw new Error("Invalid productId");
+//     }
+//     const productDetailsResponse = await fetch(`/api/products/${productId}`);
+
+//     if (!productDetailsResponse.ok) {
+//       throw new Error("Failed to fetch product details");
+//     }
+
+//     const productData = await productDetailsResponse.json();
+
+//     let currentStockQuantity = productData.quantityInStock;
+//     currentStockQuantity -= quantityToSubtract;
+
+//     const updateStockResponse = await fetch(
+//       `/api/products/${productId}/stock`,
+//       {
+//         method: "PUT",
+//         // headers: {
+//         //   "Content-Type": "application/json",
+//         // },
+//         // body: JSON.stringify({ quantityInStock: currentStockQuantity }),
+//       }
+//     );
+
+//     if (!updateStockResponse.ok) {
+//       throw new Error("Failed to update product stock");
+//     }
+
+//     return true;
+//   } catch (error) {
+//     console.error("Error decreasing product stock quantity:", error);
+//     return Promise.reject(error);
+//   }
+// };

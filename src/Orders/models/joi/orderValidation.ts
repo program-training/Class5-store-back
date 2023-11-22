@@ -1,6 +1,6 @@
 import Joi from "joi";
 import ordersInterface from "../../interfaces/OrderInterface";
-import ProductInterface from "../../../products/interfaces/productInterface";
+import ProductInterface from "../../../products/interfaces/ProductInterface";
 import shippingDetails from "../../interfaces/OrderInterface";
 
 const userValidation = (order: ordersInterface) => {

@@ -1,39 +1,37 @@
 import jsonfile from "jsonfile";
 import path from "path";
 import { handleJsonfileError } from "../../utils/handleErrors";
-import ordersInterface from "../interfaces/OrderInterface";
+import OrdersInterface from "../interfaces/OrderInterface";
 
-const DB_URL = path.join(__dirname, "../../DB/orders.json");
+const DB_URL = path.join(__dirname, "../../../DB/orders.json");
 
 export const getOrdersFromJsonFile = async () => {
   try {
     const data = await jsonfile.readFile(DB_URL);
-    return data;
+    return data.orders;
   } catch (error) {
     return handleJsonfileError(error);
   }
 };
 
-export const getOrderByIdFromJsonFile = async (id: number) => {
+export const getOrderByIdFromJsonFile = async (id: string) => {
   try {
     const result = await getOrdersFromJsonFile();
-    const orders = result.orders;
-    const order = orders.find((p: ordersInterface) => p.id === id);
+    const orders = result.orders as OrdersInterface[]
+    const order = orders.find((p: OrdersInterface) => p.userId === id);
     if (!order) {
-      console.log("Product not found");
-      throw Error;
+      throw Error("Product not found");
     }
     return order;
   } catch (error) {
-    console.log(error);
     return handleJsonfileError(error);
   }
 };
 
-export const addOrdersToDb = async (documents: Record<string, unknown>[]) => {
+export const addOrdersToDb = async (order: OrdersInterface) => {
   try {
     const data = await getOrdersFromJsonFile();
-    const newData = { ...data.orders, documents };
+    const newData = { ...data.orders, order };
     await jsonfile.writeFile(DB_URL, newData);
     return newData;
   } catch (error) {

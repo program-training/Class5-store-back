@@ -1,33 +1,32 @@
-import chalk from "chalk";
-import { handleError, handleJsonfileError } from "../../utils/handleErrors";
 import {
+  addOrdersToDb,
   getOrderByIdFromJsonFile,
   getOrdersFromJsonFile,
 } from "../dal/orderDal";
-import {
-  getProductByIdFromJsonFile,
-  getProductsFromJsonFile,
-} from "../../dataAccess/jsonfileDAL";
-import ordersInterface from "../interfaces/OrderInterface";
-
+import OrdersInterface from "../interfaces/OrderInterface";
 export const getAllOrders = async () => {
   try {
     const AllOrders = await getOrdersFromJsonFile();
-    console.log(AllOrders);
     return AllOrders;
   } catch (error) {
-    console.log(chalk.redBright(error));
     return Promise.reject(error);
   }
 };
 
-export const getProduct = async (productId: number) => {
+export const getOrderByUserId = async (userId: string) => {
   try {
-    const getProductFromMDB = await getProductByIdFromJsonFile(productId);
-    console.log(getProductFromMDB);
-    return getProductFromMDB;
+    const order = await getOrderByIdFromJsonFile(userId);
+    return order;
   } catch (error) {
-    console.log(chalk.redBright(error));
     return Promise.reject(error);
   }
 };
+
+export const registerOrder =async (order:OrdersInterface) => {
+  try {
+    const registeredOrder = await addOrdersToDb(order)
+    return registeredOrder
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}
