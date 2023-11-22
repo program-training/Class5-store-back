@@ -1,8 +1,8 @@
-import UserInterface from "../interfaces/UserInterface";
 import { getUser, register } from "../services/usersApiService";
 import { handleError } from "../../utils/handleErrors";
 import userValidation from "../models/joi/userValidation";
 import { Request, Response } from "express";
+import UserInterface from "../interfaces/userInterface";
 
 export const handleGetUser = async (req: Request, res: Response) => {
   try {
