@@ -4,15 +4,6 @@ import { handleError } from "../../utils/handleErrors";
 import userValidation from "../models/joi/userValidation";
 import { Request, Response } from "express";
 
-// export const handleGetUsers = async (req: Request, res: Response) => {
-//   try {
-//     const users = await getUsers();
-//     return res.send(users);
-//   } catch (error) {
-//     handleError(res, error);
-//   }
-// };
-
 export const handleGetUser = async (req: Request, res: Response) => {
   try {
     const { id: userId } = req.params;

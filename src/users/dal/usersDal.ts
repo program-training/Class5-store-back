@@ -9,7 +9,7 @@ export const getUserByIdFromDb = async (id: string) => {
   }
 };
 
-export const registerUsersToDb = async (user: UserInterface) => {
+export const registerUserToDb = async (user: UserInterface) => {
   try {
     const newUser = new User(user);
     const userFromDB = await newUser.save();
