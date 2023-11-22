@@ -1,16 +1,13 @@
-interface ProductInterface {
-    _id: string;
-    name: string;
-    salePrice: number;
-    quantity: number;
-    description: string;
-    category: string;
-    discountPercentage: number;
-    image: {
-      url: string;
-      alt: string;
-    };
-  }
+ interface ProductInterface {
+  id: string;
+  name: string;
+  salePrice: number;
+  quantity : number;
+  description : string;
+  category: string;
+  discountPercentage : number;
+  imageUrl:string;
+  imageAlt: string;
+}
   
-  export default ProductInterface;
-  
+export default ProductInterface;
