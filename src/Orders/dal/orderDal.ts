@@ -3,7 +3,7 @@ import path from "path";
 import { handleJsonfileError } from "../../utils/handleErrors";
 import ordersInterface from "../interfaces/OrderInterface";
 
-const DB_URL = path.join(__dirname, "../../DB/orders.json");
+const DB_URL = path.join(__dirname, "../../../DB/orders.json");
 
 export const getOrdersFromJsonFile = async () => {
   try {
@@ -14,14 +14,13 @@ export const getOrdersFromJsonFile = async () => {
   }
 };
 
-export const getOrderByIdFromJsonFile = async (id: number) => {
+export const getOrderByUserIdFromJsonFile = async (id: string) => {
   try {
     const result = await getOrdersFromJsonFile();
-    const orders = result.orders;
-    const order = orders.find((p: ordersInterface) => p.id === id);
+    const orders = result.orders as ordersInterface[];
+    const order = orders.find((p: ordersInterface) => p.userId === id);
     if (!order) {
-      console.log("Product not found");
-      throw Error;
+      throw Error("order not found");
     }
     return order;
   } catch (error) {

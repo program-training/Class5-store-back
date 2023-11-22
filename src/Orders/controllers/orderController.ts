@@ -1,7 +1,7 @@
 import { handleError } from "../../utils/handleErrors";
 import { Request, Response } from "express";
-import { getAllOrders } from "../service/orderService";
-import { getProductById } from "../../dataAccess/mongoose";
+import { getAllOrders, getOrderByUserId } from "../service/orderService";
+
 
 export const handleGetOrders = async (req: Request, res: Response) => {
   try {
@@ -12,10 +12,10 @@ export const handleGetOrders = async (req: Request, res: Response) => {
   }
 };
 
-export const handleGetOrder = async (req: Request, res: Response) => {
+export const handleGetOrderByUserId = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const Orders = await getProductById(id);
+    const Orders = await getOrderByUserId(id);
     return res.send(Orders);
   } catch (error) {
     handleError(res, error);
