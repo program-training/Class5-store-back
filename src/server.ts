@@ -4,7 +4,8 @@ import chalk from "chalk";
 import morgan from "./logger/morgan";
 import cors from "./cors/cors";
 import { connectToDatabase } from "./dataAccess/mongoose";
-
+import { deleteUsers, initialDataToDB } from "./users/dal/usersDal";
+import { users } from "./initialData/initialData";
 const app = express();
 
 app.use(morgan);
