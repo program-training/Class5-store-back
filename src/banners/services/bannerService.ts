@@ -1,5 +1,10 @@
 import { getBanner } from "../Dal/bannerDal";
 
 export const getBannerService = async () => {
-  return getBanner();
+  try {
+    const messeage = await getBanner();
+    return messeage;
+  } catch (error) {
+    return Promise.reject(error);
+  }
 };
