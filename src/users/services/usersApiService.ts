@@ -2,6 +2,7 @@ import {
   getUserByIdFromDb,
   registerUserToDb,
   getUsersFromDb,
+  userExist,
 } from "../dal/usersDal";
 import UserInterface from "../interfaces/userInterface";
 import User from "../models/mongoose/UserSchema";
@@ -25,10 +26,10 @@ export const getUser = async (userId: string) => {
 
 export const register = async (user: UserInterface) => {
   try {
-    const userRegistered = await User.find({ email: user.email });
-    if (userRegistered) return userRegistered;
-    await registerUserToDb(user);
-    return user;
+    let userCheck = await userExist(user.email);
+    if (userCheck) return userCheck;
+    const userRegistered = await registerUserToDb(user);
+    return userRegistered;
   } catch (error) {
     return Promise.reject(error);
   }

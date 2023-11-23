@@ -28,7 +28,7 @@ export const handleGetProduct = async (req: Request, res: Response) => {
 export const handleGetFromStock = async (req: Request, res: Response) => {
   try {
     const cart = req.body;
-    const result = await getDataForQuantity(cart);
+    const result = await getDataForQuantity(cart.cart);
     return res.send(result);
   } catch (error) {
     handleError(res, error);
