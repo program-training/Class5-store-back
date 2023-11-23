@@ -25,8 +25,6 @@ export const registerUserToDb = async (user: UserInterface) => {
   try {
     const newUser = new User(user);
     const userFromDB = await newUser.save();
-    console.log(userFromDB);
-
     return userFromDB;
   } catch (error) {
     if (error instanceof Error) return Promise.reject(error);
@@ -52,6 +50,14 @@ export const deleteUsers = async () => {
   try {
     const result = await User.deleteMany({});
     return result;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const userExist = async (email: string) => {
+  try {
+    return await User.find({ email: email });
   } catch (error) {
     return Promise.reject(error);
   }
