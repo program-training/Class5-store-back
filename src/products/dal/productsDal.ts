@@ -1,29 +1,24 @@
-import jsonfile from "jsonfile";
-import path from "path";
-import { handleJsonfileError } from "../../utils/handleErrors";
-import ProductInterface from "../interfaces/productInterface";
+import axios from "axios";
+const DB_URL = "https://erp-server-v2.onrender.com";
 
-const DB_URL = path.join(__dirname, "../../../DB/products.json");
-
-export const getProductsFromJsonFile = async () => {
+export const getProductsFromServer = async () => {
   try {
-    const data = await jsonfile.readFile(DB_URL);
+    const { data } = await axios.get(
+      `${DB_URL}/api/shop_inventory?searchText=`
+    );
     return data;
   } catch (error) {
-    return handleJsonfileError(error);
+    return Promise.reject(error);
   }
 };
 
-export const getProductByIdFromJsonFile = async (id: number) => {
+export const getProductByIdFromServer = async (productId: number) => {
   try {
-    const result = await getProductsFromJsonFile();
-    const products = result.products;
-    const product = products.find((p: ProductInterface) => p.id === id);
-    if (!product) {
-      throw Error("Product not found");
-    }
-    return product;
+    const { data } = await axios.get(
+      `${DB_URL}/api/shop_inventory/${productId}`
+    );
+    return data;
   } catch (error) {
-    return handleJsonfileError(error);
+    return Promise.reject(error);
   }
 };
