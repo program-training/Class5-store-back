@@ -1,5 +1,5 @@
 interface UserInterface {
-  _id: string;
+  _id?: string;
   email: string;
   admin?: true;
   password?: string;
