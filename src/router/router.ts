@@ -6,7 +6,6 @@ import orderRouters from "../Orders/routes/OrderRoutes";
 
 router.use("/api/users", usersRoutes);
 router.use("/api/products", productsRoutes);
-// router.use("/api/categories", categoriesRoutes);
 router.use("/api/orders", orderRouters);
 
 router.use("*", (req: Request, res: Response) => {
