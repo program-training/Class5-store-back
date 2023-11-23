@@ -1,5 +1,5 @@
 import axios from "axios";
-const ERP_BASE_URL = "https://erp-server-v2.onrender.com";
+const ERP_BASE_URL = process.env.ERP_BASE_URL || "https://erp-server-v2.onrender.com";
 
 export const getProductsFromServer = async () => {
   try {
