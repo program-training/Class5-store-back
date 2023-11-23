@@ -28,7 +28,7 @@ export const handleUserRegistration = async (req: Request, res: Response) => {
     const { error } = userValidation(user);
     if (error?.details[0].message) throw new Error(error?.details[0].message);
     const userFromDB = await register(user);
-    return res.status(201).send(userFromDB);
+    return res.status(200).send(userFromDB);
   } catch (error) {
     if (error instanceof Error) handleError(res, error);
   }

@@ -27,7 +27,7 @@ export const getUser = async (userId: string) => {
 export const register = async (user: UserInterface) => {
   try {
     let userCheck = await userExist(user.email);
-    if (userCheck) return userCheck;
+    if (userCheck.length) return userCheck;
     const userRegistered = await registerUserToDb(user);
     return userRegistered;
   } catch (error) {
