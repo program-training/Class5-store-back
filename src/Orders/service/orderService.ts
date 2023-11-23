@@ -2,6 +2,7 @@ import sendEmail from "../../utils/sendEmail";
 import {
   getOrderByUserIdFromJsonFile,
   getOrdersFromJsonFile,
+  getOrdersFromRender,
   registerOrderToDb,
 } from "../dal/orderDal";
 import OrderFromClientInterface from "../interfaces/OrderFromClientInterface";
@@ -9,7 +10,7 @@ import ordersInterface from "../interfaces/OrderInterface";
 
 export const getOrdersFromDb = async () => {
   try {
-    const AllOrders = await getOrdersFromJsonFile();
+    const AllOrders = await getOrdersFromRender();
     return AllOrders;
   } catch (error) {
     return Promise.reject(error);
@@ -30,17 +31,16 @@ export const registerOrderService = async (
   try {
     const orderTime = new Date();
     const status = "pending";
-    const id = Math.random();
     const order: ordersInterface = {
       ...orderFromClient,
       orderTime,
       status,
-      id,
     };
-    await registerOrderToDb(order);
+    const registerdOrder = await registerOrderToDb(order);
+    console.log(registerdOrder);
     const { email, userId } = orderFromClient;
     await sendEmail(email, userId);
-    return order;
+    return registerdOrder;
   } catch (error) {
     return Promise.reject(error);
   }

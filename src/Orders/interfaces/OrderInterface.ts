@@ -2,7 +2,7 @@ import ProductInterface from "../../products/interfaces/productInterface";
 
 interface ordersInterface {
   userId: string;
-  id: number;
+  id?: number;
   products: ProductInterface[];
   status: "pending" | "processing" | "shipped" | "delivered" | "completed";
   email: string;
