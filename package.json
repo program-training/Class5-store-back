@@ -4,7 +4,7 @@
   "description": "express server exe",
   "main": "dist/server.js",
   "scripts": {
-    "test": "mocha",
+    "test": "cross-env NODE_ENV=test jest --testTimeout=10000",
     "dev": "nodemon .",
     "ts": "tsc -w"
   },
@@ -44,5 +44,16 @@
     "morgan": "^1.10.0",
     "nodemailer": "^6.9.7",
     "uuid": "^9.0.0"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/src/$1"
+    }
   }
+  
 }
