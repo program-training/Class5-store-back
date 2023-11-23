@@ -12,7 +12,7 @@ app.use(cors);
 app.use(express.json());
 app.use(router);
 
-const PORT = 3333;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(chalk.blueBright(`Server listening on port: ${PORT}`));
   connectToDatabase()
