@@ -31,17 +31,27 @@ export const getDataForQuantity = async (cart: CheckQuantity[]) => {
       cart.map(async (item) => {
         const product = await getProductByIdFromJsonFile(item.productId);
         if (product.quantity === 0) {
-          notInStock.push({ product, amountMissing: item.amount });
-        } else if (product.quantity !== 0) {
+          notInStock.push({
+            product,
+            amountMissing: item.amount,
+            ordered: item.amount,
+          });
+        }
+        if (product.quantity !== 0) {
           const referents = item.amount - product.quantity;
-          if (referents < 0) {
+          if (referents <= 0) {
             inStock.push(item);
           } else if (referents > 0) {
             inStock.push({
               productId: item.productId,
               amount: product.quantity,
+              ordered: item.amount,
             });
-            notInStock.push({ product, amountMissing: referents });
+            notInStock.push({
+              product,
+              amountMissing: referents,
+              ordered: item.amount,
+            });
           }
         }
       })
