@@ -38,7 +38,10 @@ export const registerOrderService = async (
     };
     const registerdOrder = await registerOrderToDb(order);
     console.log(registerdOrder);
-    const { email, userId } = orderFromClient;
+    const {
+      email,
+      shippingDetails: { userId },
+    } = orderFromClient;
     await sendEmail(email, userId);
     return registerdOrder;
   } catch (error) {

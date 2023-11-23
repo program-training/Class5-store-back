@@ -1,4 +1,4 @@
-interface ProductToOrderInterface {
+interface CartItemInterface {
   id: number;
   name: string;
   salePrice: number;
@@ -6,4 +6,4 @@ interface ProductToOrderInterface {
   description: string;
 }
 
-export default ProductToOrderInterface;
+export default CartItemInterface;

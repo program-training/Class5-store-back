@@ -39,17 +39,19 @@ export const getOrdersFromJsonFile = async () => {
   }
 };
 
+//מביא הזמנה לפי id
 export const getOrderByUserIdFromJsonFile = async (id: string) => {
   try {
-    const result = await getOrdersFromJsonFile();
-    const orders = result.orders as ordersInterface[];
-    const order = orders.find((p: ordersInterface) => p.userId === id);
+    const numberid = +id;
+    const orders = await getOrdersFromRender();
+    const order = orders.find(
+      (p: ordersInterface) => p.shippingDetails.userId === numberid
+    );
     if (!order) {
       throw Error("order not found");
     }
     return order;
   } catch (error) {
-    console.log(error);
-    return handleJsonfileError(error);
+    return Promise.reject(error);
   }
 };
