@@ -4,7 +4,6 @@ import chalk from "chalk";
 import morgan from "./logger/morgan";
 import cors from "./cors/cors";
 import { connectToDatabase } from "./dataAccess/mongoose";
-
 const app = express();
 
 app.use(morgan);
