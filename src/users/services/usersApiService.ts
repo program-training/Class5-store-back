@@ -5,7 +5,6 @@ import {
   userExist,
 } from "../dal/usersDal";
 import UserInterface from "../interfaces/userInterface";
-import User from "../models/mongoose/UserSchema";
 
 export const getUsers = async () => {
   try {
