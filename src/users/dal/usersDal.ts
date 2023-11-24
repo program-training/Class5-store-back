@@ -1,8 +1,8 @@
 import User from "../models/mongoose/UserSchema";
 import UserInterface from "../interfaces/userInterface";
 import { initialUser } from "../../initialData/initialData";
-//מקבל את כל היוזרים מהדאטה בייס
-export const getUsersFromDb = async () => {
+
+export const getUsersFromDB = async () => {
   try {
     const users = await User.find();
     return users;
@@ -11,42 +11,37 @@ export const getUsersFromDb = async () => {
   }
 };
 
-//מקבל יוזר לפי ת"ז
-export const getUserByIdFromDb = async (id: string) => {
+export const getUserByIdFromDB = async (id: string) => {
   try {
-    return await User.findById(id);
+    const user = await User.findById(id);
+    return user;
   } catch (error) {
     return Promise.reject(error);
   }
 };
 
-//רושם יוזר
-export const registerUserToDb = async (user: UserInterface) => {
+export const registerUserToDB = async (user: UserInterface) => {
   try {
-    const newUser = new User(user);
-    await newUser.save();
-    return newUser;
+    const registeredUser = new User(user);
+    await registeredUser.save();
+    return registeredUser;
   } catch (error) {
     if (error instanceof Error) return Promise.reject(error);
   }
 };
 
-//בודק אם יש יוזרים בדאטה בייס ואם אין מכניס חדשים
 export const initialDataToDB = async (users: initialUser[]) => {
   try {
-    const usersInDb = await User.find();
-    if (usersInDb.length === 0) {
-      const result = await User.insertMany(users);
-      return result;
-    }
-    return "there are already users in DB";
+    const usersInDB = await User.find();
+    if (usersInDB.length) return "there are already users in DB";
+    const result = await User.insertMany(users);
+    return result;
   } catch (error) {
     return Promise.reject(error);
   }
 };
 
-//מוחק מוצרים לפי תנאי
-export const deleteUsers = async () => {
+export const deleteUsersFromDB = async () => {
   try {
     const result = await User.deleteMany({});
     return result;
@@ -55,9 +50,10 @@ export const deleteUsers = async () => {
   }
 };
 
-export const userExist = async (email: string) => {
+export const userExistInDB = async (email: string) => {
   try {
-    return await User.find({ email: email });
+    const user = await User.find({ email: email });
+    return user;
   } catch (error) {
     return Promise.reject(error);
   }

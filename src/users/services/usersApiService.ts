@@ -1,33 +1,33 @@
 import {
-  getUserByIdFromDb,
-  registerUserToDb,
-  getUsersFromDb,
-  userExist,
+  getUserByIdFromDB,
+  registerUserToDB,
+  getUsersFromDB,
+  userExistInDB,
 } from "../dal/usersDal";
 import UserInterface from "../interfaces/userInterface";
 
-export const getUsers = async () => {
+export const getUsersService = async () => {
   try {
-    const users = await getUsersFromDb();
+    const users = await getUsersFromDB();
     return users;
   } catch (error) {
     return Error;
   }
 };
-export const getUser = async (userId: string) => {
+export const getUserByIdService = async (userId: string) => {
   try {
-    const getUserFromMDB = await getUserByIdFromDb(userId);
+    const getUserFromMDB = await getUserByIdFromDB(userId);
     return getUserFromMDB;
   } catch (error) {
     return Promise.reject(error);
   }
 };
 
-export const register = async (user: UserInterface) => {
+export const registerUserService = async (user: UserInterface) => {
   try {
-    let userCheck = await userExist(user.email);
+    let userCheck = await userExistInDB(user.email);
     if (userCheck.length) return userCheck;
-    const userRegistered = await registerUserToDb(user);
+    const userRegistered = await registerUserToDB(user);
     return userRegistered;
   } catch (error) {
     return Promise.reject(error);
