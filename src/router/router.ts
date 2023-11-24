@@ -1,11 +1,16 @@
 import express, { Request, Response } from "express";
+import usersRouter from "../users/routes/usersRoutes";
+import productsRouter from "../products/routes/productsRoutes";
+import ordersRouter from "../Orders/routes/OrderRoutes";
+
 const router = express.Router();
-import usersRoutes from "../users/routes/usersRoutes";
-import productsRoutes from "../products/routes/productsRoutes";
-import orderRouters from "../Orders/routes/OrderRoutes";
-router.use("/api/users", usersRoutes);
-router.use("/api/products", productsRoutes);
-router.use("/api/orders", orderRouters);
+
+router.use("/api/users", usersRouter);
+
+router.use("/api/products", productsRouter);
+
+router.use("/api/orders", ordersRouter);
+
 router.use("*", (req: Request, res: Response) => {
   console.log(req);
   res.status(404).send("Page not found!");
