@@ -1,34 +1,37 @@
 import { handleError } from "../../utils/handleErrors";
 import { Request, Response } from "express";
 import {
-  getOrdersFromDb,
-  getOrderByUserId,
+  getOrdersService,
+  getOrderByUserIdService,
   registerOrderService,
 } from "../service/orderService";
 import OrderFromClientInterface from "../interfaces/OrderFromClientInterface";
+import orderValidation from "../models/joi/orderValidation";
 
-export const handleGetOrders = async (req: Request, res: Response) => {
+export const getOrdersController = async (req: Request, res: Response) => {
   try {
-    const Orders = await getOrdersFromDb();
+    const Orders = await getOrdersService();
     return res.status(200).send(Orders);
   } catch (error) {
     handleError(res, error);
   }
 };
 
-export const handleGetOrderByUserId = async (req: Request, res: Response) => {
+export const getOrderByUserIdController = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const Orders = await getOrderByUserId(id);
+    const Orders = await getOrderByUserIdService(id);
     return res.send(Orders);
   } catch (error) {
     handleError(res, error);
   }
 };
 
-export const handleRegisterOrder = async (req: Request, res: Response) => {
+export const registerOrderController = async (req: Request, res: Response) => {
   try {
-    const order = req.body as OrderFromClientInterface;
+    const order:OrderFromClientInterface = req.body;
+    const {error} = orderValidation(order);
+    if (error?.details[0].message) throw new Error(error?.details[0].message);
     const registeredOrder = await registerOrderService(order);
     res.send(registeredOrder);
   } catch (error) {

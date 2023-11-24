@@ -4,6 +4,7 @@
   "description": "express server exe",
   "main": "dist/server.js",
   "scripts": {
+    "start": "tsc && node .",
     "test": "cross-env NODE_ENV=test jest --testTimeout=10000",
     "dev": "nodemon .",
     "ts": "tsc -w"

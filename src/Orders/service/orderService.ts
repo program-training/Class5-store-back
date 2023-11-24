@@ -1,25 +1,24 @@
 import sendEmail from "../../utils/sendEmail";
 import {
-  getOrderByUserIdFromJsonFile,
-  getOrdersFromJsonFile,
-  getOrdersFromRender,
-  registerOrderToDb,
+  getOrderByUserIdFromDB,
+  getOrdersFromDB,
+  registerOrderToDB,
 } from "../dal/orderDal";
 import OrderFromClientInterface from "../interfaces/OrderFromClientInterface";
 import ordersInterface from "../interfaces/OrderInterface";
 
-export const getOrdersFromDb = async () => {
+export const getOrdersService = async () => {
   try {
-    const AllOrders = await getOrdersFromRender();
+    const AllOrders = await getOrdersFromDB();
     return AllOrders;
   } catch (error) {
     return Promise.reject(error);
   }
 };
 
-export const getOrderByUserId = async (id: string) => {
+export const getOrderByUserIdService = async (id: string) => {
   try {
-    return await getOrderByUserIdFromJsonFile(id);
+    return await getOrderByUserIdFromDB(id);
   } catch (error) {
     return Promise.reject(error);
   }
@@ -36,14 +35,14 @@ export const registerOrderService = async (
       orderTime,
       status,
     };
-    const registerdOrder = await registerOrderToDb(order);
-    console.log(registerdOrder);
+    const registeredOrder = await registerOrderToDB(order);
+    console.log(registeredOrder);
     const {
       email,
       shippingDetails: { userId },
     } = orderFromClient;
     await sendEmail(email, userId);
-    return registerdOrder;
+    return registeredOrder;
   } catch (error) {
     return Promise.reject(error);
   }
