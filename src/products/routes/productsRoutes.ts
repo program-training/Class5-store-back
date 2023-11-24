@@ -1,16 +1,16 @@
 import express from "express";
 import {
-  handleGetFromStock,
-  handleGetProduct,
-  handleGetProducts,
+  getProductByIdController,
+  getProductsController,
+  getProductsStockController,
 } from "../controllers/productsControllers";
 
 const router = express.Router();
 
-router.get("/", handleGetProducts);
+router.get("/", getProductsController);
 
-router.get("/:id", handleGetProduct);
+router.get("/:id", getProductByIdController);
 
-router.post("/stock", handleGetFromStock);
+router.post("/stock", getProductsStockController);
 
 export default router;
