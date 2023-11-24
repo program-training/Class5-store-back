@@ -1,15 +1,11 @@
-import jsonfile from "jsonfile";
-import path from "path";
-import { handleJsonfileError } from "../../utils/handleErrors";
 import ordersInterface from "../interfaces/OrderInterface";
 import axios from "axios";
 
-const DB_URL = path.join(__dirname, "../../../DB/orders.json");
 const OMS_BASE_URL =
   process.env.OMS_BASE_URL || "https://project-team1-oms-back.onrender.com";
 
 //מקבל את כל היוזרים מהרנדר
-export const getOrdersFromRender = async () => {
+export const getOrdersFromDB = async () => {
   try {
     const orders = await axios.get(`${OMS_BASE_URL}/api/orders`);
     if (orders.data.length === 0) {
@@ -21,7 +17,7 @@ export const getOrdersFromRender = async () => {
   }
 };
 //רושם הזמנה לרנדר
-export const registerOrderToDb = async (order: ordersInterface) => {
+export const registerOrderToDB = async (order: ordersInterface) => {
   try {
     const result = await axios.post(`${OMS_BASE_URL}/api/orders`, order);
     return result.data;
@@ -30,22 +26,12 @@ export const registerOrderToDb = async (order: ordersInterface) => {
   }
 };
 
-export const getOrdersFromJsonFile = async () => {
-  try {
-    const data = await jsonfile.readFile(DB_URL);
-    return data;
-  } catch (error) {
-    return handleJsonfileError(error);
-  }
-};
-
 //מביא הזמנה לפי id
-export const getOrderByUserIdFromJsonFile = async (id: string) => {
+export const getOrderByUserIdFromDB = async (id: string) => {
   try {
-    const numberid = +id;
-    const orders = await getOrdersFromRender();
+    const orders = await getOrdersFromDB();
     const order = orders.find(
-      (p: ordersInterface) => p.shippingDetails.userId === numberid
+      (order: ordersInterface) => order.shippingDetails.userId === id
     );
     if (!order) {
       throw Error("order not found");
