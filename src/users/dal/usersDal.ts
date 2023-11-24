@@ -24,8 +24,8 @@ export const getUserByIdFromDb = async (id: string) => {
 export const registerUserToDb = async (user: UserInterface) => {
   try {
     const newUser = new User(user);
-    const userFromDB = await newUser.save();
-    return userFromDB;
+    await newUser.save();
+    return newUser;
   } catch (error) {
     if (error instanceof Error) return Promise.reject(error);
   }
