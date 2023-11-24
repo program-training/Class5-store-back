@@ -1,17 +1,17 @@
-import ProductInterface from "../../products/interfaces/productInterface";
+import CartItemInterface from "./CartItemInterface";
 
 interface ordersInterface {
-  userId: string;
-  id: number;
-  products: ProductInterface[];
+  id?: number | string;
+  cartItems: CartItemInterface[];
   status: "pending" | "processing" | "shipped" | "delivered" | "completed";
   email: string;
   price: number;
   orderTime: Date;
   shippingDetails: {
-    // orderType: "standard"| "express" | "pickup"
+    orderType: "standard" | "express" | "pickup";
     address: string;
     contactNumber: string;
+    userId: string | number;
   };
 }
 

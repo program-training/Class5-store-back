@@ -4,6 +4,7 @@ import chalk from "chalk";
 import morgan from "./logger/morgan";
 import cors from "./cors/cors";
 import { connectToDatabase } from "./dataAccess/mongoose";
+import { getOrdersFromRender } from "./Orders/dal/orderDal";
 const app = express();
 
 app.use(morgan);
@@ -17,5 +18,6 @@ app.listen(PORT, () => {
   connectToDatabase()
     .then((message) => console.log(message))
     .catch((error) => console.log(error.message));
+  getOrdersFromRender();
 });
 export default app;
