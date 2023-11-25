@@ -2,7 +2,7 @@ import {
   getUserByIdService,
   getUsersService,
   registerUserService,
-} from "../services/usersApiService";
+} from "../services/usersService";
 import { handleError } from "../../utils/handleErrors";
 import userValidation from "../models/joi/userValidation";
 import { Request, Response } from "express";

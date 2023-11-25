@@ -1,6 +1,3 @@
-import { admin } from "googleapis/build/src/apis/admin";
-import { bool, string } from "joi";
-
 export interface initialUser {
   email: string;
   admin: boolean;
@@ -23,7 +20,6 @@ export const users: initialUser[] = [
   { email: "lulu14@gmail.com", admin: false },
   { email: "lulu15@gmail.com", admin: false },
   { email: "lulu16@gmail.com", admin: false },
-
   { email: "lulu17@gmail.com", admin: false },
   { email: "lulu18@gmail.com", admin: false },
   { email: "lulu19@gmail.com", admin: false },
