@@ -7,20 +7,27 @@ const orderValidation = (order: OrderFromClientInterface) => {
   const schema = Joi.object({
     cartItems: Joi.array()
       .items(cartItemSchema)
-      .message("cartItems is not valid")
       .required()
-      .message("cartItems is required"),
+      .messages({
+        "any.required": "cartItems is required",
+      }),
     email: Joi.string()
       .email()
-      .message("user email is not valid")
       .required()
-      .message("user email is required"),
-    price: Joi.number().required().message("price is required"),
+      .messages({
+        "string.base": "user email must be a valid email",
+        "any.required": "user email is required",
+      }),
+    price: Joi.number()
+      .required()
+      .messages({
+        "any.required": "price is required",
+      }),
     shippingDetails: shippingDetailsSchema
-      .keys()
-      .message("shippingDetails is not valid")
       .required()
-      .message("shippingDetails is required"),
+      .messages({
+        "any.required": "shippingDetails is required",
+      }),
   });
 
   return schema.validate(order);

@@ -4,22 +4,20 @@ import UserInterface from "../../interfaces/userInterface";
 const userValidation = (user: UserInterface) => {
   const schema = Joi.object({
     _id: Joi.string().allow(""),
-    email: Joi.string()
-      .ruleset.pattern(
-        /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/
-      )
-      .rule({ message: 'user "mail" mast be a valid mail' })
-      .required(),
+    email: Joi.string().email().required().messages({
+      "string.base": "user email must be a valid email",
+      "any.required": "user email is required",
+    }),
     isAdmin: Joi.bool().allow(),
     password: Joi.string()
-      .ruleset.pattern(
+      .pattern(
         /((?=.*\d{1})(?=.*[A-Z]{1})(?=.*[a-z]{1})(?=.*[!@#$%^&*]{1}).{8,20})/
       )
-      .rule({
-        message:
+      .allow()
+      .messages({
+        "string.pattern.base":
           'user "password" must be at least nine characters long and contain an uppercase letter, a lowercase letter, a number and one of the following characters !@#$%^&*-',
-      })
-      .allow(),
+      }),
   });
   return schema.validate(user);
 };

@@ -2,7 +2,7 @@ import CartItemInterface from "./CartItemInterface";
 import ShippingDetailsInterface from "./ShippingDetailsInterface";
 
 interface OrdersInterface {
-  id?: number | string;
+  _id?: string;
   cartItems: CartItemInterface[];
   status: "pending" | "processing" | "shipped" | "delivered" | "completed";
   email: string;

@@ -11,7 +11,7 @@ export const getUsersService = async () => {
     const users = await getUsersFromDB();
     return users;
   } catch (error) {
-    return Error;
+    return Promise.reject(error);
   }
 };
 export const getUserByIdService = async (userId: string) => {
@@ -26,7 +26,7 @@ export const getUserByIdService = async (userId: string) => {
 export const registerUserService = async (user: UserInterface) => {
   try {
     let userCheck = await userExistInDB(user.email);
-    if (userCheck.length) return userCheck;
+    if (userCheck) return userCheck;
     const userRegistered = await registerUserToDB(user);
     return userRegistered;
   } catch (error) {
