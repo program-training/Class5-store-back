@@ -1,3 +1,4 @@
+import { string } from "joi";
 import {
   getUserByIdFromDB,
   registerUserToDB,
@@ -7,6 +8,8 @@ import {
 } from "../dal/usersDal";
 import { generateUserPassword } from "../helpers/bcrypt";
 import UserInterface from "../interfaces/userInterface";
+import { token } from "morgan";
+import { generateToken } from "../../auth/JWT";
 
 export const getUsersService = async () => {
   try {
@@ -41,7 +44,10 @@ export const registerUserService = async (user: UserInterface) => {
 export const LoginService = async (email: string, password: string) => {
   try {
     const user = await Login(email, password);
-    return user;
+    if (!user) throw new Error();
+    const id = user._id.toString();
+    const token = generateToken(id, user.isAdmin);
+    return token;
   } catch (error) {
     return Promise.reject(error);
   }
