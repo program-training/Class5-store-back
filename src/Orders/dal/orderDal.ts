@@ -4,7 +4,7 @@ import axios from "axios";
 const OMS_BASE_URL =
   process.env.OMS_BASE_URL || "https://project-team1-oms-back.onrender.com";
 
-//מקבל את כל היוזרים מהרנדר
+//מקבל את כל ההזמנות מהרנדר
 export const getOrdersFromDB = async () => {
   try {
     const orders = await axios.get(`${OMS_BASE_URL}/api/orders`);
@@ -26,13 +26,15 @@ export const registerOrderToDB = async (order: ordersInterface) => {
   }
 };
 
+
+
+
+
 //מביא הזמנה לפי id
 export const getOrderByUserIdFromDB = async (id: string) => {
   try {
     const orders = await getOrdersFromDB();
-    const order = orders.find(
-      (order: ordersInterface) => order.shippingDetails.userId === id
-    );
+    const order = orders.find((order: ordersInterface) => order._id === id);
     if (!order) {
       throw Error("order not found");
     }

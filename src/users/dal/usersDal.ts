@@ -1,6 +1,8 @@
 import User from "../models/mongoose/UserSchema";
 import UserInterface from "../interfaces/userInterface";
+import { comparePassword } from "../helpers/bcrypt";
 
+//מביא יוזרים מהמונגו
 export const getUsersFromDB = async () => {
   try {
     const users = await User.find();
@@ -19,16 +21,6 @@ export const getUserByIdFromDB = async (id: string) => {
   }
 };
 
-export const registerUserToDB = async (user: UserInterface) => {
-  try {
-    const registeredUser = new User(user);
-    await registeredUser.save();
-    return registeredUser;
-  } catch (error) {
-    if (error instanceof Error) return Promise.reject(error);
-  }
-};
-
 export const initialDataToDB = async (users: UserInterface[]) => {
   try {
     const usersInDB = await User.find();
@@ -40,10 +32,34 @@ export const initialDataToDB = async (users: UserInterface[]) => {
   }
 };
 
+//מחיקת יוזר/ס מהמערכת
 export const deleteUsersFromDB = async () => {
   try {
     const result = await User.deleteMany({});
     return result;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const registerUserToDB = async (user: UserInterface) => {
+  try {
+    const registeredUser = new User(user);
+    await registeredUser.save();
+    return registeredUser;
+  } catch (error) {
+    if (error instanceof Error) return Promise.reject(error);
+  }
+};
+
+export const Login = async (email: string, password: string) => {
+  try {
+    const user = await User.findOne({ email }).exec();
+    const checkIfPasswordTrue = comparePassword(password, user?.password!);
+    if (!checkIfPasswordTrue) {
+      throw new Error();
+    }
+    return user;
   } catch (error) {
     return Promise.reject(error);
   }
