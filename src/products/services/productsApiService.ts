@@ -1,5 +1,5 @@
 import { getProductByIdFromDB, getProductsFromDB } from "../dal/productsDal";
-import { CheckQuantity, NotInStock } from "../types/types";
+import { CheckQuantity as InStock, NotInStock } from "../types/types";
 
 export const getProductsService = async () => {
   try {
@@ -19,9 +19,9 @@ export const getProductByIdService = async (productId: number) => {
   }
 };
 
-export const getProductsStockService = async (cart: CheckQuantity[]) => {
+export const getProductsStockService = async (cart: InStock[]) => {
   try {
-    const inStock: CheckQuantity[] = [];
+    const inStock: InStock[] = [];
     const notInStock: NotInStock[] = [];
     await Promise.all(
       cart.map(async (item) => {
@@ -29,24 +29,21 @@ export const getProductsStockService = async (cart: CheckQuantity[]) => {
         if (product.quantity === 0) {
           notInStock.push({
             product,
-            amountMissing: item.amount,
-            ordered: item.amount,
+            requiredQuantity: item.requiredQuantity,
           });
         }
         if (product.quantity !== 0) {
-          const referents = item.amount - product.quantity;
+          const referents = item.requiredQuantity - product.quantity;
           if (referents <= 0) {
             inStock.push(item);
           } else if (referents > 0) {
             inStock.push({
               productId: item.productId,
-              amount: product.quantity,
-              ordered: item.amount,
+              requiredQuantity: item.requiredQuantity,
             });
             notInStock.push({
               product,
-              amountMissing: referents,
-              ordered: item.amount,
+              requiredQuantity: item.requiredQuantity,
             });
           }
         }

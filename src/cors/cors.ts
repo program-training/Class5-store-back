@@ -4,7 +4,7 @@ import ServerError from "../utils/ServerError"
 const whiteList = ["http://127.0.0.1"];
 
 const corsOptions: CorsOptionsDelegate = (req, callback) => {
-  const authorized = whiteList.includes(String(req.headers.origin));
+  const authorized = whiteList.includes(String(req.headers.origin)) || !req.headers.origin;
   if (!authorized)
     return callback(
       new ServerError(

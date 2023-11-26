@@ -13,4 +13,6 @@ router.get("/:id", getProductByIdController);
 
 router.post("/stock", getProductsStockController);
 
+// router.post("/cancel", cancelProductsStockController)
+
 export default router;
