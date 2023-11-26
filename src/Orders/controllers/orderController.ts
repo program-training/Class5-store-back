@@ -10,8 +10,8 @@ import orderValidation from "../models/joi/orderValidation";
 
 export const getOrdersController = async (req: Request, res: Response) => {
   try {
-    const Orders = await getOrdersService();
-    return res.status(200).send(Orders);
+    const orders = await getOrdersService();
+    return res.status(200).send(orders);
   } catch (error) {
     handleError(res, error);
   }
@@ -20,8 +20,8 @@ export const getOrdersController = async (req: Request, res: Response) => {
 export const getOrderByUserIdController = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const Orders = await getOrderByUserIdService(id);
-    return res.send(Orders);
+    const orders = await getOrderByUserIdService(id);
+    return res.send(orders);
   } catch (error) {
     handleError(res, error);
   }

@@ -9,8 +9,8 @@ import OrderInterface from "../interfaces/OrderInterface";
 
 export const getOrdersService = async () => {
   try {
-    const AllOrders = await getOrdersFromDB();
-    return AllOrders;
+    const orders = await getOrdersFromDB();
+    return orders;
   } catch (error) {
     return Promise.reject(error);
   }

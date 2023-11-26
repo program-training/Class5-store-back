@@ -34,6 +34,6 @@ export const registerUserController = async (req: Request, res: Response) => {
     const userFromDB = await registerUserService(user);
     return res.status(200).send(userFromDB);
   } catch (error) {
-    if (error instanceof Error) handleError(res, error);
+    handleError(res, error);
   }
 };

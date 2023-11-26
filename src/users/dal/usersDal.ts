@@ -1,6 +1,5 @@
 import User from "../models/mongoose/UserSchema";
 import UserInterface from "../interfaces/userInterface";
-import { initialUser } from "../../initialData/initialData";
 
 export const getUsersFromDB = async () => {
   try {
@@ -30,7 +29,7 @@ export const registerUserToDB = async (user: UserInterface) => {
   }
 };
 
-export const initialDataToDB = async (users: initialUser[]) => {
+export const initialDataToDB = async (users: UserInterface[]) => {
   try {
     const usersInDB = await User.find();
     if (usersInDB.length) return "there are already users in DB";
@@ -53,7 +52,7 @@ export const deleteUsersFromDB = async () => {
 export const userExistInDB = async (email: string) => {
   try {
     const user = await User.find({ email: email });
-    return user;
+    return user[0];
   } catch (error) {
     return Promise.reject(error);
   }
