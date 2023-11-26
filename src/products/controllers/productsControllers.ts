@@ -37,3 +37,4 @@ export const getProductsStockController = async (
     handleError(res, error);
   }
 };
+

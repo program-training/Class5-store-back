@@ -7,7 +7,7 @@
     "start": "tsc && node .",
     "test": "cross-env NODE_ENV=test jest --testTimeout=10000",
     "dev": "nodemon .",
-    "ts": "tsc -w"
+    "build": "tsc"
   },
   "author": "David Yakin",
   "license": "ISC",

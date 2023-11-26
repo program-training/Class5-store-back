@@ -5,9 +5,6 @@ const whiteList = ["http://127.0.0.1"];
 
 const corsOptions: CorsOptionsDelegate = (req, callback) => {
   const origin = req.headers.origin;
-
-  // If no origin header is present (e.g., same-origin request or Postman),
-  // consider it as authorized
   if (!origin || whiteList.includes(String(origin))) {
     callback(null, { origin: true });
   } else {
