@@ -44,7 +44,7 @@ export const LoginController = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body as UserInterface;
     const result = await LoginService(email, password!);
-    res.send(`signIn sucessful ${result}`);
+    res.send(result);
   } catch (error) {
     handleError(res, error);
   }
