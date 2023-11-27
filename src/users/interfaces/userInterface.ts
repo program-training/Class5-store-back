@@ -3,6 +3,7 @@ interface UserInterface {
   email: string;
   isAdmin?: boolean;
   password?: string;
+  initialPassword?: string;
 }
 
 export default UserInterface;

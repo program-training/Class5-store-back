@@ -3,6 +3,7 @@ import {
   LoginController,
   getUserByIdController,
   getUsersController,
+  registerAdminController,
   registerUserController,
 } from "../controllers/usersControllers";
 
@@ -12,7 +13,11 @@ router.get("/", getUsersController);
 
 router.get("/:id", getUserByIdController);
 
-router.post("/", registerUserController);
+//הרשמת אדמין
+router.post("/", registerAdminController);
+
+//משתמש רגיל
+router.post("/user", registerUserController);
 
 router.post("/signIn", LoginController);
 
