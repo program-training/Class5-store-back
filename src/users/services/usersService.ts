@@ -1,4 +1,4 @@
-import { string } from "joi";
+import joi from "joi";
 import {
   getUserByIdFromDB,
   registerUserToDB,
@@ -11,6 +11,7 @@ import UserInterface from "../interfaces/userInterface";
 import { token } from "morgan";
 import { generateToken } from "../../auth/JWT";
 import ServerError from "../../utils/ServerError";
+import adminValidation from "../models/joi/adminValidation";
 
 export const getUsersService = async () => {
   try {
@@ -36,7 +37,7 @@ export const registerUserService = async (user: UserInterface) => {
     if (userCheck) {
       const id = userCheck._id.toString();
       const token = generateToken(id, false);
-      return {token, id};
+      return token;
     }
     //אם המשתמש לא קיים רושם אותו ושולח טוקן
     const userRegistered = await registerUserToDB(user);
@@ -44,7 +45,7 @@ export const registerUserService = async (user: UserInterface) => {
       throw new ServerError(401, "did not receive user from db");
     const id = userRegistered?._id.toString();
     const token = generateToken(id!);
-    return {token, id};
+    return token;
   } catch (error) {
     return Promise.reject(error);
   }
@@ -53,10 +54,10 @@ export const registerUserService = async (user: UserInterface) => {
 //רושם אדמין לדאטהבייס
 export const registerAdminService = async (user: UserInterface) => {
   try {
-    let userCheck = await userExistInDB(user.email);
+    const userCheck = await userExistInDB(user.email);
     if (userCheck) return userCheck;
-    if (user.initialPassword !== "secret")
-      throw new ServerError(401, "unauthorized admin");
+    // if (user.initialPassword !== "secret")
+    //   throw new ServerError(401, "unauthorized admin");
     //מצפין את הסיסמה
     user.password = generateUserPassword(user.password!);
     const userRegistered = await registerUserToDB(user);
@@ -69,7 +70,7 @@ export const registerAdminService = async (user: UserInterface) => {
 export const LoginService = async (email: string, password: string) => {
   try {
     const user = await Login(email, password);
-    if (!user) throw new Error();
+    if (!user) throw new ServerError(400, "unauthorized");
     const id = user._id.toString();
     const token = generateToken(id, user.isAdmin);
     return token;
