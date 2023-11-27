@@ -4,6 +4,7 @@ import {
   getOrdersFromDB,
   registerOrderToDB,
 } from "../dal/orderDal";
+import { convertToOrder } from "../helpers/convertToOrder";
 import OrderFromClientInterface from "../interfaces/OrderFromClientInterface";
 import OrderInterface from "../interfaces/OrderInterface";
 
@@ -28,14 +29,9 @@ export const registerOrderService = async (
   orderFromClient: OrderFromClientInterface
 ) => {
   try {
-    const orderTime = new Date();
-    const status = "pending";
-    const order: OrderInterface = {
-      ...orderFromClient,
-      orderTime,
-      status,
-    };
+    const order: OrderInterface = convertToOrder(orderFromClient);
     const registeredOrder = await registerOrderToDB(order);
+    console.log(registeredOrder);
     const {
       email,
       shippingDetails: { userId },
