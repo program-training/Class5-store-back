@@ -19,10 +19,10 @@ export const getOrdersFromDB = async () => {
 export const registerOrderToDB = async (order: ordersInterface) => {
   try {
     console.log(order, 1);
-    
+
     const result = await axios.post(`${OMS_BASE_URL}/api/orders`, order);
     console.log(result.data);
-    
+
     return result.data;
   } catch (error) {
     return Promise.reject(error);
@@ -44,9 +44,18 @@ export const getOrderByUserIdFromDB = async (id: string) => {
 
 export const getOrderByIdFromDB = async (id: string) => {
   try {
-    const {data} = await axios.get(`${OMS_BASE_URL}/api/orders/${id}`)
-    return data
+    const { data } = await axios.get(`${OMS_BASE_URL}/api/orders/${id}`);
+    return data;
   } catch (error) {
     return Promise.reject(error);
   }
-}
+};
+
+export const connectedToOMS = async () => {
+  try {
+    const { data } = await axios.get(`${OMS_BASE_URL}/api/connected`);
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+};

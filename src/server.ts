@@ -5,6 +5,7 @@ import morgan from "./logger/morgan";
 import cors from "./cors/cors";
 import { connectToDatabase } from "./dataAccess/mongoose";
 import handleErrorMiddleware from "./middlewares/handleErrorMiddleware";
+import { connectedToOMS } from "./Orders/dal/orderDal";
 
 const app = express();
 
@@ -12,7 +13,7 @@ app.use(morgan);
 app.use(cors);
 app.use(express.json());
 app.use(router);
-app.use(handleErrorMiddleware)
+app.use(handleErrorMiddleware);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
