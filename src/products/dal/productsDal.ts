@@ -7,7 +7,6 @@ export const getProductsFromDB = async () => {
   try {
     // const { data } = await axios.get(
     //   `${ERP_BASE_URL}/api/shop_inventory?searchText=`
-    // );
     const data = products;
     return data;
   } catch (error) {

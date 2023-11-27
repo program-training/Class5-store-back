@@ -4,7 +4,6 @@ import axios from "axios";
 const OMS_BASE_URL =
   process.env.OMS_BASE_URL || "https://project-team1-oms-back.onrender.com";
 
-//מקבל את כל ההזמנות מהרנדר
 export const getOrdersFromDB = async () => {
   try {
     const orders = await axios.get(`${OMS_BASE_URL}/api/orders`);
@@ -16,10 +15,14 @@ export const getOrdersFromDB = async () => {
     return Promise.reject(error);
   }
 };
-//רושם הזמנה לרנדר
+
 export const registerOrderToDB = async (order: ordersInterface) => {
   try {
+    console.log(order);
+    
     const result = await axios.post(`${OMS_BASE_URL}/api/orders`, order);
+    console.log(result.data);
+    
     return result.data;
   } catch (error) {
     return Promise.reject(error);

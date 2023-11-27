@@ -1,4 +1,4 @@
-import CartItemInterface from "./CartItemInterface";
+import CartItemInterface from "./CartItemFromClientInterface";
 import ShippingDetailsInterface from "./ShippingDetailsInterface";
 
 type OrderFromClientInterface = {
