@@ -26,7 +26,7 @@ export const getProductsStockService = async (cart: InStock[]) => {
     const notInStock: NotInStock[] = [];
     await Promise.all(
       cart.map(async (item) => {
-        const product = await getProductByIdFromDB(item.productId)
+       const product = await getProductByIdFromDB(item.productId)
         if (!product) throw new ServerError(404, "not found")
         if (product.quantity === 0) {
           notInStock.push({
