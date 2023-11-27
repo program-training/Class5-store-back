@@ -13,10 +13,8 @@ router.get("/", getUsersController);
 
 router.get("/:id", getUserByIdController);
 
-//הרשמת אדמין
-router.post("/", registerAdminController);
+router.post("/admin", registerAdminController);
 
-//משתמש רגיל
 router.post("/user", registerUserController);
 
 router.post("/signIn", LoginController);

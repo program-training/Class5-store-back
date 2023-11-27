@@ -32,20 +32,19 @@ export const getUserByIdService = async (userId: string) => {
 //רושם משתמש לדאטהבייס
 export const registerUserService = async (user: UserInterface) => {
   try {
-    //אם המשתמש קיים שולח טוקן
     const userCheck = await userExistInDB(user.email);
     if (userCheck) {
       const id = userCheck._id.toString();
       const token = generateToken(id, false);
-      return token;
+      return {token, id};
     }
     //אם המשתמש לא קיים רושם אותו ושולח טוקן
     const userRegistered = await registerUserToDB(user);
     if (!userRegistered)
-      throw new ServerError(401, "did not recieve user from db");
-    const _id = userRegistered?._id.toString();
-    const newToken = generateToken(_id!);
-    return newToken;
+      throw new ServerError(401, "did not receive user from db");
+    const id = userRegistered?._id.toString();
+    const token = generateToken(id!);
+    return {token, id};
   } catch (error) {
     return Promise.reject(error);
   }
@@ -57,7 +56,7 @@ export const registerAdminService = async (user: UserInterface) => {
     let userCheck = await userExistInDB(user.email);
     if (userCheck) return userCheck;
     if (user.initialPassword !== "secret")
-      throw new ServerError(401, "unauthrized admin");
+      throw new ServerError(401, "unauthorized admin");
     //מצפין את הסיסמה
     user.password = generateUserPassword(user.password!);
     const userRegistered = await registerUserToDB(user);
