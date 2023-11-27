@@ -1,8 +1,9 @@
+import ServerError from "../../utils/ServerError";
 import { getProductByIdFromDB, getProductsFromDB } from "../dal/productsDal";
 import { CheckQuantity as InStock, NotInStock } from "../types/types";
 
 export const getProductsService = async () => {
-  try {
+  try {    
     const products = await getProductsFromDB();
     return products;
   } catch (error) {
@@ -25,7 +26,8 @@ export const getProductsStockService = async (cart: InStock[]) => {
     const notInStock: NotInStock[] = [];
     await Promise.all(
       cart.map(async (item) => {
-        const product = await getProductByIdFromDB(item.productId);
+        const product = await getProductByIdFromDB(item.productId)
+        if (!product) throw new ServerError(404, "not found")
         if (product.quantity === 0) {
           notInStock.push({
             product,

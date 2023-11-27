@@ -1,8 +1,8 @@
 import Joi from "joi";
-import CartItemInterface from "../../interfaces/CartItemInterface";
+import CartItemInterface from "../../interfaces/CartItemFromClientInterface";
 
 const cartItemSchema = Joi.object<CartItemInterface>({
-    id: Joi.number().required(),
+    productId: Joi.number().required(),
     name: Joi.string().required(),
     salePrice: Joi.string().required(),
     quantity: Joi.number().required(),

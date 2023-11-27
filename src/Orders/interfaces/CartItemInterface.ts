@@ -1,9 +1,9 @@
 interface CartItemInterface {
-  id: number;
-  name: string;
-  salePrice: string;
-  quantity: number;
-  description: string;
-}
-
-export default CartItemInterface;
+    productId: number;
+    name: string;
+    price: number;
+    quantity: number;
+    description: string;
+  }
+  
+  export default CartItemInterface;
