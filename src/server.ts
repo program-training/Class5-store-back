@@ -4,6 +4,7 @@ import chalk from "chalk";
 import morgan from "./logger/morgan";
 import cors from "./cors/cors";
 import { connectToDatabase } from "./dataAccess/mongoose";
+import { connectedToERP } from "./products/dal/productsDal";
 const app = express();
 
 app.use(morgan);
@@ -14,7 +15,8 @@ app.use(router);
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(chalk.blueBright(`Server listening on port: ${PORT}`));
-  connectToDatabase()
+  connectToDatabase();
+  connectedToERP()
     .then((message) => console.log(message))
     .catch((error) => console.log(error.message));
 });

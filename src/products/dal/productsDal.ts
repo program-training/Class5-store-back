@@ -1,5 +1,6 @@
 import axios from "axios";
-const ERP_BASE_URL = process.env.ERP_BASE_URL || "https://erp-server-v2.onrender.com";
+const ERP_BASE_URL =
+  process.env.ERP_BASE_URL || "https://erp-server-v2.onrender.com";
 
 export const getProductsFromServer = async () => {
   try {
@@ -20,5 +21,14 @@ export const getProductByIdFromServer = async (productId: number) => {
     return data;
   } catch (error) {
     return Promise.reject(error);
+  }
+};
+
+export const connectedToERP = async () => {
+  try {
+    const { data } = await axios.get(`${ERP_BASE_URL}/api/connect`);
+    console.log(data);
+  } catch (error) {
+    console.log(error);
   }
 };
