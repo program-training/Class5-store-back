@@ -1,3 +1,4 @@
+import { required } from "joi";
 import ServerError from "../../utils/ServerError";
 import { getProductByIdFromDB, getProductsFromDB } from "../dal/productsDal";
 import { CheckQuantity as InStock, NotInStock } from "../types/types";
@@ -30,28 +31,25 @@ export const getProductsStockService = async (cart: InStock[]) => {
         if (!product) throw new ServerError(404, "not found")
         if (product.quantity === 0) {
           notInStock.push({
-            product,
+            product: {...product},
             requiredQuantity: item.requiredQuantity,
           });
         }
         if (product.quantity !== 0) {
-          const referents = item.requiredQuantity - product.quantity;
-          if (referents <= 0) {
+          const referents = product.quantity - item.requiredQuantity;
+          if (referents >= 0) {
             inStock.push(item);
-          } else if (referents > 0) {
-            inStock.push({
-              productId: item.productId,
-              requiredQuantity: item.requiredQuantity,
-            });
+            product.quantity -= item.requiredQuantity;
+          } else if (referents < 0) {
             notInStock.push({
-              product,
+              product: {...product},
               requiredQuantity: item.requiredQuantity,
             });
+            product.quantity = 0
           }
         }
       })
     );
-
     return { inStock, notInStock };
   } catch (error) {
     return Promise.reject(error);
@@ -60,6 +58,14 @@ export const getProductsStockService = async (cart: InStock[]) => {
 
 export const cancelOrderService =async (cart: InStock[]) => {
   try {
+    await Promise.all(
+      cart.map(async (item) => {
+        const product = await getProductByIdFromDB(item.productId);
+        if (!product) throw new ServerError(404, "not found")
+        product.quantity += item.requiredQuantity
+      }))
+
+   
     return cart
   } catch (error) {
     return Promise.reject(error);

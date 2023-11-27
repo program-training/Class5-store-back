@@ -48,7 +48,7 @@ export const registerUserToDB = async (user: UserInterface) => {
     await registeredUser.save();
     return registeredUser;
   } catch (error) {
-    if (error instanceof Error) return Promise.reject(error);
+    return Promise.reject(error);
   }
 };
 

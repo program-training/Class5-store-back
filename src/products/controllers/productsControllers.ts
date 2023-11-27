@@ -32,7 +32,7 @@ export const getProductsStockController = async (
 ) => {
   try {
     const cart = req.body;
-    const result = await getProductsStockService(cart.cart);
+    const result = await getProductsStockService(cart);
     return res.send(result);
   } catch (error) {
     handleError(res, error);
@@ -42,7 +42,7 @@ export const getProductsStockController = async (
 export const cancelOrderController = async (req: Request, res: Response) => {
   try {
     const cart = req.body;
-    const result = cancelOrderService(cart.cart);
+    const result = await cancelOrderService(cart);
     return res.send(result);
   } catch (error) {
     handleError(res, error);
