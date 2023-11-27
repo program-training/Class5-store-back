@@ -57,3 +57,11 @@ export const getProductsStockService = async (cart: InStock[]) => {
     return Promise.reject(error);
   }
 };
+
+export const cancelOrderService =async (cart: InStock[]) => {
+  try {
+    return cart
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}

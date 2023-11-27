@@ -1,10 +1,10 @@
-import CartItemInterface from "./CartItemFromClientInterface";
+import CartItemFromClientInterface from "./CartItemFromClientInterface";
 import ShippingDetailsInterface from "./ShippingDetailsInterface";
 
 type OrderFromClientInterface = {
   email: string;
   price: number;
-  cartItems: CartItemInterface[];
+  cartItems: CartItemFromClientInterface[];
   shippingDetails: ShippingDetailsInterface
 };
 
