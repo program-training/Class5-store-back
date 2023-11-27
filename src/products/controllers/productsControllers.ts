@@ -2,6 +2,7 @@ import {
   getProductsService,
   getProductByIdService,
   getProductsStockService,
+  cancelOrderService,
 } from "../services/productsApiService";
 import { handleError } from "../../utils/handleErrors";
 import { Request, Response } from "express";
@@ -38,3 +39,12 @@ export const getProductsStockController = async (
   }
 };
 
+export const cancelOrderController = async (req: Request, res: Response) => {
+  try {
+    const cart = req.body;
+    const result = cancelOrderService(cart.cart);
+    return res.send(result);
+  } catch (error) {
+    handleError(res, error);
+  }
+};

@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  cancelOrderController,
   getProductByIdController,
   getProductsController,
   getProductsStockController,
@@ -13,6 +14,6 @@ router.get("/:id", getProductByIdController);
 
 router.post("/stock", getProductsStockController);
 
-// router.post("/cancel", cancelProductsStockController)
+router.post("/cancel", cancelOrderController);
 
 export default router;

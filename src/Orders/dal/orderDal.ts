@@ -18,7 +18,7 @@ export const getOrdersFromDB = async () => {
 
 export const registerOrderToDB = async (order: ordersInterface) => {
   try {
-    console.log(order);
+    console.log(order, 1);
     
     const result = await axios.post(`${OMS_BASE_URL}/api/orders`, order);
     console.log(result.data);
@@ -29,11 +29,6 @@ export const registerOrderToDB = async (order: ordersInterface) => {
   }
 };
 
-
-
-
-
-//מביא הזמנה לפי id
 export const getOrderByUserIdFromDB = async (id: string) => {
   try {
     const orders = await getOrdersFromDB();
@@ -46,3 +41,12 @@ export const getOrderByUserIdFromDB = async (id: string) => {
     return Promise.reject(error);
   }
 };
+
+export const getOrderByIdFromDB = async (id: string) => {
+  try {
+    const {data} = await axios.get(`${OMS_BASE_URL}/api/orders/${id}`)
+    return data
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}

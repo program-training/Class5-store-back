@@ -1,5 +1,6 @@
 import sendEmail from "../../utils/sendEmail";
 import {
+  getOrderByIdFromDB,
   getOrderByUserIdFromDB,
   getOrdersFromDB,
   registerOrderToDB,
@@ -42,3 +43,13 @@ export const registerOrderService = async (
     return Promise.reject(error);
   }
 };
+
+export const getOrderByIdService = async (id: string) => {
+  try {
+    const order = await getOrderByIdFromDB(id);
+    return order;
+  } catch (error) {
+    return Promise.reject(error)
+  }
+};
+
