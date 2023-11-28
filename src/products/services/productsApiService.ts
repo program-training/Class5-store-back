@@ -1,63 +1,73 @@
-import {
-  getProductByIdFromServer,
-  getProductsFromServer,
-} from "../dal/productsDal";
-import { CheckQuantity, NotInStock } from "./types";
+import { required } from "joi";
+import ServerError from "../../utils/ServerError";
+import { getProductByIdFromDB, getProductsFromDB } from "../dal/productsDal";
+import { CheckQuantity as InStock, NotInStock } from "../types/types";
 
-export const getProducts = async () => {
-  try {
-    const products = await getProductsFromServer();
+export const getProductsService = async () => {
+  try {    
+    const products = await getProductsFromDB();
     return products;
   } catch (error) {
     return Promise.reject(error);
   }
 };
 
-export const getProduct = async (productId: number) => {
+export const getProductByIdService = async (productId: number) => {
   try {
-    const getProductFromMDB = await getProductByIdFromServer(productId);
+    const getProductFromMDB = await getProductByIdFromDB(productId);
     return getProductFromMDB;
   } catch (error) {
     return Promise.reject(error);
   }
 };
 
-export const getDataForQuantity = async (cart: CheckQuantity[]) => {
+export const getProductsStockService = async (cart: InStock[]) => {
   try {
-    const inStock: CheckQuantity[] = [];
+    const inStock: InStock[] = [];
     const notInStock: NotInStock[] = [];
     await Promise.all(
       cart.map(async (item) => {
-        const product = await getProductByIdFromServer(item.productId);
+       const product = await getProductByIdFromDB(item.productId)
+        if (!product) throw new ServerError(404, "not found")
         if (product.quantity === 0) {
           notInStock.push({
-            product,
-            amountMissing: item.amount,
-            ordered: item.amount,
+            product: {...product},
+            requiredQuantity: item.requiredQuantity,
           });
         }
         if (product.quantity !== 0) {
-          const referents = item.amount - product.quantity;
-          if (referents <= 0) {
+          const referents = product.quantity - item.requiredQuantity;
+          if (referents >= 0) {
             inStock.push(item);
-          } else if (referents > 0) {
-            inStock.push({
-              productId: item.productId,
-              amount: product.quantity,
-              ordered: item.amount,
-            });
+            product.quantity -= item.requiredQuantity;
+          } else if (referents < 0) {
             notInStock.push({
-              product,
-              amountMissing: referents,
-              ordered: item.amount,
+              product: {...product},
+              requiredQuantity: item.requiredQuantity,
             });
+            product.quantity = 0
           }
         }
       })
     );
-
     return { inStock, notInStock };
   } catch (error) {
     return Promise.reject(error);
   }
 };
+
+export const cancelOrderService =async (cart: InStock[]) => {
+  try {
+    await Promise.all(
+      cart.map(async (item) => {
+        const product = await getProductByIdFromDB(item.productId);
+        if (!product) throw new ServerError(404, "not found")
+        product.quantity += item.requiredQuantity
+      }))
+
+   
+    return cart
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}

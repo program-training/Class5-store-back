@@ -1,8 +1,9 @@
 interface UserInterface {
   _id?: string;
   email: string;
-  admin?: true;
+  isAdmin?: boolean;
   password?: string;
+  initialPassword?: string;
 }
 
 export default UserInterface;

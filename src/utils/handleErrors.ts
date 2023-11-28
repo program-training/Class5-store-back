@@ -1,18 +1,15 @@
+import ServerError from "./ServerError";
 import { Response } from "express";
-import chalk from "chalk";
 
 export const handleError = (
   res: Response,
-  error: any,
+  error: ServerError | any,
   status: number = 400
 ) => {
-  if (error && error instanceof Error)
-    return res.status(status).send(error.message);
-  return res.status(status).send("Oops... an error accorded");
-};
-
-export const handleJsonfileError = <T>(error: T) => {
-  if (error instanceof Error) return Promise.reject(error);
-  console.log(chalk.redBright(error));
-  return Promise.reject(new Error("Something went wong!"));
+  status = error instanceof ServerError ? error.status : status;
+  const message =
+    error instanceof ServerError || error instanceof Error
+      ? error.message
+      : "Oops... an error accorded";
+  return res.status(status).send(message);
 };

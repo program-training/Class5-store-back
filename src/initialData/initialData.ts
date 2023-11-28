@@ -1,6 +1,3 @@
-import { admin } from "googleapis/build/src/apis/admin";
-import { bool, string } from "joi";
-
 export interface initialUser {
   email: string;
   admin: boolean;

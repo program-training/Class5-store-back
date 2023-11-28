@@ -1,15 +1,22 @@
 import express from "express";
 import {
-  handleGetUser,
-  handleGetUsers,
-  handleUserRegistration,
+  LoginController,
+  getUserByIdController,
+  getUsersController,
+  registerAdminController,
+  registerUserController,
 } from "../controllers/usersControllers";
+
 const router = express.Router();
 
-router.get("/", handleGetUsers);
-router.get("/:id", handleGetUser);
+router.get("/", getUsersController);
 
-router.post("/", handleUserRegistration);
-router.post("/signup", handleUserRegistration);
+router.get("/:id", getUserByIdController);
+
+router.post("/admin", registerAdminController);
+
+router.post("/user", registerUserController);
+
+router.post("/signIn", LoginController);
 
 export default router;

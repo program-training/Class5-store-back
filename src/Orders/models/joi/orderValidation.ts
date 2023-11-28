@@ -1,34 +1,36 @@
 import Joi from "joi";
-import ordersInterface from "../../interfaces/OrderInterface";
-import ProductInterface from "../../../products/interfaces/productInterface";
-import shippingDetails from "../../interfaces/OrderInterface";
+import OrderFromClientInterface from "../../interfaces/OrderFromClientInterface";
+import shippingDetailsSchema from "./shippingDetailsSchema";
+import cartItemSchema from "./cartItemSchema";
 
-const userValidation = (order: ordersInterface) => {
+const orderValidation = (order: OrderFromClientInterface) => {
   const schema = Joi.object({
-    id: Joi.string().allow(""),
-    products: Joi.array<ProductInterface>().required(),
-    email: Joi.string()
-      .pattern(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/)
-      .message('user "mail" mast be a valid mail')
+    cartItems: Joi.array()
+      .items(cartItemSchema)
       .required()
       .messages({
-        "string.pattern.base": 'user "mail" mast be a valid mail',
-        "string.empty": 'user "mail" is required',
-      })
-      .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*-]).{9,}$/)
-      .message(
-        'user "password" must be at least nine characters long and contain an uppercase letter, a lowercase letter, a number and one of the following characters !@#$%^&*-'
-      )
-      .required()
-      .messages({
-        "string.pattern.base":
-          'user "password" must be at least nine characters long and contain an uppercase letter, a lowercase letter, a number and one of the following characters !@#$%^&*-',
-        "string.empty": 'user "password" is required',
+        "any.required": "cartItems is required",
       }),
-    shippingDetails: Joi.object<shippingDetails>().required(),
+    email: Joi.string()
+      .email()
+      .required()
+      .messages({
+        "string.base": "user email must be a valid email",
+        "any.required": "user email is required",
+      }),
+    price: Joi.number()
+      .required()
+      .messages({
+        "any.required": "price is required",
+      }),
+    shippingDetails: shippingDetailsSchema
+      .required()
+      .messages({
+        "any.required": "shippingDetails is required",
+      }),
   });
 
   return schema.validate(order);
 };
 
-export default userValidation;
+export default orderValidation;

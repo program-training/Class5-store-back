@@ -1,41 +1,52 @@
-import jsonfile from "jsonfile";
-import path from "path";
-import { handleJsonfileError } from "../../utils/handleErrors";
 import ordersInterface from "../interfaces/OrderInterface";
+import axios from "axios";
 
-const DB_URL = path.join(__dirname, "../../../DB/orders.json");
+const OMS_BASE_URL =
+  process.env.OMS_BASE_URL || "https://project-team1-oms-back.onrender.com";
 
-export const getOrdersFromJsonFile = async () => {
+export const getOrdersFromDB = async () => {
   try {
-    const data = await jsonfile.readFile(DB_URL);
-    return data;
+    const orders = await axios.get(`${OMS_BASE_URL}/api/orders`);
+    if (orders.data.length === 0) {
+      throw Error;
+    }
+    return orders.data;
   } catch (error) {
-    return handleJsonfileError(error);
+    return Promise.reject(error);
   }
 };
 
-export const getOrderByUserIdFromJsonFile = async (id: string) => {
+export const registerOrderToDB = async (order: ordersInterface) => {
   try {
-    const result = await getOrdersFromJsonFile();
-    const orders = result.orders as ordersInterface[];
-    const order = orders.find((p: ordersInterface) => p.userId === id);
+    console.log(order, 1);
+    
+    const result = await axios.post(`${OMS_BASE_URL}/api/orders`, order);
+    console.log(result.data);
+    
+    return result.data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const getOrderByUserIdFromDB = async (id: string) => {
+  try {
+    const orders = await getOrdersFromDB();
+    const order = orders.find((order: ordersInterface) => order._id === id);
     if (!order) {
       throw Error("order not found");
     }
     return order;
   } catch (error) {
-    console.log(error);
-    return handleJsonfileError(error);
+    return Promise.reject(error);
   }
 };
 
-export const registerOrderToDb = async (order: ordersInterface) => {
+export const getOrderByIdFromDB = async (id: string) => {
   try {
-    const data = await getOrdersFromJsonFile();
-    const newData = { ...data.orders, order };
-    await jsonfile.writeFile(DB_URL, newData);
-    return newData;
+    const {data} = await axios.get(`${OMS_BASE_URL}/api/orders/${id}`)
+    return data
   } catch (error) {
-    return handleJsonfileError(error);
+    return Promise.reject(error);
   }
-};
+}
