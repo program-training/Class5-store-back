@@ -17,8 +17,7 @@ app.use(handleErrorMiddleware);
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(chalk.blueBright(`Server listening on port: ${PORT}`));
-  connectToDatabase();
-  connectedToERP()
+  connectToDatabase()
     .then((message) => console.log(message))
     .catch((error) => console.log(error.message));
 });
