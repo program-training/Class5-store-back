@@ -37,7 +37,7 @@ export const registerUserService = async (user: UserInterface) => {
     if (userCheck) {
       const id = userCheck._id.toString();
       const token = generateToken(id, false);
-      return token;
+      return id;
     }
     //אם המשתמש לא קיים רושם אותו ושולח טוקן
     const userRegistered = await registerUserToDB(user);
@@ -45,7 +45,7 @@ export const registerUserService = async (user: UserInterface) => {
       throw new ServerError(401, "did not receive user from db");
     const id = userRegistered?._id.toString();
     const token = generateToken(id!);
-    return token;
+    return id;
   } catch (error) {
     return Promise.reject(error);
   }
