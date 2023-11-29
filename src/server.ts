@@ -5,6 +5,7 @@ import morgan from "./logger/morgan";
 import cors from "./cors/cors";
 import { connectToDatabase } from "./dataAccess/mongoose";
 import handleErrorMiddleware from "./middlewares/handleErrorMiddleware";
+import { connectedToOMS } from "./Orders/dal/orderDal";
 
 const app = express();
 

@@ -2,7 +2,7 @@ import mongoose, { ConnectOptions } from "mongoose";
 import { MongoMemoryServer } from "mongodb-memory-server";
 import {
   getUsersService,
-  getUserByIdService,
+  // getUserByIdService,
   registerUserService,
 } from "../usersService";
 import User from "../../models/mongoose/UserSchema";
@@ -40,9 +40,9 @@ describe("User Service Functions", () => {
   // it("should register a user through the service", async () => {
   //   const registeredUser = await registerUserService(testUser);
   //   expect(registeredUser).toBeDefined();
-  //   // expect(registeredUser?.email).toBe(testUser.email);
-  //   // expect(registeredUser?.isAdmin).toBe(testUser.isAdmin);
-  //   // expect(registeredUser?.password).toBe(testUser.password);
+  // expect(registeredUser?.email).toBe(testUser.email);
+  // expect(registeredUser?.isAdmin).toBe(testUser.isAdmin);
+  // expect(registeredUser?.password).toBe(testUser.password);
   // });
 
   it("should get all users through the service", async () => {

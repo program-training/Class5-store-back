@@ -1,6 +1,6 @@
 import express from "express";
 import {
-  LoginController,
+  loginController,
   getUserByIdController,
   getUsersController,
   registerAdminController,
@@ -17,6 +17,6 @@ router.post("/admin", registerAdminController);
 
 router.post("/user", registerUserController);
 
-router.post("/signIn", LoginController);
+router.post("/signIn", loginController);
 
 export default router;
