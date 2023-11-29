@@ -35,6 +35,7 @@ export const registerAdminController = async (req: Request, res: Response) => {
     const { error } = adminValidation(user);
     if (error?.details[0].message) throw new Error(error?.details[0].message);
     const userFromDB = await registerAdminService(user);
+
     return res.status(200).send(userFromDB);
   } catch (error) {
     handleError(res, error);
