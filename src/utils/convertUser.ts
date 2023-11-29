@@ -7,7 +7,7 @@ export interface UserInDBInterface extends Document {
   password?: string | undefined;
 }
 export const convertToUserInterface = (user: UserInDBInterface) => {
-  const { _id, password, ...otherDetails } = user;
+  const { _id, isAdmin, email } = user;
   const id = _id.toString();
-  return { _id: id, ...otherDetails };
+  return { _id: id, isAdmin, email };
 };

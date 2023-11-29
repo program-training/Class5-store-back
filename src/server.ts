@@ -6,7 +6,7 @@ import cors from "./cors/cors";
 import { connectToDatabase } from "./dataAccess/mongoose";
 import handleErrorMiddleware from "./middlewares/handleErrorMiddleware";
 import { connectedToOMS } from "./Orders/dal/orderDal";
-
+import { connectedToERP } from "./products/dal/productsDal";
 const app = express();
 
 app.use(morgan);
@@ -15,9 +15,11 @@ app.use(express.json());
 app.use(router);
 app.use(handleErrorMiddleware);
 
-const PORT = process.env.PORT;
-app.listen(PORT, () => {
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, async () => {
   console.log(chalk.blueBright(`Server listening on port: ${PORT}`));
+  await connectedToOMS();
+  await connectedToERP();
   connectToDatabase()
     .then((message) => console.log(message))
     .catch((error) => console.log(error.message));

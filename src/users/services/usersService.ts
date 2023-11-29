@@ -50,14 +50,15 @@ export const registerUserService = async (user: UserInterface) => {
 export const registerAdminService = async (user: UserInterface) => {
   try {
     const userCheck = await userExistInDB(user.email);
-    if (userCheck) return userCheck;
-    if (user.initialPassword !== "secret")
-      throw new ServerError(401, "unauthorized admin");
+    if (userCheck) throw new ServerError(400, "user already exist");
+    if (user.initialPassword !== "secretPass1@")
+      throw new ServerError(401, "unauthorized");
     user.password = generateUserPassword(user.password!);
     delete user.initialPassword;
     user.isAdmin = true;
     const userRegistered = await registerUserToDB(user);
-    return userRegistered;
+    const convertedUser = convertToUserInterface(userRegistered);
+    return convertedUser;
   } catch (error) {
     return Promise.reject(error);
   }
