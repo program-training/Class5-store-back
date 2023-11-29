@@ -2,7 +2,7 @@ import mongoose, { ConnectOptions } from "mongoose";
 import { MongoMemoryServer } from "mongodb-memory-server";
 import {
   getUsersService,
-  getUserByIdService,
+  // getUserByIdService,
   registerUserService,
 } from "../usersService";
 import User from "../../models/mongoose/UserSchema";

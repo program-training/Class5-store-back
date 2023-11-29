@@ -52,7 +52,7 @@ export const registerUserToDB = async (user: UserInterface) => {
   }
 };
 
-export const Login = async (email: string, password: string) => {
+export const login = async (email: string, password: string) => {
   try {
     const user = await User.findOne({ email }).exec();
     const checkIfPasswordTrue = comparePassword(password, user?.password!);
