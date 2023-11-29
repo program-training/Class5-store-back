@@ -12,9 +12,9 @@ app.use(morgan);
 app.use(cors);
 app.use(express.json());
 app.use(router);
-app.use(handleErrorMiddleware)
+app.use(handleErrorMiddleware);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(chalk.blueBright(`Server listening on port: ${PORT}`));
   connectToDatabase()
