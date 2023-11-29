@@ -32,7 +32,6 @@ export const initialDataToDB = async (users: UserInterface[]) => {
   }
 };
 
-//מחיקת יוזר/ס מהמערכת
 export const deleteUsersFromDB = async () => {
   try {
     const result = await User.deleteMany({});
