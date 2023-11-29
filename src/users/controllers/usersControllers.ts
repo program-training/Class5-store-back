@@ -1,5 +1,5 @@
 import {
-  LoginService,
+  loginService,
   getUserByIdService,
   getUsersService,
   registerAdminService,
@@ -9,7 +9,6 @@ import { handleError } from "../../utils/handleErrors";
 import userValidation from "../models/joi/userValidation";
 import { Request, Response } from "express";
 import UserInterface from "../interfaces/userInterface";
-import { Login } from "../dal/usersDal";
 import adminValidation from "../models/joi/adminValidation";
 
 export const getUsersController = async (req: Request, res: Response) => {
@@ -29,7 +28,7 @@ export const getUserByIdController = async (req: Request, res: Response) => {
     handleError(res, error);
   }
 };
-//קונטרולר לרישום אדמינים
+
 export const registerAdminController = async (req: Request, res: Response) => {
   try {
     const user: UserInterface = req.body;
@@ -42,24 +41,21 @@ export const registerAdminController = async (req: Request, res: Response) => {
   }
 };
 
-//קונטרולר להרשמה של יוזר
 export const registerUserController = async (req: Request, res: Response) => {
   try {
     const user: UserInterface = req.body;
-
     const { error } = userValidation(user);
     if (error?.details[0].message) throw new Error(error?.details[0].message);
-
     const token = await registerUserService(user);
     return res.status(200).send(token);
   } catch (error) {
     handleError(res, error);
   }
 };
-export const LoginController = async (req: Request, res: Response) => {
+export const loginController = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body as UserInterface;
-    const result = await LoginService(email, password!);
+    const result = await loginService(email, password!);
     res.status(200).send(result);
   } catch (error) {
     handleError(res, error);
