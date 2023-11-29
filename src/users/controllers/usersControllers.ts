@@ -10,6 +10,7 @@ import userValidation from "../models/joi/userValidation";
 import { Request, Response } from "express";
 import UserInterface from "../interfaces/userInterface";
 import { Login } from "../dal/usersDal";
+import adminValidation from "../models/joi/adminValidation";
 
 export const getUsersController = async (req: Request, res: Response) => {
   try {
@@ -32,8 +33,8 @@ export const getUserByIdController = async (req: Request, res: Response) => {
 export const registerAdminController = async (req: Request, res: Response) => {
   try {
     const user: UserInterface = req.body;
-    // const { error } = userValidation(user);
-    // if (error?.details[0].message) throw new Error(error?.details[0].message);
+    const { error } = adminValidation(user);
+    if (error?.details[0].message) throw new Error(error?.details[0].message);
     const userFromDB = await registerAdminService(user);
     return res.status(200).send(userFromDB);
   } catch (error) {
