@@ -6,6 +6,7 @@ import {
 } from "../services/productsApiService";
 import { handleError } from "../../utils/handleErrors";
 import { Request, Response } from "express";
+import { convertToCheck } from "../helpers/convertToCheck";
 
 export const getProductsController = async (req: Request, res: Response) => {
   try {
@@ -32,7 +33,8 @@ export const getProductsStockController = async (
 ) => {
   try {
     const cart = req.body;
-    const result = await getProductsStockService(cart);
+    const converted = convertToCheck(cart);
+    const result = await getProductsStockService(converted);
     return res.send(result);
   } catch (error) {
     handleError(res, error);
