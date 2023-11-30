@@ -2,12 +2,12 @@ import axios from "axios";
 import { CheckQuantity } from "../types/types";
 
 const ERP_BASE_URL =
-  process.env.ERP_BASE_URL || "https://erp-server-v2.onrender.com";
+  process.env.ERP_BASE_URL || "https://erp-server-v2.onrender.com/api";
 
 export const getProductsFromDB = async () => {
   try {
     const { data } = await axios.get(
-      `${ERP_BASE_URL}/api/shop_inventory?searchText=`
+      `${ERP_BASE_URL}/shop_inventory?searchText=`
     );
     return data;
   } catch (error) {
@@ -18,7 +18,7 @@ export const getProductsFromDB = async () => {
 export const getProductByIdFromDB = async (productId: number) => {
   try {
     const { data } = await axios.get(
-      `${ERP_BASE_URL}/api/shop_inventory/${productId}`
+      `${ERP_BASE_URL}/shop_inventory/${productId}`
     );
     return data;
   } catch (error) {
@@ -29,7 +29,7 @@ export const getProductByIdFromDB = async (productId: number) => {
 export const checkStockInDB = async (cart: CheckQuantity[]) => {
   try {
     const { data } = await axios.post(
-      `${ERP_BASE_URL}/api/shop_inventory/updateInventory`,
+      `${ERP_BASE_URL}/shop_inventory/updateInventory`,
       cart
     );
     return data;
@@ -41,7 +41,7 @@ export const checkStockInDB = async (cart: CheckQuantity[]) => {
 export const cancelOrder = async (cart: CheckQuantity[]) => {
   try {
     const { data, status } = await axios.post(
-      `${ERP_BASE_URL}/api/shop_inventory/cancelOrder`,
+      `${ERP_BASE_URL}/shop_inventory/cancelOrder`,
       cart
     );
     return data;
@@ -52,9 +52,7 @@ export const cancelOrder = async (cart: CheckQuantity[]) => {
 
 export const connectedToERP = async () => {
   try {
-    const { data } = await axios.get(
-      `${ERP_BASE_URL}/api/shop_inventory/products/connect`
-    );
+    const { data } = await axios.get(`${ERP_BASE_URL}/connect`);
     console.log(data);
   } catch (error) {
     console.log(error);
