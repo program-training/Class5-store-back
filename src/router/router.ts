@@ -5,11 +5,11 @@ import ordersRouter from "../Orders/routes/OrderRoutes";
 
 const router = express.Router();
 
-router.use("/api/users", usersRouter);
+router.use("/users", usersRouter);
 
-router.use("/api/products", productsRouter);
+router.use("/products", productsRouter);
 
-router.use("/api/orders", ordersRouter);
+router.use("/orders", ordersRouter);
 
 router.use("*", (req: Request, res: Response) => {
   console.log(req);
