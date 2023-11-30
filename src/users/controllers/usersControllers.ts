@@ -19,6 +19,7 @@ export const getUsersController = async (req: Request, res: Response) => {
     handleError(res, error);
   }
 };
+
 export const getUserByIdController = async (req: Request, res: Response) => {
   try {
     const { id: userId } = req.params;
@@ -28,7 +29,7 @@ export const getUserByIdController = async (req: Request, res: Response) => {
     handleError(res, error);
   }
 };
-
+//קונטרולר לרישום אדמינים
 export const registerAdminController = async (req: Request, res: Response) => {
   try {
     const user: UserInterface = req.body;
