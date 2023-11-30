@@ -29,7 +29,7 @@ export const getProductByIdFromDB = async (productId: number) => {
 export const checkStockInDB = async (cart: CheckQuantity[]) => {
   try {
     const { data } = await axios.post(
-      `${ERP_BASE_URL}/api/updateInventory`,
+      `${ERP_BASE_URL}/api/shop_inventory/updateInventory`,
       cart
     );
     return data;
@@ -41,7 +41,7 @@ export const checkStockInDB = async (cart: CheckQuantity[]) => {
 export const cancelOrder = async (cart: CheckQuantity[]) => {
   try {
     const { data, status } = await axios.post(
-      `${ERP_BASE_URL}/api/cancelOrder`,
+      `${ERP_BASE_URL}/api/shop_inventory/cancelOrder`,
       cart
     );
     return data;
@@ -52,7 +52,9 @@ export const cancelOrder = async (cart: CheckQuantity[]) => {
 
 export const connectedToERP = async () => {
   try {
-    const { data } = await axios.get(`${ERP_BASE_URL}/api/products/connect`);
+    const { data } = await axios.get(
+      `${ERP_BASE_URL}/api/shop_inventory/products/connect`
+    );
     console.log(data);
   } catch (error) {
     console.log(error);

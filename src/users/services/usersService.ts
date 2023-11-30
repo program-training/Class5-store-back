@@ -5,7 +5,7 @@ import {
   userExistInDB,
   login,
 } from "../dal/usersDal";
-import { generateUserPassword } from "../helpers/bcrypt";
+import { comparePassword, generateUserPassword } from "../helpers/bcrypt";
 import UserInterface from "../interfaces/userInterface";
 import { generateToken } from "../../auth/JWT";
 import ServerError from "../../utils/ServerError";
@@ -49,8 +49,9 @@ export const registerUserService = async (user: UserInterface) => {
 
 export const registerAdminService = async (user: UserInterface) => {
   try {
-    const userCheck = await userExistInDB(user.email);
-    if (userCheck) throw new ServerError(400, "user already exist");
+    const userExist = await userExistInDB(user.email);
+    if (userExist) throw new ServerError(400, "user already exist");
+    const comp = comparePassword;
     if (user.initialPassword !== "secretPass1@")
       throw new ServerError(401, "unauthorized");
     user.password = generateUserPassword(user.password!);

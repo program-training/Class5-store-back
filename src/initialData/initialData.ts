@@ -1,6 +1,7 @@
 export interface initialUser {
   email: string;
   admin: boolean;
+  password?: string;
 }
 
 export const users: initialUser[] = [
@@ -24,4 +25,5 @@ export const users: initialUser[] = [
   { email: "lulu18@gmail.com", admin: false },
   { email: "lulu19@gmail.com", admin: false },
   { email: "lulu20@gmail.com", admin: false },
+  { email: "example@gmail.com", admin: true, password: "adminPass1@" },
 ];

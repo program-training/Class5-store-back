@@ -7,11 +7,9 @@ const OMS_BASE_URL =
 
 export const getOrdersFromDB = async () => {
   try {
-    const orders = await axios.get(`${OMS_BASE_URL}/api/orders`);
-    if (orders.data.length === 0) {
-      throw Error;
-    }
-    return orders.data;
+    const { data: orders } = await axios.get(`${OMS_BASE_URL}/api/orders`);
+    if (orders.length === 0) throw new ServerError(404, "products not found");
+    return orders;
   } catch (error) {
     return Promise.reject(error);
   }
@@ -28,11 +26,11 @@ export const registerOrderToDB = async (order: ordersInterface) => {
 
 export const getOrderByUserIdFromDB = async (id: string) => {
   try {
-    const { data } = await axios.get(
+    const { data: orders } = await axios.get(
       `${OMS_BASE_URL}/api/orders/allOrders/${id}`
     );
-    if (!data) throw new ServerError(404, "order not found");
-    return data;
+    if (!orders) throw new ServerError(404, "orders not found");
+    return orders;
   } catch (error) {
     return Promise.reject(error);
   }
@@ -40,8 +38,8 @@ export const getOrderByUserIdFromDB = async (id: string) => {
 
 export const getOrderByIdFromDB = async (id: string) => {
   try {
-    const { data } = await axios.get(`${OMS_BASE_URL}/api/orders/${id}`);
-    return data;
+    const { data: order } = await axios.get(`${OMS_BASE_URL}/api/orders/${id}`);
+    return order;
   } catch (error) {
     return Promise.reject(error);
   }
