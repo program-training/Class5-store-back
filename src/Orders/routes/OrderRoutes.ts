@@ -2,7 +2,8 @@ import express from "express";
 import {
   getOrderByUserIdController,
   getOrdersController,
-  registerOrderController
+  registerOrderController,
+  getOrderByIdController,
 } from "../controllers/orderController";
 
 const router = express.Router();
@@ -10,6 +11,8 @@ const router = express.Router();
 router.get("/", getOrdersController);
 
 router.get("/:id", getOrderByUserIdController);
+
+router.get("/order/:id", getOrderByIdController);
 
 router.post("/", registerOrderController);
 

@@ -1,17 +1,17 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import UserInterface from "../users/interfaces/userInterface";
 dotenv.config();
 
 const secret = process.env.JWT_SECRET || "secret";
 
-export const generateToken = (id: string, isAdmin = false) => {
+export const generateToken = ({ _id, isAdmin, email }: UserInterface) => {
   const expiresIn = "1h";
   try {
-    const token = jwt.sign({ id, isAdmin }, secret, { expiresIn });
+    const token = jwt.sign({ _id, isAdmin, email }, secret, { expiresIn });
     return token;
   } catch (error) {
-    console.error("Error generating token:", error);
-    throw error; // Rethrow the error or handle it as needed
+    return Promise.reject(error);
   }
 };
 

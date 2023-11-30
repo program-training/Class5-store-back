@@ -1,17 +1,15 @@
-import joi from "joi";
 import {
   getUserByIdFromDB,
   registerUserToDB,
   getUsersFromDB,
   userExistInDB,
-  Login,
+  login,
 } from "../dal/usersDal";
 import { generateUserPassword } from "../helpers/bcrypt";
 import UserInterface from "../interfaces/userInterface";
-import { token } from "morgan";
 import { generateToken } from "../../auth/JWT";
 import ServerError from "../../utils/ServerError";
-import adminValidation from "../models/joi/adminValidation";
+import { convertToUserInterface } from "../../utils/convertUser";
 
 export const getUsersService = async () => {
   try {
@@ -30,49 +28,48 @@ export const getUserByIdService = async (userId: string) => {
   }
 };
 
-//רושם משתמש לדאטהבייס
 export const registerUserService = async (user: UserInterface) => {
   try {
-    const userCheck = await userExistInDB(user.email);
-    if (userCheck) {
-      const id = userCheck._id.toString();
-      const token = generateToken(id, false);
-      return id;
+    const userExist = await userExistInDB(user.email);
+    if (userExist) {
+      const convertedUser = convertToUserInterface(userExist);
+      const token = generateToken(convertedUser);
+      return token;
     }
-    //אם המשתמש לא קיים רושם אותו ושולח טוקן
     const userRegistered = await registerUserToDB(user);
     if (!userRegistered)
       throw new ServerError(401, "did not receive user from db");
-    const id = userRegistered?._id.toString();
-    const token = generateToken(id!);
-    return id;
+    const convertedUser = convertToUserInterface(userRegistered);
+    const token = generateToken(convertedUser);
+    return token;
   } catch (error) {
     return Promise.reject(error);
   }
 };
 
-//רושם אדמין לדאטהבייס
 export const registerAdminService = async (user: UserInterface) => {
   try {
     const userCheck = await userExistInDB(user.email);
-    if (userCheck) return userCheck;
-    // if (user.initialPassword !== "secret")
-    //   throw new ServerError(401, "unauthorized admin");
-    //מצפין את הסיסמה
+    if (userCheck) throw new ServerError(400, "user already exist");
+    if (user.initialPassword !== "secretPass1@")
+      throw new ServerError(401, "unauthorized");
     user.password = generateUserPassword(user.password!);
+    delete user.initialPassword;
+    user.isAdmin = true;
     const userRegistered = await registerUserToDB(user);
-    return userRegistered;
+    const convertedUser = convertToUserInterface(userRegistered);
+    return convertedUser;
   } catch (error) {
     return Promise.reject(error);
   }
 };
-//מנהל התחברות לאתר
-export const LoginService = async (email: string, password: string) => {
+
+export const loginService = async (email: string, password: string) => {
   try {
-    const user = await Login(email, password);
+    const user = await login(email, password);
     if (!user) throw new ServerError(400, "unauthorized");
-    const id = user._id.toString();
-    const token = generateToken(id, user.isAdmin);
+    const convertedUser = convertToUserInterface(user);
+    const token = generateToken(convertedUser);
     return token;
   } catch (error) {
     return Promise.reject(error);

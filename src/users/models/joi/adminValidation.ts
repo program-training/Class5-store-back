@@ -16,7 +16,7 @@ const adminValidation = (user: UserInterface) => {
         "string.pattern.base":
           'user "password" must be at least nine characters long and contain an uppercase letter, a lowercase letter, a number and one of the following characters !@#$%^&*-',
       }),
-    initialPassword: Joi.string().valid("secret").required(),
+    initialPassword: Joi.string().required(),
   });
   return schema.validate(user);
 };

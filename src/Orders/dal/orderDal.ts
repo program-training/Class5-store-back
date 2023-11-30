@@ -1,3 +1,4 @@
+import ServerError from "../../utils/ServerError";
 import ordersInterface from "../interfaces/OrderInterface";
 import axios from "axios";
 
@@ -18,12 +19,8 @@ export const getOrdersFromDB = async () => {
 
 export const registerOrderToDB = async (order: ordersInterface) => {
   try {
-    console.log(order, 1);
-
-    const result = await axios.post(`${OMS_BASE_URL}/api/orders`, order);
-    console.log(result.data);
-
-    return result.data;
+    const { data } = await axios.post(`${OMS_BASE_URL}/api/orders`, order);
+    return data;
   } catch (error) {
     return Promise.reject(error);
   }
@@ -31,12 +28,11 @@ export const registerOrderToDB = async (order: ordersInterface) => {
 
 export const getOrderByUserIdFromDB = async (id: string) => {
   try {
-    const orders = await getOrdersFromDB();
-    const order = orders.find((order: ordersInterface) => order._id === id);
-    if (!order) {
-      throw Error("order not found");
-    }
-    return order;
+    const { data } = await axios.get(
+      `${OMS_BASE_URL}/api/orders/allOrders/${id}`
+    );
+    if (!data) throw new ServerError(404, "order not found");
+    return data;
   } catch (error) {
     return Promise.reject(error);
   }
