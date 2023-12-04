@@ -1,24 +1,26 @@
 import sendEmail from "../../utils/sendEmail";
 import {
-  getOrderByUserIdFromJsonFile,
-  getOrdersFromJsonFile,
-  registerOrderToDb,
+  getOrderByIdFromDB,
+  getOrderByUserIdFromDB,
+  getOrdersFromDB,
+  registerOrderToDB,
 } from "../dal/orderDal";
+import { convertToOrder } from "../helpers/convertToOrder";
 import OrderFromClientInterface from "../interfaces/OrderFromClientInterface";
-import ordersInterface from "../interfaces/OrderInterface";
+import OrderInterface from "../interfaces/OrderInterface";
 
-export const getOrdersFromDb = async () => {
+export const getOrdersService = async () => {
   try {
-    const AllOrders = await getOrdersFromJsonFile();
-    return AllOrders;
+    const orders = await getOrdersFromDB();
+    return orders;
   } catch (error) {
     return Promise.reject(error);
   }
 };
 
-export const getOrderByUserId = async (id: string) => {
+export const getOrderByUserIdService = async (id: string) => {
   try {
-    return await getOrderByUserIdFromJsonFile(id);
+    return await getOrderByUserIdFromDB(id);
   } catch (error) {
     return Promise.reject(error);
   }
@@ -28,20 +30,25 @@ export const registerOrderService = async (
   orderFromClient: OrderFromClientInterface
 ) => {
   try {
-    const orderTime = new Date();
-    const status = "pending";
-    const id = Math.random();
-    const order: ordersInterface = {
-      ...orderFromClient,
-      orderTime,
-      status,
-      id,
-    };
-    await registerOrderToDb(order);
-    const { email, userId } = orderFromClient;
+    const order: OrderInterface = convertToOrder(orderFromClient);
+    const registeredOrder = await registerOrderToDB(order);
+    const {
+      email,
+      shippingDetails: { userId },
+    } = orderFromClient;
     await sendEmail(email, userId);
-    return order;
+    return registeredOrder;
   } catch (error) {
     return Promise.reject(error);
   }
 };
+
+export const getOrderByIdService = async (id: string) => {
+  try {
+    const order = await getOrderByIdFromDB(id);
+    return order;
+  } catch (error) {
+    return Promise.reject(error)
+  }
+};
+

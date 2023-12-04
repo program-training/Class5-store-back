@@ -1,14 +1,11 @@
-import ProductInterface from "../../products/interfaces/productInterface";
+import CartItemFromClientInterface from "./CartItemFromClientInterface";
+import ShippingDetailsInterface from "./ShippingDetailsInterface";
 
 type OrderFromClientInterface = {
-  userId: string;
   email: string;
   price: number;
-  products: ProductInterface[];
-  shippingDetails: {
-    address: string;
-    contactNumber: string;
-  };
+  cartItems: CartItemFromClientInterface[];
+  shippingDetails: ShippingDetailsInterface
 };
 
-export default OrderFromClientInterface
+export default OrderFromClientInterface;

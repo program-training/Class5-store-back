@@ -1,18 +1,14 @@
-import ProductInterface from "../../products/interfaces/productInterface";
+import CartItemInterface from "./CartItemInterface";
+import ShippingDetailsInterface from "./ShippingDetailsInterface";
 
-interface ordersInterface {
-  userId: string;
-  id: number;
-  products: ProductInterface[];
+interface OrdersInterface {
+  _id?: string;
+  cartItems: CartItemInterface[];
   status: "pending" | "processing" | "shipped" | "delivered" | "completed";
   email: string;
   price: number;
   orderTime: Date;
-  shippingDetails: {
-    // orderType: "standard"| "express" | "pickup"
-    address: string;
-    contactNumber: string;
-  };
+  shippingDetails: ShippingDetailsInterface
 }
 
-export default ordersInterface;
+export default OrdersInterface;
