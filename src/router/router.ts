@@ -4,9 +4,9 @@ import usersRoutes from "../users/routes/usersRoutes";
 import productsRoutes from "../products/routes/productsRoutes";
 import orderRouters from "../Orders/routes/OrderRoutes";
 
-router.use("/api/users", usersRoutes);
-router.use("/api/products", productsRoutes);
-router.use("/api/orders", orderRouters);
+router.use("/users", usersRoutes);
+router.use("/products", productsRoutes);
+router.use("/orders", orderRouters);
 
 router.use("*", (req: Request, res: Response) => {
   console.log(req);

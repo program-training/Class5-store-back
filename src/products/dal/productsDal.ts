@@ -5,7 +5,7 @@ const ERP_BASE_URL =
 export const getProductsFromServer = async () => {
   try {
     const { data } = await axios.get(
-      `${ERP_BASE_URL}/api/shop_inventory?searchText=`
+      `${ERP_BASE_URL}/shop_inventory?searchText=`
     );
     return data;
   } catch (error) {
@@ -16,7 +16,7 @@ export const getProductsFromServer = async () => {
 export const getProductByIdFromServer = async (productId: number) => {
   try {
     const { data } = await axios.get(
-      `${ERP_BASE_URL}/api/shop_inventory/${productId}`
+      `${ERP_BASE_URL}/shop_inventory/${productId}`
     );
     return data;
   } catch (error) {
@@ -26,7 +26,7 @@ export const getProductByIdFromServer = async (productId: number) => {
 
 export const connectedToERP = async () => {
   try {
-    const { data } = await axios.get(`${ERP_BASE_URL}/api/connect`);
+    const { data } = await axios.get(`${ERP_BASE_URL}/connect`);
     console.log(data);
   } catch (error) {
     console.log(error);
