@@ -1,16 +1,19 @@
 import express from "express";
 import {
-  handleGetOrders,
-  handleGetOrderByUserId,
-  handleRegisterOrder,
+  getOrderByUserIdController,
+  getOrdersController,
+  registerOrderController,
+  getOrderByIdController,
 } from "../controllers/orderController";
 
 const router = express.Router();
 
-router.get("/", handleGetOrders);
+router.get("/", getOrdersController);
 
-router.get("/:id", handleGetOrderByUserId);
+router.get("/:id", getOrderByUserIdController);
 
-router.post("/", handleRegisterOrder);
+router.get("/order/:id", getOrderByIdController);
+
+router.post("/", registerOrderController);
 
 export default router;

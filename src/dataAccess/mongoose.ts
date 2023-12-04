@@ -9,7 +9,6 @@ export const connectToDatabase = async () => {
     );
     return "Connected to MongoDB";
   } catch (error) {
-    console.error("Error connecting to MongoDB:", error);
-    return "no connection to mongo :((";
+    return "No connection to mongo :((";
   } 
 };

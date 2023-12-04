@@ -1,8 +1,10 @@
 import axios from "axios";
+import { CheckQuantity } from "../types/types";
+
 const ERP_BASE_URL =
   process.env.ERP_BASE_URL || "https://erp-server-v2.onrender.com";
 
-export const getProductsFromServer = async () => {
+export const getProductsFromDB = async () => {
   try {
     const { data } = await axios.get(
       `${ERP_BASE_URL}/shop_inventory?searchText=`
@@ -13,10 +15,34 @@ export const getProductsFromServer = async () => {
   }
 };
 
-export const getProductByIdFromServer = async (productId: number) => {
+export const getProductByIdFromDB = async (productId: number) => {
   try {
     const { data } = await axios.get(
       `${ERP_BASE_URL}/shop_inventory/${productId}`
+    );
+    return data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const checkStockInDB = async (cart: CheckQuantity[]) => {
+  try {
+    const { data } = await axios.post(
+      `${ERP_BASE_URL}/shop_inventory/updateInventory`,
+      cart
+    );
+    return data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const cancelOrder = async (cart: CheckQuantity[]) => {
+  try {
+    const { data, status } = await axios.post(
+      `${ERP_BASE_URL}/shop_inventory/cancelOrder`,
+      cart
     );
     return data;
   } catch (error) {

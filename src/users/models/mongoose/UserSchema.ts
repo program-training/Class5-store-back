@@ -1,5 +1,4 @@
-import { bool } from "joi";
-import mongoose, { Schema, InferSchemaType, Model } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 export const UserSchema = new Schema(
   {
@@ -10,7 +9,7 @@ export const UserSchema = new Schema(
     },
     isAdmin: {
       type: Boolean,
-      required: false,
+      default: false,
     },
     password: {
       type: String,
