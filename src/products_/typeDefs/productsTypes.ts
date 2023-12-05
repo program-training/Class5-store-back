@@ -2,7 +2,7 @@ const productTypes = `
   type Product {
     id: ID
     name: String
-    salePrice: Int
+    salePrice: Float
     quantity: Int
     description: String
     category: String
