@@ -10,11 +10,26 @@ const productTypes = `
     imageUrl: String
     imageAlt: String
   }
+  input CheckQuantity {
+    productId: Int
+    requiredQuantity: Int
+  }
+
+  type NotInStock = {
+    product: Product
+    requiredQuantity: Int
+
+  type Response {
+    inStock:[CheckQuantity]
+    notInStock: [NotInStock]
+  }
 `;
 
 export const productsTypeQueries = `
   getProducts:[Product]
   getProduct(id:ID):Product
+  checkProductsInStock(cart:CheckQuantity): Response
+
 
 `;
 

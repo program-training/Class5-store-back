@@ -40,7 +40,7 @@ export const checkStockInDB = async (cart: CheckQuantity[]) => {
 };
 
 // לעבוד על זה
-export const cancelProductsInOrder = async (cart: CheckQuantity[]) => {
+export const cancelOrder = async (cart: CheckQuantity[]) => {
   try {
     const { data, status } = await axios.post(
       `${ERP_BASE_URL}/shop_inventory/cancelOrder`,
