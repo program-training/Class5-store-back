@@ -7,6 +7,8 @@ import { connectToDatabase } from "./dataAccess/mongoose";
 import handleErrorMiddleware from "./middlewares/handleErrorMiddleware";
 import { connectedToOMS } from "./Orders/dal/orderDal";
 import { connectedToERP } from "./products/dal/productsDal";
+import { startStandaloneServer } from "@apollo/server/standalone";
+import server from "./users/graphql/apolloServer";
 const app = express();
 
 app.use(morgan);
@@ -25,3 +27,7 @@ app.listen(PORT, async () => {
     .catch((error) => console.log(error.message));
 });
 export default app;
+
+startStandaloneServer(server, { listen: { port: 5000 } })
+  .then(({ url }) => console.log(url))
+  .catch((error) => console.log(error));
