@@ -1,6 +1,6 @@
 import ordersQueries from "../Orders/queries/ordersQueries";
 import {
-  productsMutations,
+  productsMutation,
   productsQueries,
 } from "../products_/queries/productsQuery";
 
@@ -9,8 +9,8 @@ const resolvers = {
     ...productsQueries,
     ...ordersQueries,
   },
-  Mutations: {
-    ...productsMutations,
+  Mutation: {
+    ...productsMutation,
   },
 };
 

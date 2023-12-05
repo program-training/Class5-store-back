@@ -8,6 +8,6 @@ export const productsQueries = {
   getProducts,
   getProduct,
 };
-export const productsMutations = {
+export const productsMutation = {
   checkProductsInStock,
 };
