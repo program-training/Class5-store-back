@@ -1,4 +1,4 @@
-import ProductInterface from "../interfaces/productInterface";
+import ProductInterface from "../../products/interfaces/productInterface";
 
 export type CheckQuantity = {
   productId: number;

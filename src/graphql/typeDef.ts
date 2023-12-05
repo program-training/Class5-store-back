@@ -5,27 +5,17 @@
 // import booksTypes from "../books/typeDefs/booksTypes";
 import productTypes from "../products_/typeDefs/productsTypes";
 import { productsTypeQueries } from "../products_/typeDefs/productsTypes";
-
-const typeDefs = `#graphql   
-    ${productTypes}
- 
-  
-  type Query{
-    ${productsTypeQueries}
-  } 
-`;
-
-export default typeDefs;
 import orderTypes, { ordersTypeQueries } from "../Orders/typeDef/orderTypes";
 
 const typeDefs = `#graphql   
-
-  ${orderTypes}
-
+    ${productTypes}
+    ${orderTypes}
+  
   type Query{
+    ${productsTypeQueries}
     ${ordersTypeQueries}
-  } 
 
-   `;
+  } 
+`;
 
 export default typeDefs;
