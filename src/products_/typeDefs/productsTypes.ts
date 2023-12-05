@@ -14,23 +14,28 @@ const productTypes = `
     productId: Int
     requiredQuantity: Int
   }
-
-  type NotInStock = {
+  type InStock {
+    productId: Int
+    requiredQuantity: Int
+  }
+  type NotInStock {
     product: Product
     requiredQuantity: Int
-
+  }
   type Response {
-    inStock:[CheckQuantity]
-    notInStock: [NotInStock]
+    inStock: [InStock]!
+    notInStock: [NotInStock]!
   }
 `;
 
 export const productsTypeQueries = `
-  getProducts:[Product]
-  getProduct(id:ID):Product
-  checkProductsInStock(cart:CheckQuantity): Response
+  getProducts: [Product]
+  getProduct(id:ID): Product
 
+`;
 
+export const productsTypeMutation = `
+  checkProductsInStock(cart:[CheckQuantity!]): Response
 `;
 
 export default productTypes;
