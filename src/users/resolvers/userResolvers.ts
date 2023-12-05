@@ -1,9 +1,9 @@
-import User from "../../models/mongoose/UserSchema";
+import User from "../models/mongoose/UserSchema";
 import {
   loginService,
   registerAdminService,
   registerUserService,
-} from "../../services/usersService";
+} from "../services/usersService";
 import {
   AdminRegisterMutation,
   AdminRegister,
