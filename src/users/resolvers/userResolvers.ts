@@ -39,10 +39,9 @@ export const registerUser = async (
   args: { input: UserRegister }
 ) => {
   try {
-    const { email, isAdmin, password } = args.input;
+    const { email, password } = args.input;
     const newUser = {
       email,
-      isAdmin,
       password,
     };
     await registerUserService(newUser);

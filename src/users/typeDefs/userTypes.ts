@@ -1,9 +1,9 @@
-export const usersTypes = `#graphql
+export const usersTypes = `
   type User {
     _id: ID!
     email: String!
     isAdmin: Boolean!
-    password: String!
+    password: String
   }
 
   type RegisterUser {
