@@ -1,15 +1,19 @@
 export interface User {
   _id: string;
   email: string;
+  isAdmin: boolean;
   password: string;
+}
+
+export interface UserReg {
+  _id: string;
+  email: string;
   isAdmin: boolean;
 }
 
 export interface UserRegister {
-  _id?: string;
   email: string;
-  isAdmin?: boolean;
-  password?: string;
+  password: string;
 }
 
 export interface UserQuery {
@@ -17,7 +21,7 @@ export interface UserQuery {
 }
 
 export interface UserRegisterMutation {
-  addUser(args: UserRegister): User;
+  addUser(args: UserRegister): UserReg;
 }
 
 export interface Admin {
@@ -27,9 +31,7 @@ export interface Admin {
 }
 
 export interface AdminRegister {
-  _id?: string;
   email: string;
-  isAdmin?: boolean;
   password?: string;
 }
 

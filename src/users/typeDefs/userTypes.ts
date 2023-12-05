@@ -32,7 +32,7 @@ export const usersTypeQueries = `
   getUser(_id: String!): User
 `;
 export const usersTypeMutation = `
-  registerUser(input: RegisterUserInput!): User
+  registerUser(input: RegisterUserInput!): RegisterUser
   registerAdmin(input: RegisterUserInput!): RegisterUser
   loginUser(input: Login): Token
 `;

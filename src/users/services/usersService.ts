@@ -34,14 +34,16 @@ export const registerUserService = async (user: UserInterface) => {
     if (userExist) {
       const convertedUser = convertToUserInterface(userExist);
       const token = generateToken(convertedUser);
-      return token;
+      // return token;
+      return convertedUser;
     }
     const userRegistered = await registerUserToDB(user);
     if (!userRegistered)
       throw new ServerError(401, "did not receive user from db");
     const convertedUser = convertToUserInterface(userRegistered);
     const token = generateToken(convertedUser);
-    return token;
+    // return token;
+    return convertedUser;
   } catch (error) {
     return Promise.reject(error);
   }

@@ -55,7 +55,7 @@ export const login = async (email: string, password: string) => {
   try {
     const user = await User.findOne({ email }).exec();
     const checkIfPasswordTrue = comparePassword(password, user?.password!);
-    if (!checkIfPasswordTrue) throw new ServerError(403, "unauthorized");
+    if (checkIfPasswordTrue) throw new ServerError(403, "unauthorized");
     return user;
   } catch (error) {
     return Promise.reject(error);
