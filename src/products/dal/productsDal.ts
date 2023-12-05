@@ -26,7 +26,7 @@ export const getProductByIdFromDB = async (productId: number) => {
     );
     return data;
     }
-    return products.find((product) => product.id === productId)
+    return products.find((product) => product.id === productId));
   } catch (error) {
     return Promise.reject(error);
   }
