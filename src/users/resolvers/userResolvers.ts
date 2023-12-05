@@ -62,11 +62,7 @@ export const registerAdmin = async (
       email,
       password,
     };
-    console.log(newUser);
-
     const user = await registerAdminService(newUser);
-    console.log(user);
-
     return user;
   } catch (error) {
     if (error instanceof Error) console.log(error.message);
@@ -80,8 +76,6 @@ export const loginUser = async (parent: UserLogin, args: { input: Login }) => {
     const token = await loginService(email, password);
     return { token };
   } catch (error) {
-    console.log(error, "error");
-
     if (error instanceof Error) console.log(error.message);
     return null;
   }
