@@ -30,7 +30,7 @@ export const getOrderByUserIdFromDB = async (id: string) => {
       `${OMS_BASE_URL}/orders/allOrders/${id}`
     );
     if (!orders) throw new ServerError(404, "orders not found");
-    return orders;
+    return Promise.resolve(orders);
   } catch (error) {
     return Promise.reject(error);
   }
@@ -39,7 +39,8 @@ export const getOrderByUserIdFromDB = async (id: string) => {
 export const getOrderByIdFromDB = async (id: string) => {
   try {
     const { data: order } = await axios.get(`${OMS_BASE_URL}/orders/${id}`);
-    return order;
+    if (!order) throw new ServerError(404, "orders not found");
+    return Promise.resolve(order);
   } catch (error) {
     return Promise.reject(error);
   }
