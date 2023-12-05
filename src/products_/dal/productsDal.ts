@@ -29,3 +29,15 @@ export const checkStockInDB = async (cart: CheckQuantity[]) => {
     return Promise.reject(error);
   }
 };
+
+export const cancelProductsInOrder = async (cart: CheckQuantity[]) => {
+  try {
+    const { data, status } = await axios.post(
+      `${ERP_BASE_URL}/shop_inventory/cancelOrder`,
+      cart
+    );
+    return data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};

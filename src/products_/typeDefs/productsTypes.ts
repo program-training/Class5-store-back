@@ -36,6 +36,8 @@ export const productsTypeQueries = `
 
 export const productsTypeMutation = `
   checkProductsInStock(cart:[CheckQuantity!]): Response
+  cancelProductsInStock(cart:[CheckQuantity!]): String!
+
 `;
 
 export default productTypes;

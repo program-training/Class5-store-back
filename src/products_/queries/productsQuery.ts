@@ -1,4 +1,5 @@
 import {
+  cancelProductsInStock,
   checkProductsInStock,
   getProduct,
   getProducts,
@@ -10,4 +11,5 @@ export const productsQueries = {
 };
 export const productsMutation = {
   checkProductsInStock,
+  cancelProductsInStock,
 };

@@ -2,6 +2,7 @@ import {
   getProductsFromDB,
   getProductByIdFromDB,
   checkStockInDB,
+  cancelProductsInOrder,
 } from "../dal/productsDal";
 import { CheckQuantity } from "../types/types";
 
@@ -31,6 +32,18 @@ export const checkProductsInStock = async (
 ) => {
   try {
     const product = await checkStockInDB(cart);
+    return product;
+  } catch (error) {
+    if (error instanceof Error) console.log(error.message);
+    return null;
+  }
+};
+export const cancelProductsInStock = async (
+  _: any,
+  { cart }: { cart: CheckQuantity[] }
+) => {
+  try {
+    const product = await cancelProductsInOrder(cart);
     return product;
   } catch (error) {
     if (error instanceof Error) console.log(error.message);
