@@ -4,6 +4,7 @@ import {
   checkStockInDB,
   cancelProductsInOrder,
 } from "../dal/productsDal";
+import { convertToCheck, productToCheck } from "../helpers/convetToChack";
 import { CheckQuantity } from "../types/types";
 
 export const getProducts = async () => {
@@ -28,11 +29,12 @@ export const getProduct = async (_: unknown, { id }: { id: String }) => {
 
 export const checkProductsInStock = async (
   _: any,
-  { cart }: { cart: CheckQuantity[] }
+  { cart }: { cart: productToCheck[] }
 ) => {
   try {
-    const product = await checkStockInDB(cart);
-    return product;
+    const converted = convertToCheck(cart);
+    const result = await checkStockInDB(converted);
+    return result;
   } catch (error) {
     if (error instanceof Error) console.log(error.message);
     return null;

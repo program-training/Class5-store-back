@@ -2,7 +2,7 @@ const productTypes = `
   type Product {
     id: ID
     name: String
-    salePrice: Int
+    salePrice: String
     quantity: Int
     description: String
     category: String
@@ -10,10 +10,30 @@ const productTypes = `
     imageUrl: String
     imageAlt: String
   }
+ 
+
   input CheckQuantity {
     productId: Int
     requiredQuantity: Int
   }
+  input ProductInput {
+    id: ID
+    name: String
+    salePrice: String
+    quantity: Int
+    description: String
+    category: String
+    discountPercentage: Int
+    imageUrl: String
+    imageAlt: String
+  }
+
+  input ProductToCheck {
+    product: ProductInput
+    requiredQuantity: Int
+    sumProductInCart: Int
+  }
+
   type InStock {
     productId: Int
     requiredQuantity: Int
@@ -35,7 +55,7 @@ export const productsTypeQueries = `
 `;
 
 export const productsTypeMutation = `
-  checkProductsInStock(cart:[CheckQuantity!]): Response
+  checkProductsInStock(cart:[ProductToCheck!]): Response
   cancelProductsInStock(cart:[CheckQuantity!]): String!
 
 `;
