@@ -7,12 +7,8 @@ const secret = process.env.JWT_SECRET || "secret";
 
 export const generateToken = ({ _id, isAdmin, email }: UserInterface) => {
   const expiresIn = "1h";
-  try {
-    const token = jwt.sign({ _id, isAdmin, email }, secret, { expiresIn });
-    return token;
-  } catch (error) {
-    return Promise.reject(error);
-  }
+  const token = jwt.sign({ _id, isAdmin, email }, secret, { expiresIn });
+  return token;
 };
 
 export const verifyToken = (token: string, secretKey: string) => {

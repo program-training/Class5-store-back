@@ -47,3 +47,4 @@ startStandaloneServer(server, {
       );
   })
   .catch((error) => console.log(error.message));
+

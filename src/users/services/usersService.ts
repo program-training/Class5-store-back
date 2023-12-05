@@ -52,8 +52,6 @@ export const registerAdminService = async (user: UserInterface) => {
     const userExist = await userExistInDB(user.email);
     if (userExist) throw new ServerError(400, "user already exist");
     const comp = comparePassword;
-    if (user.initialPassword !== "secretPass1@")
-      throw new ServerError(401, "unauthorized");
     user.password = generateUserPassword(user.password!);
     delete user.initialPassword;
     user.isAdmin = true;
