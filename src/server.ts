@@ -7,6 +7,8 @@ import { connectToDatabase } from "./dataAccess/mongoose";
 import handleErrorMiddleware from "./middlewares/handleErrorMiddleware";
 import { connectedToOMS } from "./Orders/dal/orderDal";
 import { connectedToERP } from "./products/dal/productsDal";
+import { initialDataToDB } from "./users/dal/usersDal";
+import { users } from "./initialData/initialData";
 const app = express();
 
 app.use(morgan);
@@ -21,7 +23,12 @@ app.listen(PORT, async () => {
   await connectedToOMS();
   await connectedToERP();
   connectToDatabase()
-    .then((message) => console.log(message))
+    .then((message) => {
+      console.log(message);
+      initialDataToDB(users)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+    })
     .catch((error) => console.log(error.message));
 });
 export default app;
