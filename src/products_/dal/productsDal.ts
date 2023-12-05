@@ -11,35 +11,9 @@ export const getProductsFromDB = async () => {
   return data;
 };
 
-// export const checkStockInDB = async (cart: CheckQuantity[]) => {
-//   try {
-//     const { data } = await axios.post(
-//       `${ERP_BASE_URL}/shop_inventory/updateInventory`,
-//       cart
-//     );
-//     return data;
-//   } catch (error) {
-//     return Promise.reject(error);
-//   }
-// };
-
-// export const cancelOrder = async (cart: CheckQuantity[]) => {
-//   try {
-//     const { data, status } = await axios.post(
-//       `${ERP_BASE_URL}/shop_inventory/cancelOrder`,
-//       cart
-//     );
-//     return data;
-//   } catch (error) {
-//     return Promise.reject(error);
-//   }
-// };
-
-// export const connectedToERP = async () => {
-//   try {
-//     const { data } = await axios.get(`${ERP_BASE_URL}/connect`);
-//     console.log(data);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+export const getProductByIdFromDB = async (productId: string) => {
+  const { data } = await axios.get(
+    `${ERP_BASE_URL}/shop_inventory/${productId}`
+  );
+  return data;
+};
