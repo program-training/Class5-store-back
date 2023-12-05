@@ -1,5 +1,5 @@
-import usersMutation from "./queries/userMutation";
-import usersQueries from "./queries/userQueries";
+import usersMutation from "../queries/userMutation";
+import usersQueries from "../queries/userQueries";
 
 const resolvers = {
   Query: {

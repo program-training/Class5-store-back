@@ -27,11 +27,11 @@ export const usersTypes = `#graphql
   }
 `;
 
-export const usersTypeQueries = `#graphql
+export const usersTypeQueries = `
   getUsers:[User!]!
   getUser(_id: String!): User
 `;
-export const usersTypeMutation = `#graphql
+export const usersTypeMutation = `
   registerUser(input: RegisterUserInput!): User
   registerAdmin(input: RegisterUserInput!): RegisterUser
   loginUser(input: Login): Token
