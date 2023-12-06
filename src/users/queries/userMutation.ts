@@ -2,7 +2,7 @@ import {
   registerAdmin,
   registerUser,
   loginUser,
-} from "../resolvers/userResolvers";
+} from "../../_users/services/usersServices";
 
 const usersMutation = {
   registerUser,

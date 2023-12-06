@@ -1,15 +1,15 @@
-import {
-  cancelProductsInStock,
-  checkProductsInStock,
-  getProduct,
-  getProducts,
-} from "../resolvers/productsResolver";
+// import {
+//   cancelProductsInStock,
+//   checkProductsInStock,
+//   getProduct,
+//   getProducts,
+// } from "../resolvers/productsResolvers";
 
-export const productsQueries = {
-  getProducts,
-  getProduct,
-};
-export const productsMutation = {
-  checkProductsInStock,
-  cancelProductsInStock,
-};
+// export const productsQueries = {
+//   getProducts,
+//   getProduct,
+// };
+// export const productsMutations = {
+//   checkProductsInStock,
+//   cancelProductsInStock,
+// };

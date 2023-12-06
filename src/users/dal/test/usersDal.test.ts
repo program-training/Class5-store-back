@@ -7,7 +7,7 @@ import {
   initialDataToDB,
   deleteUsersFromDB,
   userExistInDB,
-} from "../usersDal";
+} from "../../../_users/dal/usersDal";
 import UserInterface from "../../interfaces/userInterface";
 
 let mongoServer: MongoMemoryServer;

@@ -1,10 +1,9 @@
 import ordersQueries from "../Orders/queries/ordersQueries";
 import {
-  productsMutation,
+  productsMutations,
   productsQueries,
-} from "../products_/queries/productsQuery";
-import usersQueries from "../users/queries/userQueries";
-import usersMutation from "../users/queries/userMutation";
+} from "../products_/resolvers/productsResolvers";
+import {usersMutations, usersQueries} from "../_users/resolvers/usersResolvers";
 
 const resolvers = {
   Query: {
@@ -13,9 +12,8 @@ const resolvers = {
     ...usersQueries,
   },
   Mutation: {
-    ...usersMutation,
-
-    ...productsMutation,
+    ...usersMutations,
+    ...productsMutations,
   },
 };
 

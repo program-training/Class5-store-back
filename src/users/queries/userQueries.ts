@@ -1,4 +1,4 @@
-import { getUsers, getUser } from "../resolvers/userResolvers";
+import { getUsers, getUser } from "../../_users/services/usersServices";
 
 const usersQueries = {
   getUsers,

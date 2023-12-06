@@ -1,31 +1,68 @@
 import {
+  AdminRegisterMutation,
+  AdminRegister,
+  UserQuery,
+  UserRegister,
+  UserRegisterMutation,
+  UserLogin,
+  Login,
+} from "../../users/resolvers/interface";
+
+import {
   getUserByIdFromDB,
   registerUserToDB,
   getUsersFromDB,
   userExistInDB,
-  login,
+  loginToDB,
   userAdminInDB,
 } from "../dal/usersDal";
-import { comparePassword, generateUserPassword } from "../helpers/bcrypt";
-import { AdminInterface, UserInterface } from "../interfaces/userInterface";
+import {
+  comparePassword,
+  generateUserPassword,
+} from "../../users/helpers/bcrypt";
+import {
+  AdminInterface,
+  UserInterface,
+} from "../../users/interfaces/userInterface";
 import { generateToken } from "../../auth/JWT";
 import ServerError from "../../utils/ServerError";
 import { convertToUserInterface } from "../../utils/convertUser";
 
-export const getUsersService = async () => {
+export const getUsers = async () => {
   try {
     const users = await getUsersFromDB();
     return users;
   } catch (error) {
-    return Promise.reject(error);
+    if (error instanceof Error) console.log(error.message);
+    return null;
   }
 };
-export const getUserByIdService = async (userId: string) => {
+
+export const getUser = async (parent: UserQuery, args: { _id: string }) => {
   try {
-    const getUserFromMDB = await getUserByIdFromDB(userId);
-    return getUserFromMDB;
+    const user = await getUserByIdFromDB(args._id);
+    return user;
   } catch (error) {
-    return Promise.reject(error);
+    if (error instanceof Error) console.log(error.message);
+    return null;
+  }
+};
+
+export const registerUser = async (
+  parent: UserRegisterMutation,
+  args: { input: UserRegister }
+) => {
+  try {
+    const { email, password } = args.input;
+    const newUser = {
+      email,
+      password,
+    };
+    const user = await registerUserService(newUser);
+    return user;
+  } catch (error) {
+    if (error instanceof Error) console.log(error.message);
+    return null;
   }
 };
 
@@ -68,12 +105,42 @@ export const registerAdminService = async (user: AdminInterface) => {
 
 export const loginService = async (email: string, password: string) => {
   try {
-    const user = await login(email, password);
+    const user = await loginToDB(email, password);
     if (!user) throw new ServerError(400, "unauthorized");
     const convertedUser = convertToUserInterface(user);
     const token = generateToken(convertedUser);
     return token;
   } catch (error) {
     return Promise.reject(error);
+  }
+};
+
+export const registerAdmin = async (
+  parent: AdminRegisterMutation,
+  args: { input: AdminRegister }
+) => {
+  try {
+    const { email, password, isAdmin } = args.input;
+    const newUser = {
+      email,
+      password,
+      isAdmin,
+    };
+    const user = await registerAdminService(newUser);
+    return user;
+  } catch (error) {
+    if (error instanceof Error) console.log(error.message);
+    return null;
+  }
+};
+
+export const loginUser = async (parent: UserLogin, args: { input: Login }) => {
+  try {
+    const { email, password } = args.input;
+    const token = await loginService(email, password);
+    return { token };
+  } catch (error) {
+    if (error instanceof Error) console.log(error.message);
+    return null;
   }
 };

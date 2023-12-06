@@ -1,4 +1,4 @@
-export const usersTypes = `
+export const usersTypeDefs = `
   type User {
     _id: ID!
     email: String!
@@ -28,11 +28,11 @@ export const usersTypes = `
   }
 `;
 
-export const usersTypeQueries = `
+export const usersTypeDefsQueries = `
   getUsers:[User!]!
   getUser(_id: String!): User
 `;
-export const usersTypeMutation = `
+export const usersTypeDefsMutations = `
   registerUser(input: RegisterUserInput!): RegisterUser
   registerAdmin(input: RegisterUserInput!): RegisterUser
   loginUser(input: Login): Token

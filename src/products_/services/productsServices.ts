@@ -2,7 +2,7 @@ import {
   getProductsFromDB,
   getProductByIdFromDB,
   checkStockInDB,
-  cancelProductsInOrder,
+  cancelProductsInOrderInDB,
 } from "../dal/productsDal";
 import { convertToCheck, productToCheck } from "../helpers/convetToChack";
 import { CheckQuantity } from "../types/types";
@@ -45,7 +45,7 @@ export const cancelProductsInStock = async (
   { cart }: { cart: CheckQuantity[] }
 ) => {
   try {
-    const product = await cancelProductsInOrder(cart);
+    const product = await cancelProductsInOrderInDB(cart);
     return product;
   } catch (error) {
     if (error instanceof Error) console.log(error.message);

@@ -4,7 +4,7 @@ import {
   getUsersService,
   registerAdminService,
   registerUserService,
-} from "../services/usersService";
+} from "../../_users/services/usersResolvers";
 import { handleError } from "../../utils/handleErrors";
 import userValidation from "../models/joi/userValidation";
 import { Request, Response } from "express";

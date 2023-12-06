@@ -4,7 +4,7 @@ import {
   getUsersService,
   // getUserByIdService,
   registerUserService,
-} from "../usersService";
+} from "../../../_users/services/usersResolvers";
 import User from "../../models/mongoose/UserSchema";
 import UserInterface from "../../interfaces/userInterface";
 

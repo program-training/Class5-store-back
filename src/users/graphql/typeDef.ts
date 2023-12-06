@@ -1,18 +1,18 @@
 import {
-  usersTypeMutation,
-  usersTypeQueries,
-  usersTypes,
-} from "../typeDefs/userTypes";
+  usersTypeDefsMutations,
+  usersTypeDefsQueries,
+  usersTypeDefs,
+} from "../../_users/typeDefs/userTypeDefs";
 
 const typeDefs = `#graphql
 
-    ${usersTypes}
+    ${usersTypeDefs}
 
     type Query{
-      ${usersTypeQueries}
+      ${usersTypeDefsQueries}
     }
     type Mutation {
-      ${usersTypeMutation}
+      ${usersTypeDefsMutations}
     }
 
      `;
