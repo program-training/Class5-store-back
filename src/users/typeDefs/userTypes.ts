@@ -18,7 +18,8 @@ export const usersTypes = `
 
   input RegisterUserInput {
     email: String!
-    password: String
+    password: String!
+    isAdmin: Boolean!
   }
 
   input Login {
@@ -32,7 +33,7 @@ export const usersTypeQueries = `
   getUser(_id: String!): User
 `;
 export const usersTypeMutation = `
-  registerUser(input: RegisterUserInput!): User
+  registerUser(input: RegisterUserInput!): RegisterUser
   registerAdmin(input: RegisterUserInput!): RegisterUser
   loginUser(input: Login): Token
 `;

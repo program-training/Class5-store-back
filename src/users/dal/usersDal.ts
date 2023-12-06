@@ -1,5 +1,5 @@
 import User from "../models/mongoose/UserSchema";
-import UserInterface from "../interfaces/userInterface";
+import { UserInterface } from "../interfaces/userInterface";
 import { comparePassword } from "../helpers/bcrypt";
 import ServerError from "../../utils/ServerError";
 
@@ -55,7 +55,7 @@ export const login = async (email: string, password: string) => {
   try {
     const user = await User.findOne({ email }).exec();
     const checkIfPasswordTrue = comparePassword(password, user?.password!);
-    if (!checkIfPasswordTrue) throw new ServerError(403, "unauthorized");
+    if (checkIfPasswordTrue) throw new ServerError(403, "unauthorized");
     return user;
   } catch (error) {
     return Promise.reject(error);
@@ -66,6 +66,15 @@ export const userExistInDB = async (email: string) => {
   try {
     const user = await User.find({ email: email });
     return user[0];
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const userAdminInDB = async (isAdmin: boolean) => {
+  try {
+    const user = await User.find({ isAdmin: isAdmin });
+    return user[0].isAdmin;
   } catch (error) {
     return Promise.reject(error);
   }

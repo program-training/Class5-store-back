@@ -4,9 +4,10 @@ import {
   getUsersFromDB,
   userExistInDB,
   login,
+  userAdminInDB,
 } from "../dal/usersDal";
 import { comparePassword, generateUserPassword } from "../helpers/bcrypt";
-import UserInterface from "../interfaces/userInterface";
+import { AdminInterface, UserInterface } from "../interfaces/userInterface";
 import { generateToken } from "../../auth/JWT";
 import ServerError from "../../utils/ServerError";
 import { convertToUserInterface } from "../../utils/convertUser";
@@ -33,24 +34,26 @@ export const registerUserService = async (user: UserInterface) => {
     const userExist = await userExistInDB(user.email);
     if (userExist) {
       const convertedUser = convertToUserInterface(userExist);
-      const token = generateToken(convertedUser);
-      return token;
+      // const token = generateToken(convertedUser);
+      // return token;
+      return convertedUser;
     }
     const userRegistered = await registerUserToDB(user);
     if (!userRegistered)
       throw new ServerError(401, "did not receive user from db");
     const convertedUser = convertToUserInterface(userRegistered);
-    const token = generateToken(convertedUser);
-    return token;
+    // const token = generateToken(convertedUser);
+    // return token;
+    return convertedUser;
   } catch (error) {
     return Promise.reject(error);
   }
 };
 
-export const registerAdminService = async (user: UserInterface) => {
+export const registerAdminService = async (user: AdminInterface) => {
   try {
-    const userExist = await userExistInDB(user.email);
-    if (userExist) throw new ServerError(400, "user already exist");
+    const adminExist = await userAdminInDB(user.isAdmin);
+    if (adminExist) throw new ServerError(400, "Admin already exist");
     const comp = comparePassword;
     user.password = generateUserPassword(user.password!);
     delete user.initialPassword;
