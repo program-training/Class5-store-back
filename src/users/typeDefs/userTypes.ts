@@ -18,7 +18,8 @@ export const usersTypes = `
 
   input RegisterUserInput {
     email: String!
-    password: String
+    password: String!
+    isAdmin: Boolean!
   }
 
   input Login {

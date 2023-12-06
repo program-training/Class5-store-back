@@ -1,4 +1,4 @@
-interface UserInterface {
+export interface UserInterface {
   _id?: string;
   email: string;
   isAdmin?: boolean;
@@ -6,4 +6,10 @@ interface UserInterface {
   initialPassword?: string;
 }
 
-export default UserInterface;
+export interface AdminInterface {
+  _id?: string;
+  email: string;
+  isAdmin: boolean;
+  password: string;
+  initialPassword?: string;
+}

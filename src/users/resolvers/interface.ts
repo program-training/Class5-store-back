@@ -32,7 +32,8 @@ export interface Admin {
 
 export interface AdminRegister {
   email: string;
-  password?: string;
+  password: string;
+  isAdmin: boolean;
 }
 
 export interface AdminRegisterMutation {

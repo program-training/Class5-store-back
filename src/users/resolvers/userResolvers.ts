@@ -57,10 +57,11 @@ export const registerAdmin = async (
   args: { input: AdminRegister }
 ) => {
   try {
-    const { email, password } = args.input;
+    const { email, password, isAdmin } = args.input;
     const newUser = {
       email,
       password,
+      isAdmin,
     };
     const user = await registerAdminService(newUser);
     return user;
