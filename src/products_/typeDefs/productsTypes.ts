@@ -9,6 +9,7 @@ const productTypes = `
     discountPercentage: Int
     imageUrl: String
     imageAlt: String
+
   }
  
 
@@ -26,12 +27,13 @@ const productTypes = `
     discountPercentage: Int
     imageUrl: String
     imageAlt: String
+  
   }
 
   input ProductToCheck {
     product: ProductInput
     requiredQuantity: Int
-    sumProductInCart: Int
+    sumProductInCart: Int 
   }
 
   type InStock {
