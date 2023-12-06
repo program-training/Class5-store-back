@@ -1,8 +1,15 @@
-import { getProduct, getProducts } from "../resolvers/productsResolver";
+import {
+  cancelProductsInStock,
+  checkProductsInStock,
+  getProduct,
+  getProducts,
+} from "../resolvers/productsResolver";
 
-const productsQueries = {
+export const productsQueries = {
   getProducts,
   getProduct,
 };
-
-export default productsQueries;
+export const productsMutation = {
+  checkProductsInStock,
+  cancelProductsInStock,
+};

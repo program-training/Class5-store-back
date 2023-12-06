@@ -26,6 +26,7 @@ export const getProductByIdFromDB = async (productId: number) => {
   }
 };
 
+// לעבוד על זה
 export const checkStockInDB = async (cart: CheckQuantity[]) => {
   try {
     const { data } = await axios.post(
@@ -38,6 +39,7 @@ export const checkStockInDB = async (cart: CheckQuantity[]) => {
   }
 };
 
+// לעבוד על זה
 export const cancelOrder = async (cart: CheckQuantity[]) => {
   try {
     const { data, status } = await axios.post(

@@ -1,4 +1,11 @@
-import { getProductsFromDB, getProductByIdFromDB } from "../dal/productsDal";
+import {
+  getProductsFromDB,
+  getProductByIdFromDB,
+  checkStockInDB,
+  cancelProductsInOrder,
+} from "../dal/productsDal";
+import { convertToCheck, productToCheck } from "../helpers/convetToChack";
+import { CheckQuantity } from "../types/types";
 
 export const getProducts = async () => {
   try {
@@ -13,6 +20,32 @@ export const getProducts = async () => {
 export const getProduct = async (_: unknown, { id }: { id: String }) => {
   try {
     const product = await getProductByIdFromDB(id as string);
+    return product;
+  } catch (error) {
+    if (error instanceof Error) console.log(error.message);
+    return null;
+  }
+};
+
+export const checkProductsInStock = async (
+  _: any,
+  { cart }: { cart: productToCheck[] }
+) => {
+  try {
+    const converted = convertToCheck(cart);
+    const result = await checkStockInDB(converted);
+    return result;
+  } catch (error) {
+    if (error instanceof Error) console.log(error.message);
+    return null;
+  }
+};
+export const cancelProductsInStock = async (
+  _: any,
+  { cart }: { cart: CheckQuantity[] }
+) => {
+  try {
+    const product = await cancelProductsInOrder(cart);
     return product;
   } catch (error) {
     if (error instanceof Error) console.log(error.message);

@@ -1,4 +1,6 @@
-import productTypes from "../products_/typeDefs/productsTypes";
+import productTypes, {
+  productsTypeMutation,
+} from "../products_/typeDefs/productsTypes";
 import { productsTypeQueries } from "../products_/typeDefs/productsTypes";
 import orderTypes, { ordersTypeQueries } from "../Orders/typeDef/orderTypes";
 import {
@@ -19,6 +21,8 @@ const typeDefs = `#graphql
   } 
   type Mutation{
     ${usersTypeMutation}
+    ${productsTypeMutation}
+
   }
 `;
 
