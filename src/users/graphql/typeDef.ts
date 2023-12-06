@@ -1,20 +1,20 @@
-// import {
-//   usersTypeMutation,
-//   usersTypeQueries,
-//   usersTypes,
-// } from "../typeDefs/userTypes";
+import {
+  usersTypeMutation,
+  usersTypeQueries,
+  usersTypes,
+} from "../typeDefs/userTypes";
 
-// const typeDefs = `#graphql
+const typeDefs = `#graphql
 
-//     ${usersTypes}
+    ${usersTypes}
 
-//     type Query{
-//       ${usersTypeQueries}
-//     }
-//     type Mutation {
-//       ${usersTypeMutation}
-//     }
+    type Query{
+      ${usersTypeQueries}
+    }
+    type Mutation {
+      ${usersTypeMutation}
+    }
 
-//      `;
+     `;
 
-// export default typeDefs;
+export default typeDefs;
