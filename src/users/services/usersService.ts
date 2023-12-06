@@ -34,7 +34,7 @@ export const registerUserService = async (user: UserInterface) => {
     const userExist = await userExistInDB(user.email);
     if (userExist) {
       const convertedUser = convertToUserInterface(userExist);
-      const token = generateToken(convertedUser);
+      // const token = generateToken(convertedUser);
       // return token;
       return convertedUser;
     }
@@ -42,7 +42,7 @@ export const registerUserService = async (user: UserInterface) => {
     if (!userRegistered)
       throw new ServerError(401, "did not receive user from db");
     const convertedUser = convertToUserInterface(userRegistered);
-    const token = generateToken(convertedUser);
+    // const token = generateToken(convertedUser);
     // return token;
     return convertedUser;
   } catch (error) {
