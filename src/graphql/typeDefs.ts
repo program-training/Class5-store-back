@@ -1,23 +1,30 @@
-import productTypes, {
-  productsTypeMutation,
-} from "../products_/typeDefs/productsTypes";
-import { productsTypeQueries } from "../products_/typeDefs/productsTypes";
+import {
+  productsTypeDefsMutation,
+  productTypesDefs,
+} from "../products_/typeDefs/productsTypeDefs";
+import { productsTypeDefsQueries } from "../products_/typeDefs/productsTypeDefs";
 import orderTypes, { ordersTypeQueries } from "../Orders/typeDef/orderTypes";
+import {
+  usersTypeDefsMutations,
+  usersTypeDefsQueries,
+  usersTypeDefs,
+} from "../_users/typeDefs/userTypeDefs";
 
 const typeDefs = `#graphql   
-    ${productTypes}
+    ${productTypesDefs}
     ${orderTypes}
+    ${usersTypeDefs}
   
   type Query{
-    ${productsTypeQueries}
+    ${productsTypeDefsQueries}
     ${ordersTypeQueries}
-
+    ${usersTypeDefsQueries}
   } 
   type Mutation{
-    ${productsTypeMutation}
+    ${usersTypeDefsMutations}
+    ${productsTypeDefsMutation}
 
-
-  } 
+  }
 `;
 
 export default typeDefs;

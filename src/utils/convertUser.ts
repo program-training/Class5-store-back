@@ -6,7 +6,8 @@ export interface UserInDBInterface extends Document {
   isAdmin: boolean;
   password?: string | undefined;
 }
-export const convertToUserInterface = (user: UserInDBInterface) => {
+
+export const convertUserForSending = (user: UserInDBInterface) => {
   const { _id, isAdmin, email } = user;
   const id = _id.toString();
   return { _id: id, isAdmin, email };

@@ -1,4 +1,4 @@
-const productTypes = `#graphql
+export const productTypesDefs = `
   type Product {
     id: Int
     name: String
@@ -11,8 +11,6 @@ const productTypes = `#graphql
     imageAlt: String
 
   }
- 
-
   input CheckQuantity {
     productId: Int
     requiredQuantity: Int
@@ -33,7 +31,6 @@ const productTypes = `#graphql
     productId: Int
     requiredQuantity: Int
   }
-
   type InStock {
     productId: Int
     requiredQuantity: Int
@@ -48,16 +45,14 @@ const productTypes = `#graphql
   }
 `;
 
-export const productsTypeQueries = `
+export const productsTypeDefsQueries = `
   getProducts: [Product]
   getProduct(id:ID): Product
 
 `;
 
-export const productsTypeMutation = `
+export const productsTypeDefsMutation = `
   checkProductsInStock(cart:[ProductToCheck!]): Response
   cancelProductsInStock(cart:[CheckQuantity!]): String!
 
 `;
-
-export default productTypes;
