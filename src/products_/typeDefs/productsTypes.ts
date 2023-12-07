@@ -1,6 +1,6 @@
-const productTypes = `
+const productTypes = `#graphql
   type Product {
-    id: ID
+    id: Int
     name: String
     salePrice: String
     quantity: Int
@@ -18,7 +18,7 @@ const productTypes = `
     requiredQuantity: Int
   }
   input ProductInput {
-    id: ID
+    id: Int
     name: String
     salePrice: String
     quantity: Int
@@ -29,11 +29,9 @@ const productTypes = `
     imageAlt: String
   
   }
-
   input ProductToCheck {
-    product: ProductInput
+    productId: Int
     requiredQuantity: Int
-    sumProductInCart: Int 
   }
 
   type InStock {
