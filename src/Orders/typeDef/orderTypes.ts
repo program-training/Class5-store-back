@@ -28,6 +28,7 @@ type Order {
 export const ordersTypeQueries = `
   getOrders: [Order]
   getOrderByUserId(id: ID!): Order
+  getOrderById(id: ID!): Order
 `;
 
 export default orderTypes;
