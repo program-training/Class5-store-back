@@ -8,7 +8,6 @@ interface ProductInterface {
   discountPercentage: number;
   imageUrl: string;
   imageAlt: string;
-  __typename: string;
 }
 
 export default ProductInterface;
