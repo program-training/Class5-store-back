@@ -1,11 +1,7 @@
 import User from "../models/mongoose/UserSchema";
-import { UserInterface } from "../../users/interfaces/userInterface";
-import { comparePassword } from "../../users/helpers/bcrypt";
 import ServerError from "../../utils/ServerError";
-import {
-  UserReqInterface,
-  UserResInterface,
-} from "../interfaces/usersInterfaces";
+import { UserReqInterface } from "../interfaces/usersInterfaces";
+import { comparePassword } from "../helpers/bcrypt";
 
 export const getUsersFromDB = async () => {
   const users = await User.find();
