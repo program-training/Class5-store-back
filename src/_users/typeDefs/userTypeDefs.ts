@@ -16,7 +16,6 @@ export const usersTypeDefs = `
     isAdmin: Boolean!
 
   }
-  union Res = RegisterUser | Token
 
   input RegisterUserInput {
     email: String!
