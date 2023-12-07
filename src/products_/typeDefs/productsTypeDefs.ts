@@ -9,6 +9,7 @@ export const productTypesDefs = `
     discountPercentage: Int
     imageUrl: String
     imageAlt: String
+
   }
   input CheckQuantity {
     productId: Int
@@ -24,11 +25,12 @@ export const productTypesDefs = `
     discountPercentage: Int
     imageUrl: String
     imageAlt: String
+  
   }
   input ProductToCheck {
     product: ProductInput
     requiredQuantity: Int
-    sumProductInCart: Int
+    sumProductInCart: Int 
   }
   type InStock {
     productId: Int
