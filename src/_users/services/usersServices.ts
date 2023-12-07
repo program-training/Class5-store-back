@@ -60,7 +60,11 @@ const login = async (user: UserReqInterface) => {
   if (!userLogin) {
     throw new ServerError(400, "unauthorized");
   } else {
-    const token = generateToken(userLogin);
+    const { _id, email, password, isAdmin } = userLogin;
+    if (typeof password !== "string") {
+      throw new Error("Password is not a string!");
+    }
+    const token = generateToken({ _id, email, password, isAdmin });
     return { token: token, isAdmin: user.isAdmin };
   }
 };
