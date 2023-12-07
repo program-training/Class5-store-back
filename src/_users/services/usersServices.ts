@@ -11,7 +11,7 @@ import {
   UserRegisterMutation,
   UserLogin,
   Login,
-} from "../../users/resolvers/interface";
+} from "../../_users/interfaces/usersInterfaces";
 import {
   getUserByIdFromDB,
   registerUserToDB,
