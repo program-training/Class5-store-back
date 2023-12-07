@@ -5,7 +5,6 @@ export const usersTypeDefs = `
     isAdmin: Boolean!
     password: String
   }
-
   type RegisterUser {
     _id: ID!
     email: String!
@@ -14,7 +13,10 @@ export const usersTypeDefs = `
 
   type Token {
     token: String!
+    isAdmin: Boolean!
+
   }
+  union Res = RegisterUser | Token
 
   input RegisterUserInput {
     email: String!
@@ -33,7 +35,8 @@ export const usersTypeDefsQueries = `
   getUser(_id: String!): User
 `;
 export const usersTypeDefsMutations = `
-  registerUser(input: RegisterUserInput!): RegisterUser
+  signUpUser(input: RegisterUserInput): RegisterUser
+  signUpAndSignInUser(input: RegisterUserInput): Token
+  SignInUser(input: RegisterUserInput): Token
   registerAdmin(input: RegisterUserInput!): RegisterUser
-  loginUser(input: Login): Token
 `;

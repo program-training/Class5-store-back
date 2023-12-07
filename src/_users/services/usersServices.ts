@@ -1,4 +1,9 @@
 import {
+  UserReqInterface,
+  UserResInterface,
+} from "../interfaces/usersInterfaces";
+
+import {
   AdminRegisterMutation,
   AdminRegister,
   UserQuery,
@@ -7,26 +12,16 @@ import {
   UserLogin,
   Login,
 } from "../../users/resolvers/interface";
-
 import {
   getUserByIdFromDB,
   registerUserToDB,
   getUsersFromDB,
   userExistInDB,
   loginToDB,
-  userAdminInDB,
 } from "../dal/usersDal";
-import {
-  comparePassword,
-  generateUserPassword,
-} from "../../users/helpers/bcrypt";
-import {
-  AdminInterface,
-  UserInterface,
-} from "../../users/interfaces/userInterface";
 import { generateToken } from "../../auth/JWT";
 import ServerError from "../../utils/ServerError";
-import { convertToUserInterface } from "../../utils/convertUser";
+import { convertUserForSending } from "../utils/usersUtils";
 
 export const getUsers = async () => {
   try {
@@ -48,97 +43,59 @@ export const getUser = async (parent: UserQuery, args: { _id: string }) => {
   }
 };
 
-export const registerUser = async (
+const register = async (user: UserReqInterface) => {
+  if (await userExistInDB(user.email))
+    throw new ServerError(
+      401,
+      "it is not possible to register again with an existing email"
+    );
+  const userRegistered = await registerUserToDB(user);
+  if (!userRegistered)
+    throw new ServerError(401, "did not receive user from db");
+  return convertUserForSending(userRegistered as UserResInterface);
+};
+
+const login = async (user: UserReqInterface) => {
+  const userLogin = await loginToDB(user.email, user.password);
+  if (!userLogin) {
+    throw new ServerError(400, "unauthorized");
+  } else {
+    const token = generateToken(userLogin);
+    return { token: token, isAdmin: user.isAdmin };
+  }
+};
+
+export const signUpUser = async (
   parent: UserRegisterMutation,
-  args: { input: UserRegister }
+  args: { input: UserReqInterface }
 ) => {
   try {
-    const { email, password } = args.input;
-    const newUser = {
-      email,
-      password,
-    };
-    const user = await registerUserService(newUser);
-    return user;
+    return register(args.input);
   } catch (error) {
     if (error instanceof Error) console.log(error.message);
     return null;
   }
 };
 
-export const registerUserService = async (user: UserInterface) => {
-  try {
-    const userExist = await userExistInDB(user.email);
-    if (userExist) {
-      const convertedUser = convertToUserInterface(userExist);
-      // const token = generateToken(convertedUser);
-      // return token;
-      return convertedUser;
-    }
-    const userRegistered = await registerUserToDB(user);
-    if (!userRegistered)
-      throw new ServerError(401, "did not receive user from db");
-    const convertedUser = convertToUserInterface(userRegistered);
-    // const token = generateToken(convertedUser);
-    // return token;
-    return convertedUser;
-  } catch (error) {
-    return Promise.reject(error);
-  }
-};
-
-export const registerAdminService = async (user: AdminInterface) => {
-  try {
-    const adminExist = await userAdminInDB(user.isAdmin);
-    if (adminExist) throw new ServerError(400, "Admin already exist");
-    const comp = comparePassword;
-    user.password = generateUserPassword(user.password!);
-    delete user.initialPassword;
-    user.isAdmin = true;
-    const userRegistered = await registerUserToDB(user);
-    const convertedUser = convertToUserInterface(userRegistered);
-    return convertedUser;
-  } catch (error) {
-    return Promise.reject(error);
-  }
-};
-
-export const loginService = async (email: string, password: string) => {
-  try {
-    const user = await loginToDB(email, password);
-    if (!user) throw new ServerError(400, "unauthorized");
-    const convertedUser = convertToUserInterface(user);
-    const token = generateToken(convertedUser);
-    return token;
-  } catch (error) {
-    return Promise.reject(error);
-  }
-};
-
-export const registerAdmin = async (
-  parent: AdminRegisterMutation,
-  args: { input: AdminRegister }
+export const signUpAndSignInUser = async (
+  parent: UserRegisterMutation,
+  args: { input: UserReqInterface }
 ) => {
   try {
-    const { email, password, isAdmin } = args.input;
-    const newUser = {
-      email,
-      password,
-      isAdmin,
-    };
-    const user = await registerAdminService(newUser);
-    return user;
+    await register(args.input);
+    return login(args.input);
   } catch (error) {
     if (error instanceof Error) console.log(error.message);
     return null;
   }
 };
 
-export const loginUser = async (parent: UserLogin, args: { input: Login }) => {
+export const SignInUser = async (
+  parent: UserRegisterMutation,
+  args: { input: UserReqInterface }
+) => {
   try {
-    const { email, password } = args.input;
-    const token = await loginService(email, password);
-    return { token };
+    return login(args.input);
   } catch (error) {
     if (error instanceof Error) console.log(error.message);
     return null;

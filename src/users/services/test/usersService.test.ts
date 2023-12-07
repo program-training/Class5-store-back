@@ -5,7 +5,7 @@ import {
   // getUserByIdService,
   registerUserService,
 } from "../../../_users/services/usersResolvers";
-import User from "../../models/mongoose/UserSchema";
+import User from "../../../_users/models/mongoose/UserSchema";
 import UserInterface from "../../interfaces/userInterface";
 
 let mongoServer: MongoMemoryServer;

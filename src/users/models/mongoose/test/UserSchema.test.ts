@@ -1,6 +1,6 @@
 import mongoose, { ConnectOptions } from "mongoose";
 import { MongoMemoryServer } from "mongodb-memory-server";
-import UserModel from "../UserSchema";
+import UserModel from "../../../../_users/models/mongoose/UserSchema";
 
 let mongoServer: MongoMemoryServer;
 
@@ -33,7 +33,7 @@ describe("User Model", () => {
     expect(savedUser._id).toBeDefined();
     expect(savedUser.email).toBe(userData.email);
     expect(savedUser.isAdmin).toBe(userData.isAdmin);
-    expect(savedUser.password).toBe(userData.password); 
+    expect(savedUser.password).toBe(userData.password);
   });
 
   it("should not save a user without required fields", async () => {

@@ -1,7 +1,11 @@
-import User from "../../users/models/mongoose/UserSchema";
+import User from "../models/mongoose/UserSchema";
 import { UserInterface } from "../../users/interfaces/userInterface";
 import { comparePassword } from "../../users/helpers/bcrypt";
 import ServerError from "../../utils/ServerError";
+import {
+  UserReqInterface,
+  UserResInterface,
+} from "../interfaces/usersInterfaces";
 
 export const getUsersFromDB = async () => {
   const users = await User.find();
@@ -13,13 +17,6 @@ export const getUserByIdFromDB = async (id: string) => {
   return user;
 };
 
-export const initialDataToDB = async (users: UserInterface[]) => {
-  const usersInDB = await User.find();
-  if (usersInDB.length) return "there are already users in DB";
-  const result = await User.insertMany(users);
-  return result;
-};
-
 export const deleteUsersFromDB = async () => {
   try {
     const result = await User.deleteMany({});
@@ -29,7 +26,7 @@ export const deleteUsersFromDB = async () => {
   }
 };
 
-export const registerUserToDB = async (user: UserInterface) => {
+export const registerUserToDB = async (user: UserReqInterface) => {
   const registeredUser = new User(user);
   await registeredUser.save();
   return registeredUser;
@@ -45,29 +42,8 @@ export const loginToDB = async (email: string, password: string) => {
 export const userExistInDB = async (email: string) => {
   try {
     const user = await User.find({ email: email });
+    console.log(user[0]);
     return user[0];
-  } catch (error) {
-    return Promise.reject(error);
-  }
-};
-
-export const userAdminInDB = async (isAdmin: boolean) => {
-  const user = await User.find({ isAdmin: isAdmin });
-  return user[0].isAdmin;
-};
-
-export const isAdmin = async (user: UserInterface) => {
-  try {
-    const isAdmin = await User.findOne({ isAdmin: true });
-    const correctPassword = comparePassword(
-      user.initialPassword!,
-      isAdmin?.password!
-    );
-    if (!correctPassword) throw new ServerError(403, "unauthorized");
-    const { initialPassword, ...userDetails } = user;
-    const newAdmin = new User(userDetails);
-    await newAdmin.save();
-    return "admin registered successfully";
   } catch (error) {
     return Promise.reject(error);
   }

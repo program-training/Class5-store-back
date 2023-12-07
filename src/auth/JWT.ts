@@ -1,11 +1,11 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import UserInterface from "../users/interfaces/userInterface";
+import { UserResInterface } from "../_users/interfaces/usersInterfaces";
 dotenv.config();
 
 const secret = process.env.JWT_SECRET || "secret";
 
-export const generateToken = ({ _id, isAdmin, email }: UserInterface) => {
+export const generateToken = ({ _id, isAdmin, email }: UserResInterface) => {
   const expiresIn = "1h";
   const token = jwt.sign({ _id, isAdmin, email }, secret, { expiresIn });
   return token;
