@@ -9,24 +9,8 @@ export const productTypesDefs = `
     discountPercentage: Int
     imageUrl: String
     imageAlt: String
+  }
 
-  }
-  input CheckQuantity {
-    productId: Int
-    requiredQuantity: Int
-  }
-  input ProductInput {
-    id: Int
-    name: String
-    salePrice: String
-    quantity: Int
-    description: String
-    category: String
-    discountPercentage: Int
-    imageUrl: String
-    imageAlt: String
-  
-  }
   input ProductToCheck {
     productId: Int
     requiredQuantity: Int
@@ -53,6 +37,6 @@ export const productsTypeDefsQueries = `
 
 export const productsTypeDefsMutation = `
   checkProductsInStock(cart:[ProductToCheck!]): Response
-  cancelProductsInStock(cart:[CheckQuantity!]): String!
+  cancelProductsInStock(cart:[ProductToCheck!]): String!
 
 `;
