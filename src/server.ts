@@ -24,10 +24,11 @@ export default app;
 
 import { connectToDatabase } from "./dataAccess/mongoose";
 import { connectedToOMS } from "./Orders/dal/orderDal";
-import { connectedToERP } from "./products/dal/productsDal";
+
 import { startStandaloneServer } from "@apollo/server/standalone";
 import server from "./graphql/apolloServer";
 import chalk from "chalk";
+import { connectedToERP } from "./products_/dal/productsDal";
 
 startStandaloneServer(server, {
   listen: { port: 4000 },

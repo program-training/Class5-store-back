@@ -5,17 +5,25 @@ const ERP_BASE_URL =
   process.env.ERP_BASE_URL || "https://erp-server-v2.onrender.com";
 
 export const getProductsFromDB = async () => {
-  const { data } = await axios.get(
-    `${ERP_BASE_URL}/shop_inventory?searchText=`
-  );
-  return data;
+  try {
+    const { data } = await axios.get(
+      `${ERP_BASE_URL}/shop_inventory?searchText=`
+    );
+    return data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
 };
 
 export const getProductByIdFromDB = async (productId: string) => {
-  const { data } = await axios.get(
-    `${ERP_BASE_URL}/shop_inventory/${productId}`
-  );
-  return data;
+  try {
+    const { data } = await axios.get(
+      `${ERP_BASE_URL}/shop_inventory/${productId}`
+    );
+    return data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
 };
 
 export const checkStockInDB = async (cart: CheckQuantity[]) => {
@@ -41,5 +49,14 @@ export const cancelProductsInOrderInDB = async (cart: CheckQuantity[]) => {
     return data;
   } catch (error) {
     return Promise.reject(error);
+  }
+};
+
+export const connectedToERP = async () => {
+  try {
+    const { data } = await axios.get(`${ERP_BASE_URL}/connect`);
+    console.log(data);
+  } catch (error) {
+    console.log(error);
   }
 };
