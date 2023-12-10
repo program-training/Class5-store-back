@@ -4,15 +4,6 @@ import {
 } from "../interfaces/usersInterfaces";
 
 import {
-  AdminRegisterMutation,
-  AdminRegister,
-  UserQuery,
-  UserRegister,
-  UserRegisterMutation,
-  UserLogin,
-  Login,
-} from "../../users/resolvers/interface";
-import {
   getUserByIdFromDB,
   registerUserToDB,
   getUsersFromDB,
@@ -33,7 +24,7 @@ export const getUsers = async () => {
   }
 };
 
-export const getUser = async (parent: UserQuery, args: { _id: string }) => {
+export const getUser = async (_: any, args: { _id: string }) => {
   try {
     const user = await getUserByIdFromDB(args._id);
     return user;
@@ -69,10 +60,7 @@ const login = async (user: UserReqInterface) => {
   }
 };
 
-export const signUpUser = async (
-  parent: UserRegisterMutation,
-  args: { input: UserReqInterface }
-) => {
+export const signUpUser = async (_: any, args: { input: UserReqInterface }) => {
   try {
     return register(args.input);
   } catch (error) {
@@ -82,7 +70,7 @@ export const signUpUser = async (
 };
 
 export const signUpAndSignInUser = async (
-  parent: UserRegisterMutation,
+  _: any,
   args: { input: UserReqInterface }
 ) => {
   try {
@@ -94,10 +82,7 @@ export const signUpAndSignInUser = async (
   }
 };
 
-export const SignInUser = async (
-  parent: UserRegisterMutation,
-  args: { input: UserReqInterface }
-) => {
+export const SignInUser = async (_: any, args: { input: UserReqInterface }) => {
   try {
     return login(args.input);
   } catch (error) {

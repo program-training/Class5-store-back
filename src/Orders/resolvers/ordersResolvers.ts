@@ -2,12 +2,15 @@ import {
   getOrders,
   getOrderByUserId,
   getOrderById,
+  registerOrder,
 } from "../services/ordersServices";
 
-const ordersQueries = {
+export const ordersQueries = {
   getOrders,
   getOrderByUserId,
   getOrderById,
 };
 
-export default ordersQueries;
+export const OrdersMutation = {
+  registerOrder,
+};
