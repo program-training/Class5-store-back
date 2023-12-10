@@ -3,7 +3,10 @@ import {
   productTypesDefs,
 } from "../products_/typeDefs/productsTypeDefs";
 import { productsTypeDefsQueries } from "../products_/typeDefs/productsTypeDefs";
-import orderTypes, { ordersTypeQueries } from "../Orders/typeDef/orderTypes";
+import orderTypes, {
+  ordersTypeMutation,
+  ordersTypeQueries,
+} from "../Orders/typeDef/orderTypes";
 import {
   usersTypeDefsMutations,
   usersTypeDefsQueries,
@@ -23,7 +26,7 @@ const typeDefs = `#graphql
   type Mutation{
     ${usersTypeDefsMutations}
     ${productsTypeDefsMutation}
-
+    ${ordersTypeMutation}
   }
 `;
 

@@ -13,11 +13,12 @@ export const convertToOrder = (
       return {
         productId: cartItem.productId,
         name: cartItem.name,
-        price: parseFloat(cartItem.salePrice),
         quantity: cartItem.quantity,
         description: cartItem.description,
+        price: Number(cartItem.salePrice),
       };
     }
   );
+
   return { email, price, shippingDetails, cartItems, orderTime, status };
 };

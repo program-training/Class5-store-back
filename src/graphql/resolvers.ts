@@ -1,4 +1,7 @@
-import ordersQueries from "../Orders/resolvers/ordersResolvers";
+import {
+  OrdersMutation,
+  ordersQueries,
+} from "../Orders/resolvers/ordersResolvers";
 import {
   productsMutations,
   productsQueries,
@@ -17,6 +20,7 @@ const resolvers = {
   Mutation: {
     ...usersMutations,
     ...productsMutations,
+    ...OrdersMutation,
   },
 };
 

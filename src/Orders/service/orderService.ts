@@ -1,4 +1,4 @@
-import sendEmail from "../../utils/sendEmail";
+// import sendEmail from "../../utils/sendEmail";
 import {
   getOrderByIdFromDB,
   getOrderByUserIdFromDB,
@@ -36,7 +36,7 @@ export const registerOrderService = async (
       email,
       shippingDetails: { userId },
     } = orderFromClient;
-    await sendEmail(email, userId);
+    // await sendEmail(email, userId);
     return registeredOrder;
   } catch (error) {
     return Promise.reject(error);
@@ -48,7 +48,6 @@ export const getOrderByIdService = async (id: string) => {
     const order = await getOrderByIdFromDB(id);
     return order;
   } catch (error) {
-    return Promise.reject(error)
+    return Promise.reject(error);
   }
 };
-

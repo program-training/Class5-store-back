@@ -2,7 +2,13 @@ interface ShippingDetailsInterface {
   address: string;
   contactNumber: string;
   userId: string;
-  orderType: "standard" | "express" | "pickup";
+  registerOrderType: RegisterOrderType;
+}
+
+enum RegisterOrderType {
+  standard = "STANDARD",
+  express = "EXPRESS",
+  pickup = "PICKUP",
 }
 
 export default ShippingDetailsInterface;
