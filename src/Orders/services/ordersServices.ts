@@ -2,7 +2,10 @@ import {
   getOrderByIdFromDB,
   getOrderByUserIdFromDB,
   getOrdersFromDB,
+  registerOrderToDB,
 } from "../dal/orderDal";
+import OrderFromClientInterface from "../interfaces/OrderFromClientInterface";
+import OrdersInterface from "../interfaces/OrderInterface";
 
 export const getOrders = async () => {
   try {
@@ -33,6 +36,16 @@ export const getOrderById = async (_: any, { id }: GetOrderInterface) => {
     const order = await getOrderByIdFromDB(id);
     console.log(order);
     return order;
+  } catch (error) {
+    console.log(error);
+    return "null";
+  }
+};
+export const registerOrder = async (_: any, order: OrdersInterface) => {
+  try {
+    const data = await registerOrderToDB(order);
+    console.log(data);
+    return data;
   } catch (error) {
     console.log(error);
     return "null";
