@@ -22,6 +22,10 @@ export const usersTypeDefs = `
     password: String!
     isAdmin: Boolean!
   }
+  input LoginUserInput {
+    email: String!
+    password: String!
+  }
 
   input Login {
     email: String!
@@ -36,6 +40,6 @@ export const usersTypeDefsQueries = `
 export const usersTypeDefsMutations = `
   signUpUser(input: RegisterUserInput): RegisterUser
   signUpAndSignInUser(input: RegisterUserInput): Token
-  SignInUser(input: RegisterUserInput): Token
+  SignInUser(input: LoginUserInput): Token
   registerAdmin(input: RegisterUserInput!): RegisterUser
 `;

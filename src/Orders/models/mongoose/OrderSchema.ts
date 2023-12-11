@@ -21,6 +21,10 @@ export const OrderSchema = new Schema({
   },
 });
 
+OrderSchema.pre("findOneAndUpdate", () => {
+  console.log("King Daniel!");
+});
+
 export const Order = mongoose.model("order", OrderSchema);
 
 const CartItems = new Schema({
