@@ -1,11 +1,13 @@
 import axios from "axios";
 import { CheckQuantity } from "../types/types";
+import { products } from "../../products/dal/products";
 
 const ERP_BASE_URL =
   process.env.ERP_BASE_URL || "https://erp-server-v2.onrender.com";
 
 export const getProductsFromDB = async () => {
   try {
+    if (process.env.NODE_ENV === "development") return products;
     const { data } = await axios.get(
       `${ERP_BASE_URL}/shop_inventory?searchText=`
     );
@@ -17,6 +19,8 @@ export const getProductsFromDB = async () => {
 
 export const getProductByIdFromDB = async (productId: string) => {
   try {
+    if (process.env.NODE_ENV === "development")
+      return products.find((product) => product.id === +productId);
     const { data } = await axios.get(
       `${ERP_BASE_URL}/shop_inventory/${productId}`
     );
