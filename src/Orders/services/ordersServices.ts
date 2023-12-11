@@ -4,8 +4,8 @@ import {
   getOrdersFromDB,
   registerOrderToDB,
 } from "../dal/orderDal";
-import OrderFromClientInterface from "../interfaces/OrderFromClientInterface";
-import OrdersInterface from "../interfaces/OrderInterface";
+import { registerOrderService } from "../service/orderService";
+import RegisterOrderFromClient from "../typeDef/interface";
 
 export const getOrders = async () => {
   try {
@@ -24,7 +24,6 @@ interface GetOrderInterface {
 export const getOrderByUserId = async (_: any, { id }: GetOrderInterface) => {
   try {
     const order = await getOrderByUserIdFromDB(id);
-    console.log(order);
     return order[0];
   } catch (error) {
     console.log(error);
@@ -34,18 +33,19 @@ export const getOrderByUserId = async (_: any, { id }: GetOrderInterface) => {
 export const getOrderById = async (_: any, { id }: GetOrderInterface) => {
   try {
     const order = await getOrderByIdFromDB(id);
-    console.log(order);
     return order;
   } catch (error) {
     console.log(error);
     return "null";
   }
 };
-export const registerOrder = async (_: any, order: OrdersInterface) => {
+interface RegisterOrder {
+  order: RegisterOrderFromClient;
+}
+export const registerOrder = async (_: any, registerOrder: RegisterOrder) => {
   try {
-    const data = await registerOrderToDB(order);
-    console.log(data);
-    return data;
+    const order = await registerOrderService(registerOrder.order);
+    return order;
   } catch (error) {
     console.log(error);
     return "null";
