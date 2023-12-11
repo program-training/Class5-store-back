@@ -2,6 +2,7 @@ import {
   getOrderByIdFromDB,
   getOrderByUserIdFromDB,
   getOrdersFromDB,
+  registerOrderToDB,
 } from "../dal/orderDal";
 import { registerOrderService } from "../service/orderService";
 import RegisterOrderFromClient from "../typeDef/interface";
