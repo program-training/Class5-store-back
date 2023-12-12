@@ -34,14 +34,13 @@ input CartItems {
 input RegisterShippingDetailsInput {
   address: String!
   contactNumber: String!
-  userId: String!
-  registerOrderType: RegisterOrderType!
+  orderType: RegisterOrderType!
 }
 
 enum RegisterOrderType {
-  STANDARD
-  EXPRESS
-  PICKUP
+  standard
+  express
+  pickup
 }
 
 input OrderFromClient {
@@ -54,8 +53,7 @@ input OrderFromClient {
 type RegisterShippingDetails {
   address: String!
   contactNumber: String!
-  userId: String!
-  registerOrderType: RegisterOrderType!
+  orderType: RegisterOrderType!
 }
 
 type RegisterOrder {
