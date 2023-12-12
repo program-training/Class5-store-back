@@ -4,16 +4,16 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    def pullRequestBranch = env.GITHUB_PR_SOURCE_BRANCH
+                    def pullRequestBranch = env.GITHUB_PR_SOURCE_BRANCH ?: 'main'
                     checkout([$class: 'GitSCM', branches: [[name: "*/${pullRequestBranch}"]], userRemoteConfigs: [[url: 'https://github.com/program-training/Class5-store-back']]])
                 }
             }
         }
-        stage('client build') {
+        stage('server lint') {
             steps {
                 script {
-                        sh 'echo "Building..."'
-                        sh 'docker build -t eslint-back-store-main .'
+                        sh 'npm i -D @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint'
+                        sh 'npm run lint'
                 }
             }
         }
