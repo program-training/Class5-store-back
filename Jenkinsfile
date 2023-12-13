@@ -32,7 +32,7 @@ pipeline {
         }
         failure {
             script {
-                echo 'Pipeline failed...lll Blocking pull request merge.'
+                echo 'Pipeline failed...lkll Blocking pull request merge.'
                 setGitHubPullRequestStatus(
                     state: 'FAILURE',
                     context: 'ESLINT_CLASS_5',
