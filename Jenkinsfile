@@ -9,7 +9,7 @@ pipeline {
                 }
             }
         }
-        stage('lint') {
+        stage('Lint') {
             steps {
                 script {
                         sh 'npm i -D @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint'
