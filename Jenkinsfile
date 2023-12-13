@@ -26,7 +26,7 @@ pipeline {
                 setGitHubPullRequestStatus(
                     state: 'SUCCESS',
                     context: 'ESLINT_CLASS_5',
-                    message: 'lint passed',
+                    message: 'lint passedh',
                 )
             }
         }
