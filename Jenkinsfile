@@ -36,7 +36,7 @@ pipeline {
                 setGitHubPullRequestStatus(
                     state: 'FAILURE',
                     context: 'ESLINT_CLASS_5',
-                    message: 'lint failed  grun npm run build to see errors',
+                    message: 'lint failed  grun npm run build to see errorss',
                 )
             }
         }
