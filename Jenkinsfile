@@ -4,7 +4,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    def pullRequestBranch = env.GITHUB_PR_SOURCE_BRANCH ?: 'main'
+                    def pullRequestBranch = env.GITHUB_PR_SOURCE_BRANCH ?: 'main-devops'
                     checkout([$class: 'GitSCM', branches: [[name: "*/${pullRequestBranch}"]], userRemoteConfigs: [[url: 'https://github.com/program-training/Class5-store-back']]])
                 }
             }
