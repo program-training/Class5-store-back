@@ -9,7 +9,7 @@ pipeline {
                 }
             }
         }
-        stage('server lint') {
+        stage('lint') {
             steps {
                 script {
                         sh 'npm i -D @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint'
@@ -26,7 +26,7 @@ pipeline {
                 setGitHubPullRequestStatus(
                     state: 'SUCCESS',
                     context: 'ESLINT_CLASS_5',
-                    message: 'Build passed',
+                    message: 'lint passed',
                 )
             }
         }
@@ -36,7 +36,7 @@ pipeline {
                 setGitHubPullRequestStatus(
                     state: 'FAILURE',
                     context: 'ESLINT_CLASS_5',
-                    message: 'Build failed  run npm run build to see errors',
+                    message: 'lint failed  run npm run build to see errors',
                 )
             }
         }
