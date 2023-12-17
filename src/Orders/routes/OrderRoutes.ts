@@ -5,10 +5,11 @@ import {
   registerOrderController,
   getOrderByIdController,
 } from "../controllers/orderController";
+import { getCachedOrders } from "../cache/ordersCache";
 
 const router = express.Router();
 
-router.get("/", getOrdersController);
+router.get("/", getCachedOrders, getOrdersController);
 
 router.get("/:id", getOrderByUserIdController);
 
