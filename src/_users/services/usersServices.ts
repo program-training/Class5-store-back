@@ -13,9 +13,13 @@ import {
 import { generateToken } from "../../auth/JWT";
 import ServerError from "../../utils/ServerError";
 import { convertUserForSending } from "../utils/usersUtils";
+import { redisClient } from "../../redis/client/client";
+import { cacheUsers } from "../cache/usersCache";
 
 export const getUsers = async () => {
   try {
+    const cachedUsers = await cacheUsers();
+    if (cachedUsers) return cachedUsers;
     const users = await getUsersFromDB();
     return users;
   } catch (error) {
