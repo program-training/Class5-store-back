@@ -1,5 +1,9 @@
 import { redisClient } from "../../redis/client/client";
-import { getCachedOrder, getCachedOrders } from "../cache/ordersCache";
+import {
+  getCachedOrderById,
+  getCachedOrderByUserId,
+  getCachedOrders,
+} from "../cache/ordersCache";
 import {
   getOrderByIdFromDB,
   getOrderByUserIdFromDB,
@@ -7,6 +11,10 @@ import {
 } from "../dal/orderDal";
 import { registerOrderService } from "../service/orderService";
 import RegisterOrderFromClient from "../typeDef/interface";
+
+interface GetOrderInterface {
+  id: string;
+}
 
 export const getOrders = async () => {
   try {
@@ -28,19 +36,15 @@ export const getOrders = async () => {
   }
 };
 
-interface GetOrderInterface {
-  id: string;
-}
-
 export const getOrderByUserId = async (
   _: ParentNode,
   { id }: GetOrderInterface
 ) => {
   try {
-    const cachedOrder = await getCachedOrder(id);
-    if (cachedOrder) {
-      console.log("order from cache!!!");
-      return cachedOrder;
+    const cachedOrderByUserId = await getCachedOrderByUserId(id);
+    if (cachedOrderByUserId) {
+      console.log("orderByUserId from cache!!!");
+      return cachedOrderByUserId;
     }
     const order = await getOrderByUserIdFromDB(id);
     if (!order) throw new Error("no order in the database");
@@ -56,7 +60,14 @@ export const getOrderById = async (
   { id }: GetOrderInterface
 ) => {
   try {
+    const cachedOrderById = await getCachedOrderById(id);
+    if (cachedOrderById) {
+      console.log("orderById from cache!!!");
+      return cachedOrderById;
+    }
     const order = await getOrderByIdFromDB(id);
+    if (!order) throw new Error("no orders in the database");
+    console.log("order from dataBase");
     return order;
   } catch (error) {
     console.log(error);
