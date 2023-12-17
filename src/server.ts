@@ -8,6 +8,7 @@ import { connectToDatabase } from "./dataAccess/mongoose";
 import { connectedToOMS } from "./Orders/dal/orderDal";
 import { connectedToERP } from "./products/dal/productsDal";
 import server from "./graphql/apolloServer";
+import { connectToRedis } from "./redis/reddis";
 
 const app = express();
 
@@ -18,6 +19,9 @@ app.use(express.json());
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, async () => {
   console.log(chalk.blueBright(`Server listening on port: ${PORT}`));
+  connectToRedis()
+    .then((data) => console.log(data))
+    .catch((error) => console.log(error));
   connectToDatabase()
     .then(async (message) => {
       await connectedToOMS();
