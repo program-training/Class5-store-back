@@ -1,6 +1,5 @@
 import axios from "axios";
 import { CheckQuantity } from "../types/types";
-import { products } from "../../products/dal/products";
 
 const ERP_BASE_URL =
   process.env.ERP_BASE_URL || "https://erp-server-v2.onrender.com";
