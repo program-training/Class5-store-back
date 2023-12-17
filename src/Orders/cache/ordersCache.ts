@@ -8,7 +8,7 @@ export const getCachedOrders = async (
   next: NextFunction
 ) => {
   try {
-    const cachedOrders = await RedisClient.json.get("orders");
+    const cachedOrders = await redisClient.json.get("orders");
     if (!cachedOrders) return next();
     console.log("orders from cache!!!");
     return res.send(cachedOrders);
