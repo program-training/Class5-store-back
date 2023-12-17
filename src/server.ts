@@ -24,7 +24,7 @@ app.listen(PORT, async () => {
   connectToDatabase()
     .then(async (message) => {
       await connectedToOMS();
-      await connectedToERP();
+      // await connectedToERP();
       console.log(chalk.magentaBright(message));
     })
     .then(async () => {
