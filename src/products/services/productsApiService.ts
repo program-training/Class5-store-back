@@ -1,4 +1,3 @@
-import ServerError from "../../utils/ServerError";
 import {
   getProductByIdFromDB,
   getProductsFromDB,

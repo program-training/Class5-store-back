@@ -13,9 +13,12 @@ import {
 import { generateToken } from "../../auth/JWT";
 import ServerError from "../../utils/ServerError";
 import { convertUserForSending } from "../utils/usersUtils";
+import { cacheUsers } from "../cache/usersCache";
 
 export const getUsers = async () => {
   try {
+    const cachedUsers = await cacheUsers();
+    if (cachedUsers) return cachedUsers;
     const users = await getUsersFromDB();
     return users;
   } catch (error) {
@@ -24,7 +27,7 @@ export const getUsers = async () => {
   }
 };
 
-export const getUser = async (_: any, args: { _id: string }) => {
+export const getUser = async (_: ParentNode, args: { _id: string }) => {
   try {
     const user = await getUserByIdFromDB(args._id);
     return user;
@@ -60,7 +63,10 @@ const login = async (user: UserReqInterface) => {
   }
 };
 
-export const signUpUser = async (_: any, args: { input: UserReqInterface }) => {
+export const signUpUser = async (
+  _: ParentNode,
+  args: { input: UserReqInterface }
+) => {
   try {
     return register(args.input);
   } catch (error) {
@@ -70,7 +76,7 @@ export const signUpUser = async (_: any, args: { input: UserReqInterface }) => {
 };
 
 export const signUpAndSignInUser = async (
-  _: any,
+  _: ParentNode,
   args: { input: UserReqInterface }
 ) => {
   try {
@@ -82,7 +88,10 @@ export const signUpAndSignInUser = async (
   }
 };
 
-export const SignInUser = async (_: any, args: { input: UserReqInterface }) => {
+export const SignInUser = async (
+  _: ParentNode,
+  args: { input: UserReqInterface }
+) => {
   try {
     return login(args.input);
   } catch (error) {

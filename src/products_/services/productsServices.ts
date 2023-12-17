@@ -25,7 +25,7 @@ export const getProducts = async () => {
   }
 };
 
-export const getProduct = async (_: unknown, { id }: { id: String }) => {
+export const getProduct = async (_: unknown, { id }: { id: string }) => {
   const cachedProduct = await getCachedProduct(Number(id));
   if (cachedProduct != null) {
     return cachedProduct;
@@ -41,7 +41,7 @@ export const getProduct = async (_: unknown, { id }: { id: String }) => {
 };
 
 export const checkProductsInStock = async (
-  _: any,
+  _: ParentNode,
   { cart }: { cart: productToCheck[] }
 ) => {
   try {
@@ -54,7 +54,7 @@ export const checkProductsInStock = async (
 };
 
 export const cancelProductsInStock = async (
-  _: any,
+  _: ParentNode,
   { cart }: { cart: CheckQuantity[] }
 ) => {
   try {

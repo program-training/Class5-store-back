@@ -1,4 +1,4 @@
-import { morganTime, morganDay } from "../timeService";
+import { morganTime } from "../timeService";
 
 describe("morganTime", () => {
   beforeEach(() => {
@@ -12,7 +12,7 @@ describe("morganTime", () => {
   });
 
   it("returns time in correct format", () => {
-    const result = morganTime()
+    const result = morganTime();
     expect(result).toBe("[2020/01/01 12:34:56]");
   });
 });
