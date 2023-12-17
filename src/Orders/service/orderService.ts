@@ -32,10 +32,10 @@ export const registerOrderService = async (
   try {
     const order: OrderInterface = convertToOrder(orderFromClient);
     const registeredOrder = await registerOrderToDB(order);
-    const {
-      email,
-      shippingDetails: { userId },
-    } = orderFromClient;
+    // const {
+    //   email,
+    //   shippingDetails: { userId },
+    // } = orderFromClient;
     // await sendEmail(email, userId);
     return registeredOrder;
   } catch (error) {

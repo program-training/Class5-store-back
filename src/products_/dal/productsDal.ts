@@ -44,6 +44,8 @@ export const cancelProductsInOrderInDB = async (cart: CheckQuantity[]) => {
       `${ERP_BASE_URL}/shop_inventory/cancelOrder`,
       cart
     );
+    console.log(status);
+
     return data;
   } catch (error) {
     return Promise.reject(error);

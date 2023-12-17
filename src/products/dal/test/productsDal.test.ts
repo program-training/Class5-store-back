@@ -1,6 +1,5 @@
 import { getProductsFromDB } from "../productsDal";
 import { MongoMemoryServer } from "mongodb-memory-server";
-import ProductInterface from "../../interfaces/productInterface";
 import mongoose, { ConnectOptions } from "mongoose";
 let mongoServer: MongoMemoryServer;
 

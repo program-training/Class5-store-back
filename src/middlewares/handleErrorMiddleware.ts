@@ -1,11 +1,11 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 import ServerError from "../utils/ServerError";
+import { ErrorType } from "../types/types";
 
 const handleErrorMiddleware = (
-  error: ServerError | any,
+  error: ErrorType,
   req: Request,
-  res: Response,
-  next: NextFunction
+  res: Response
 ) => {
   const status = error instanceof ServerError ? error.status : 500;
   const message =

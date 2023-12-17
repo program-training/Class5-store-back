@@ -28,16 +28,17 @@ const transporter = createTransport({
 });
 
 const sendEmail = async (email: string, userId: string) => {
-    try {
-      const info = await transporter.sendMail({
-        from: process.env.USER_EMAIL,
-        to: email,
-        subject: `hello to see your order details click on the link` ,
-        text: `http://localhost:5173/order-detalis/${userId}`,
-      })}
-     catch (error) {
-        return Promise.reject(error)
-      }
-  };
+  try {
+    const info = await transporter.sendMail({
+      from: process.env.USER_EMAIL,
+      to: email,
+      subject: `hello to see your order details click on the link`,
+      text: `http://localhost:5173/order-detalis/${userId}`,
+    });
+    return info;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
 
-export default sendEmail
+export default sendEmail;

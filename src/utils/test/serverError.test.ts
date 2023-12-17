@@ -20,28 +20,30 @@ describe("ServerError", () => {
   });
 
   it("should throw an error when an invalid status is provided", () => {
-    const invalidStatus = "not a number";
+    const invalidStatus = 0;
     const message = "Invalid Status";
 
     const createServerError = () => {
-      new ServerError(invalidStatus as any, message);
+      new ServerError(invalidStatus, message);
     };
     try {
       createServerError();
-    } catch (error: any) {
-      expect(error.message).toBe("Status must be a number");
+    } catch (error) {
+      if (error instanceof Error)
+        expect(error.message).toBe("Status must be a number");
     }
   });
   it("should throw on invalid status type", () => {
     const invalidStatus = 123;
     const message = 123;
     const createServerError = () => {
-      new ServerError(invalidStatus, message as any);
+      new ServerError(invalidStatus, String(message));
     };
     try {
       createServerError();
-    } catch (error: any) {
-      expect(error.message).toBe("Message must be a string");
+    } catch (error) {
+      if (error instanceof Error)
+        expect(error.message).toBe("Message must be a string");
     }
   });
 });

@@ -3,7 +3,7 @@ import { Response } from "express";
 
 export const handleError = (
   res: Response,
-  error: ServerError | any,
+  error: ServerError | Error | string,
   status: number = 400
 ) => {
   status = error instanceof ServerError ? error.status : status;
