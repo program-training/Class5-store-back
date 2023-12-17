@@ -2,10 +2,6 @@ name: ESLint Check
 on:
   push:
     branches: ["*"]
-    paths:
-      - "**/*.ts"
-      - "**/*.tsx"
-      - ".github/workflows/eslint-check.yml"
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,11 +14,6 @@ jobs:
       - name: Install Dependencies
         run: npm install
       - name: Run ESLint
-        run: |
-          result=$(npx eslint 'src/**/*.{ts,tsx}' --quiet; echo $?)
-          if [ $result -ne 0 ]; then
-            echo "ESLint check failed"
-            exit 1
-          fi
+        run: npx eslint 'src/**/*.{ts,tsx}' --quiet || exit 1
       - name: Check for TypeScript errors
         run: npx tsc --noEmit
