@@ -1,5 +1,5 @@
 import { NextFunction, Response, Request } from "express";
-import RedisClient from "../../cache/redis";
+import { redisClient } from "../../redis/client/client";
 // import UserInterface from "../interfaces/UserInterface";
 
 export const getCachedOrders = async (

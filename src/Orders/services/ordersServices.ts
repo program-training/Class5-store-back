@@ -1,3 +1,4 @@
+import { redisClient } from "../../redis/client/client";
 import {
   getOrderByIdFromDB,
   getOrderByUserIdFromDB,
