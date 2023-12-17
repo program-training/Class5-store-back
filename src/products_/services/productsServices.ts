@@ -7,7 +7,7 @@ import {
   cancelProductsInOrderInDB,
 } from "../dal/productsDal";
 
-import { CheckQuantity } from "../types/types";
+import { CheckQuantity, productToCheck } from "../types/types";
 
 export const getProducts = async () => {
   const cachedProducts = await getCachedProducts();
@@ -38,11 +38,6 @@ export const getProduct = async (_: unknown, { id }: { id: String }) => {
       return null;
     }
   }
-};
-
-type productToCheck = {
-  productId: number;
-  requiredQuantity: number;
 };
 
 export const checkProductsInStock = async (

@@ -36,8 +36,6 @@ export const checkStockInDB = async (cart: CheckQuantity[]) => {
       `${ERP_BASE_URL}/shop_inventory/updateInventory`,
       cart
     );
-    console.log(data);
-
     return data;
   } catch (error) {
     return Promise.reject(error);
