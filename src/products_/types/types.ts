@@ -1,4 +1,14 @@
-import ProductInterface from "../../products/interfaces/productInterface";
+export type ProductInterface = {
+  id: number;
+  name: string;
+  salePrice: string;
+  quantity: number;
+  description: string;
+  category: string;
+  discountPercentage: number;
+  imageUrl: string;
+  imageAlt: string;
+};
 
 export type CheckQuantity = {
   productId: number;
