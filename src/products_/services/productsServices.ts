@@ -10,6 +10,7 @@ import { CheckQuantity } from "../types/types";
 export const getProducts = async () => {
   try {
     const products = await getProductsFromDB();
+    await RedisClient.json.set("products", ".", products);
     return products;
   } catch (error) {
     if (error instanceof Error) console.log(error.message);
@@ -43,6 +44,7 @@ export const checkProductsInStock = async (
     return null;
   }
 };
+
 export const cancelProductsInStock = async (
   _: any,
   { cart }: { cart: CheckQuantity[] }
