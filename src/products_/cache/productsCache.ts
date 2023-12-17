@@ -1,5 +1,6 @@
 import { NextFunction, Response, Request } from "express";
 import { ProductInterface } from "../types/types";
+import { redisClient } from "../../redis/client/client";
 // import RedisClient from "../../cache/redis";
 
 export const getCachedProducts = async (
@@ -8,7 +9,7 @@ export const getCachedProducts = async (
   next: NextFunction
 ) => {
   try {
-    const cachedProducts = await RedisClient.json.get("products");
+    const cachedProducts = await redisClient.json.get("products");
     if (!cachedProducts) return next();
     console.log("users from cache!!!");
     return res.send(cachedProducts);
@@ -24,7 +25,7 @@ export const getCachedProduct = async (
 ) => {
   try {
     const { id: ProductId } = req.params;
-    const cachedProducts = (await RedisClient.json.get(
+    const cachedProducts = (await redisClient.json.get(
       "products"
     )) as ProductInterface | null;
 

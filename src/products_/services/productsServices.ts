@@ -1,3 +1,4 @@
+import { redisClient } from "../../redis/client/client";
 import {
   getProductsFromDB,
   getProductByIdFromDB,
@@ -10,7 +11,7 @@ import { CheckQuantity } from "../types/types";
 export const getProducts = async () => {
   try {
     const products = await getProductsFromDB();
-    await RedisClient.json.set("products", ".", products);
+    await redisClient.json.set("products", ".", products);
     return products;
   } catch (error) {
     if (error instanceof Error) console.log(error.message);

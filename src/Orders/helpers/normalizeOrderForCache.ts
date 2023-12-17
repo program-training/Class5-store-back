@@ -1,23 +1,22 @@
-import { object } from "joi";
-import UserInterface from "../interfaces/UserInterface";
+// import { object } from "joi";
+// import OrderInterface from "../interfaces/OrderInterface";
 
-export const normalizeUserForCache = (user: any) => {
-  if (typeof user !== "object") throw new Error("'user' mast be an object!");
-  if (!user._id && !user.email && !user.password && !user.isAdmin)
-    throw new Error(
-      "'user' mast contain the following key: _id, email, password, isAdmin"
-    );
+// export const normalizeOrderForCache = (order: OrderInterface) => {
+//   if (typeof order !== "object") throw new Error("'orders' mast be an object!");
 
-  return {
-    _id: user._id as unknown as string,
-    email: user.email,
-    password: user.password,
-    isAdmin: user.isAdmin,
-  };
-};
+//   return {
+//     _id: order._id,
+//     cartItems: order.cartItems,
+//     status: order.status,
+//     email: order.email,
+//     price: order.price,
+//     orderTime: order.orderTime,
+//     shippingDetails: order.shippingDetails,
+//   } as OrderInterface;
+// };
 
-export const normalizedUsersForCache = (users: any[]) => {
-  return users.map(<T extends UserInterface>(user: T) =>
-    normalizeUserForCache(user)
-  );
-};
+// export const normalizedOrdersForCache = (orders: OrderInterface[]) => {
+//   return orders.map(<T extends OrderInterface>(order: T) =>
+//     normalizeOrderForCache(order)
+//   );
+// };

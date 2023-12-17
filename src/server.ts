@@ -3,7 +3,6 @@ import chalk from "chalk";
 import cors from "./cors/cors";
 import handleErrorMiddleware from "./middlewares/handleErrorMiddleware";
 import { expressMiddleware } from "@apollo/server/express4";
-
 import { connectToDatabase } from "./dataAccess/mongoose";
 import { connectedToOMS } from "./Orders/dal/orderDal";
 import { connectedToERP } from "./products/dal/productsDal";
