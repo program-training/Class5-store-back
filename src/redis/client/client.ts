@@ -13,7 +13,7 @@ export const client = createClient({
     port: Number(PORT),
   },
 });
-client.on("error", function (error) {
+client.on("error", function (error: Error) {
   console.error(error);
   // I report it onto a logging service like Sentry.
 });
