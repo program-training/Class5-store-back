@@ -6,14 +6,14 @@ const {
   REDIS_HOST: HOST,
   REDIS_PORT: PORT,
 } = process.env;
-export const client = createClient({
+export const redisClient = createClient({
   password: PASSWORD,
   socket: {
     host: HOST,
     port: Number(PORT),
   },
 });
-client.on("error", function (error) {
+redisClient.on("error", function (error) {
   console.error(error);
   // I report it onto a logging service like Sentry.
 });
