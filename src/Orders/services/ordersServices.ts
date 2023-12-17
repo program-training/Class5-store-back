@@ -1,5 +1,5 @@
 import { redisClient } from "../../redis/client/client";
-import { getCachedOrders } from "../cache/ordersCache";
+import { getCachedOrder, getCachedOrders } from "../cache/ordersCache";
 import {
   getOrderByIdFromDB,
   getOrderByUserIdFromDB,
@@ -37,7 +37,7 @@ export const getOrderByUserId = async (
   { id }: GetOrderInterface
 ) => {
   try {
-    const cachedOrder = await getCachedOrders();
+    const cachedOrder = await getCachedOrder(id);
     if (cachedOrder) {
       console.log("order from cache!!!");
       return cachedOrder;

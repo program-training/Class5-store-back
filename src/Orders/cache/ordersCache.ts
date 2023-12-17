@@ -1,5 +1,5 @@
 import { redisClient } from "../../redis/client/client";
-// import UserInterface from "../interfaces/UserInterface";
+import OrderInterface from "../interfaces/OrderInterface";
 
 export const getCachedOrders = async () => {
   try {
@@ -9,10 +9,14 @@ export const getCachedOrders = async () => {
     console.log("orders from cache is fail");
   }
 };
-export const getCachedOrder = async () => {
+export const getCachedOrder = async (orderId: string) => {
   try {
-    const cachedOrder = await redisClient.json.get("orders");
-    return cachedOrder && cachedOrder;
+    const cachedOrders = (await redisClient.json.get("orders")) as
+      | OrderInterface[]
+      | null;
+    const cachedOrder =
+      cachedOrders && cachedOrders.find((order) => order._id === orderId);
+    return cachedOrder;
   } catch (error) {
     console.log("order from cache is fail");
   }
