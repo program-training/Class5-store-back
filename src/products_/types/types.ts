@@ -19,3 +19,8 @@ export type NotInStock = {
   product: ProductInterface;
   requiredQuantity: number;
 };
+
+export type productToCheck = {
+  productId: number;
+  requiredQuantity: number;
+};

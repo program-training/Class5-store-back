@@ -13,7 +13,7 @@ export const redisClient = createClient({
     port: Number(PORT),
   },
 });
-redisClient.on("error", function (error) {
+redisClient.on("error", function (error: Error) {
   console.error(error);
   // I report it onto a logging service like Sentry.
 });

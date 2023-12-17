@@ -1,6 +1,6 @@
 import ServerError from "../../utils/ServerError";
-import ordersInterface from "../interfaces/OrderInterface";
 import axios from "axios";
+import OrderInterface from "../interfaces/OrderInterface";
 
 const OMS_BASE_URL =
   process.env.OMS_BASE_URL || "https://project-team1-oms-back.onrender.com";
@@ -15,7 +15,7 @@ export const getOrdersFromDB = async () => {
   }
 };
 
-export const registerOrderToDB = async (order: ordersInterface) => {
+export const registerOrderToDB = async (order: OrderInterface) => {
   try {
     const { data } = await axios.post(`${OMS_BASE_URL}/orders`, order);
     return data;

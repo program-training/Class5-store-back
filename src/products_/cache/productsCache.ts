@@ -1,43 +1,25 @@
-import { NextFunction, Response, Request } from "express";
 import { ProductInterface } from "../types/types";
 import { redisClient } from "../../redis/client/client";
-// import RedisClient from "../../cache/redis";
 
-export const getCachedProducts = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const getCachedProducts = async () => {
   try {
     const cachedProducts = await redisClient.json.get("products");
-    if (!cachedProducts) return next();
-    console.log("users from cache!!!");
-    return res.send(cachedProducts);
+    if (!cachedProducts) return null;
+    return cachedProducts;
   } catch (error) {
-    next();
+    console.log(error);
   }
 };
 
-export const getCachedProduct = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const getCachedProduct = async (id: number) => {
   try {
-    const { id: ProductId } = req.params;
     const cachedProducts = (await redisClient.json.get(
       "products"
     )) as ProductInterface | null;
-
-    if (!cachedProducts || Array.isArray(cachedProducts) === false)
-      return next();
-    const cachedProduct = cachedProducts.find(
-      (product) => product._id === ProductId
-    );
-
-    console.log("product from cache!!!");
-    return res.send(cachedProduct);
+    if (!cachedProducts || Array.isArray(cachedProducts) === false) return null;
+    const cachedProduct = cachedProducts.find((product) => product._id === id);
+    return cachedProduct;
   } catch (error) {
-    next();
+    console.log(error);
   }
 };

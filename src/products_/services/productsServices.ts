@@ -1,3 +1,5 @@
+import { redisClient } from "../../redis/client/client";
+import { getCachedProduct, getCachedProducts } from "../cache/productsCache";
 import {
   getProductsFromDB,
   getProductByIdFromDB,
@@ -5,31 +7,37 @@ import {
   cancelProductsInOrderInDB,
 } from "../dal/productsDal";
 
-import { CheckQuantity } from "../types/types";
+import { CheckQuantity, productToCheck } from "../types/types";
 
 export const getProducts = async () => {
-  try {
-    const products = await getProductsFromDB();
-    await RedisClient.json.set("products", ".", products);
-    return products;
-  } catch (error) {
-    if (error instanceof Error) console.log(error.message);
-    return null;
+  const cachedProducts = await getCachedProducts();
+  if (cachedProducts != null) {
+    return cachedProducts;
+  } else {
+    try {
+      const products = await getProductsFromDB();
+      await redisClient.json.set("products", ".", products);
+      return products;
+    } catch (error) {
+      if (error instanceof Error) console.log(error.message);
+      return null;
+    }
   }
 };
 
 export const getProduct = async (_: unknown, { id }: { id: String }) => {
-  try {
-    const product = await getProductByIdFromDB(id as string);
-    return product;
-  } catch (error) {
-    if (error instanceof Error) console.log(error.message);
-    return null;
+  const cachedProduct = await getCachedProduct(Number(id));
+  if (cachedProduct != null) {
+    return cachedProduct;
+  } else {
+    try {
+      const product = await getProductByIdFromDB(id as string);
+      return product;
+    } catch (error) {
+      if (error instanceof Error) console.log(error.message);
+      return null;
+    }
   }
-};
-type productToCheck = {
-  productId: number;
-  requiredQuantity: number;
 };
 
 export const checkProductsInStock = async (

@@ -1,14 +1,14 @@
 import CartItemInterface from "./CartItemInterface";
 import ShippingDetailsInterface from "./ShippingDetailsInterface";
 
-interface OrdersInterface {
+interface OrderInterface {
   _id?: string;
   cartItems: CartItemInterface[];
   status: "pending" | "processing" | "shipped" | "delivered" | "completed";
   email: string;
   price: number;
   orderTime: Date;
-  shippingDetails: ShippingDetailsInterface
+  shippingDetails: ShippingDetailsInterface;
 }
 
-export default OrdersInterface;
+export default OrderInterface;

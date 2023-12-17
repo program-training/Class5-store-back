@@ -1,10 +1,10 @@
 import CartItemInterface from "../interfaces/CartItemInterface";
 import OrderFromClientInterface from "../interfaces/OrderFromClientInterface";
-import OrdersInterface from "../interfaces/OrderInterface";
+import OrderInterface from "../interfaces/OrderInterface";
 
 export const convertToOrder = (
   orderFromClient: OrderFromClientInterface
-): OrdersInterface => {
+): OrderInterface => {
   const { email, price, shippingDetails } = orderFromClient;
   const orderTime = new Date();
   const status = "pending";
