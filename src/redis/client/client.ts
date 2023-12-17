@@ -6,7 +6,7 @@ const {
   REDIS_HOST: HOST,
   REDIS_PORT: PORT,
 } = process.env;
-export const client = createClient({
+export const redisClient = createClient({
   password: PASSWORD,
   socket: {
     host: HOST,

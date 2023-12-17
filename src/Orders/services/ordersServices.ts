@@ -1,15 +1,20 @@
+import { redisClient } from "../../redis/client/client";
 import {
   getOrderByIdFromDB,
   getOrderByUserIdFromDB,
   getOrdersFromDB,
   registerOrderToDB,
 } from "../dal/orderDal";
+import { normalizedUsersForCache } from "../helpers/normalizeUserForCache";
 import { registerOrderService } from "../service/orderService";
 import RegisterOrderFromClient from "../typeDef/interface";
 
 export const getOrders = async () => {
   try {
     const orders = await getOrdersFromDB();
+    const normalizedUsers = normalizedUsersForCache(orders);
+    await redisClient.json.set("orders", ".", orders);
+    if (!orders) throw new Error("no orders in the database");
     return orders;
   } catch (error) {
     console.log(error);
