@@ -1,5 +1,7 @@
 import { redisClient } from "../../redis/client/client";
 import { getOrdersFromDB } from "../dal/orderDal";
+import { convertToOrder } from "../helpers/convertToOrder";
+import OrderFromClientInterface from "../interfaces/OrderFromClientInterface";
 import OrderInterface from "../interfaces/OrderInterface";
 
 export const getCachedOrders = async () => {
@@ -45,6 +47,17 @@ export const getCachedOrderById = async (orderId: string) => {
     return cachedOrder;
   } catch (error) {
     console.log("order from cache is fail");
+  }
+};
+export const postCachedRegisterOrder = async (
+  orderFromClient: OrderFromClientInterface
+) => {
+  try {
+    const order: OrderInterface = convertToOrder(orderFromClient);
+    const registeredOrder = await redisClient.json.set("orders", ".", order);
+    return registeredOrder;
+  } catch (error) {
+    console.log("order insert from cache is fail");
   }
 };
 
