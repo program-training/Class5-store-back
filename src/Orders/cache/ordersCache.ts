@@ -11,10 +11,10 @@ export const getCachedOrders = async () => {
 };
 export const getCachedOrder = async () => {
   try {
-    const cachedOrders = await redisClient.json.get("orders");
-    return cachedOrders && cachedOrders;
+    const cachedOrder = await redisClient.json.get("orders");
+    return cachedOrder && cachedOrder;
   } catch (error) {
-    console.log("orders from cache is fail");
+    console.log("order from cache is fail");
   }
 };
 
