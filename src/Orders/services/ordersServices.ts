@@ -35,7 +35,14 @@ interface GetOrderInterface {
 
 export const getOrderByUserId = async (_: any, { id }: GetOrderInterface) => {
   try {
+    const cachedOrder = await getCachedOrders();
+    if (cachedOrder) {
+      console.log("order from cache!!!");
+      return cachedOrder;
+    }
     const order = await getOrderByUserIdFromDB(id);
+    if (!order) throw new Error("no order in the database");
+    console.log("order from dataBase");
     return order[0];
   } catch (error) {
     console.log(error);
