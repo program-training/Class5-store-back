@@ -37,7 +37,7 @@ module.exports = {
             "skipComments": true
         }], // Maximum number of lines for a function
         "max-lines-per-function": ["error", {
-            "max": 15,
+            "max": 25,
             "skipBlankLines": true,
             "skipComments": true
         }], // Maximum number of lines for the entire file
