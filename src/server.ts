@@ -5,9 +5,9 @@ import handleErrorMiddleware from "./middlewares/handleErrorMiddleware";
 import { expressMiddleware } from "@apollo/server/express4";
 import { connectToDatabase } from "./dataAccess/mongoose";
 import { connectedToOMS } from "./Orders/dal/orderDal";
-import { connectedToERP } from "./products/dal/productsDal";
+// import { connectedToERP } from "./products/dal/productsDal";
 import server from "./graphql/apolloServer";
-import { connectToRedis } from "./redis/reddis";
+import { connectToRedis } from "./redis/redis";
 
 const app = express();
 
