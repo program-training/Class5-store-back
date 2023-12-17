@@ -83,13 +83,13 @@ export const registerOrder = async (
   registerOrder: RegisterOrder
 ) => {
   try {
-    const cachedRegisterOrder = await postCachedRegisterOrder(
-      registerOrder.order
-    );
-    if (cachedRegisterOrder) {
-      console.log("cachedRegisterOrder insert from cache!!!");
-      return cachedRegisterOrder;
-    }
+    // const cachedRegisterOrder = await postCachedRegisterOrder(
+    //   registerOrder.order
+    // );
+    // if (cachedRegisterOrder) {
+    //   console.log("cachedRegisterOrder insert from cache!!!");
+    //   return cachedRegisterOrder;
+    // }
     const order = await registerOrderService(registerOrder.order);
     return order;
   } catch (error) {

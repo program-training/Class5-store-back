@@ -54,7 +54,13 @@ export const postCachedRegisterOrder = async (
 ) => {
   try {
     const order: OrderInterface = convertToOrder(orderFromClient);
-    const registeredOrder = await redisClient.json.set("orders", ".", order);
+    const orderStringify = JSON.stringify(order);
+    const orderParse = JSON.parse(orderStringify);
+    const registeredOrder = await redisClient.json.set(
+      "orders",
+      ".",
+      orderParse
+    );
     return registeredOrder;
   } catch (error) {
     console.log("order insert from cache is fail");
