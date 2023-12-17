@@ -59,10 +59,7 @@ export const getOrderById = async (
 interface RegisterOrder {
   order: RegisterOrderFromClient;
 }
-export const registerOrder = async (
-  _: ParentNode,
-  registerOrder: RegisterOrder
-) => {
+export const registerOrder = async (_: any, registerOrder: RegisterOrder) => {
   try {
     const order = await registerOrderService(registerOrder.order);
     return order;
