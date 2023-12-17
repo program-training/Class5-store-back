@@ -7,7 +7,6 @@ const ERP_BASE_URL =
 
 export const getProductsFromDB = async () => {
   try {
-    if (process.env.NODE_ENV === "development") return products;
     const { data } = await axios.get(
       `${ERP_BASE_URL}/shop_inventory?searchText=`
     );
@@ -19,8 +18,6 @@ export const getProductsFromDB = async () => {
 
 export const getProductByIdFromDB = async (productId: string) => {
   try {
-    if (process.env.NODE_ENV === "development")
-      return products.find((product) => product.id === +productId);
     const { data } = await axios.get(
       `${ERP_BASE_URL}/shop_inventory/${productId}`
     );

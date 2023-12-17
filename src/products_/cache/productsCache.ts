@@ -1,4 +1,3 @@
-import { NextFunction, Response, Request } from "express";
 import { ProductInterface } from "../types/types";
 import { redisClient } from "../../redis/client/client";
 
