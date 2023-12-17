@@ -32,7 +32,7 @@ module.exports = {
         "@typescript-eslint/no-explicit-any": "off", // You can customize other rules based on your needs
         "max-params": ["error", 3], // Maximum number of parameters for a function
         "max-lines": ["error", {
-            "max": 15,
+            "max": 100,
             "skipBlankLines": true,
             "skipComments": true
         }], // Maximum number of lines for a function
