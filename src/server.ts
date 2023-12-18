@@ -5,7 +5,7 @@ import handleErrorMiddleware from "./middlewares/handleErrorMiddleware";
 import { expressMiddleware } from "@apollo/server/express4";
 import { connectToDatabase } from "./dataAccess/mongoose";
 import { connectedToOMS } from "./Orders/dal/orderDal";
-// import { connectedToERP } from "./products/dal/productsDal";
+import { connectedToERP } from "./products/dal/productsDal";
 import server from "./graphql/apolloServer";
 import { connectToRedis } from "./redis/redis";
 
@@ -24,7 +24,7 @@ app.listen(PORT, async () => {
   connectToDatabase()
     .then(async (message) => {
       await connectedToOMS();
-      // await connectedToERP();
+      await connectedToERP();
       console.log(chalk.magentaBright(message));
     })
     .then(async () => {
