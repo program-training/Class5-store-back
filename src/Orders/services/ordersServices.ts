@@ -3,7 +3,6 @@ import {
   getCachedOrderById,
   getCachedOrderByUserId,
   getCachedOrders,
-  postCachedRegisterOrder,
 } from "../cache/ordersCache";
 import {
   getOrderByIdFromDB,

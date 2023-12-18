@@ -25,7 +25,6 @@ export const getCachedOrderByUserId = async (userId: string) => {
     const cachedOrder =
       cachedOrders &&
       cachedOrders.find((order) => order.shippingDetails.userId === userId);
-
     return cachedOrder;
   } catch (error) {
     console.log("order from cache is fail");

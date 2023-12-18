@@ -1,5 +1,6 @@
 // With God's Help
 import { redisClient } from "../../redis/client/client";
+import { UserInDBInterface } from "../../utils/convertUser";
 
 export const cacheUsers = async () => {
   try {
@@ -9,13 +10,15 @@ export const cacheUsers = async () => {
     if (error instanceof Error) console.log(error.message);
   }
 };
-// export const cacheGetUserByID = async (id:string) => {
-//   try {
-//     const cachedUsers = await redisClient.json.get("users");
-//     if (cachedUsers) {
-//       const user = cachedUsers.find(user:userin=>id===user._id)
-//     }
-//   } catch (error) {
-//     if (error instanceof Error) console.log(error.message);
-//   }
-// };
+export const cacheGetUserByID = async (id: string) => {
+  try {
+    const cachedUsers = (await redisClient.json.get("users")) as
+      | UserInDBInterface[]
+      | null;
+    const user =
+      cachedUsers && cachedUsers.find((user) => id === String(user._id));
+    return user;
+  } catch (error) {
+    if (error instanceof Error) console.log(error.message);
+  }
+};

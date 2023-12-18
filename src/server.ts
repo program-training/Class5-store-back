@@ -17,6 +17,10 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, async () => {
+  // console.log(
+  //   mailOptions({ to: "wdwdwd", subject: "93eu", text: "diwhwdnb j" })
+  // );
+
   console.log(chalk.blueBright(`Server listening on port: ${PORT}`));
   connectToRedis()
     .then((data) => console.log(data))
