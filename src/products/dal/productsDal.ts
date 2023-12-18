@@ -8,11 +8,11 @@ export const getProductsFromDB = async () => {
   try {
     if (process.env.MODE !== "development") {
       const { data } = await axios.get(
-      `${ERP_BASE_URL}/shop_inventory?searchText=`
-    );
-    return data;
+        `${ERP_BASE_URL}/shop_inventory?searchText=`
+      );
+      return data;
     }
-    return products
+    return products;
   } catch (error) {
     return Promise.reject(error);
   }
@@ -22,11 +22,11 @@ export const getProductByIdFromDB = async (productId: number) => {
   try {
     if (process.env.MODE !== "development") {
       const { data } = await axios.get(
-      `${ERP_BASE_URL}/shop_inventory/${productId}`
-    );
-    return data;
+        `${ERP_BASE_URL}/shop_inventory/${productId}`
+      );
+      return data;
     }
-    return products.find((product) => product.id === productId));
+    return products.find((product) => product.id === productId);
   } catch (error) {
     return Promise.reject(error);
   }
