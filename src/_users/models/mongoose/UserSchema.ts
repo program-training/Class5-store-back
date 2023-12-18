@@ -18,13 +18,21 @@ export const UserSchema = new Schema(
       type: String,
       required: false,
     },
+    loginCount: {
+      type: Number,
+      default: 0,
+      required: false,
+    },
   },
   { versionKey: "" }
 );
+
 interface UserDocument extends Document {
+  _id: any;
   email: string;
   isAdmin: boolean;
   password?: string;
+  loginCount: number;
 }
 
 UserSchema.pre<UserDocument>("save", function () {
@@ -39,5 +47,19 @@ UserSchema.pre<UserDocument>("save", function () {
     }
   });
 });
-const User = mongoose.model("user", UserSchema);
+
+UserSchema.pre("findOne", async function () {
+  const UserModel = mongoose.model<UserDocument>("User");
+
+  await UserModel.updateOne(
+    {
+      email: this.getQuery().email,
+    },
+    {
+      $inc: { loginCount: 1 },
+    }
+  );
+});
+
+const User = mongoose.model<UserDocument>("User", UserSchema);
 export default User;
