@@ -4,6 +4,7 @@ export const usersTypeDefs = `
     email: String!
     isAdmin: Boolean!
     password: String
+    loginCount: Int
   }
   type RegisterUser {
     _id: ID!
