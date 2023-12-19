@@ -13,7 +13,7 @@ export const getProductsController = async (req: Request, res: Response) => {
     const products = await getProductsService();
     return res.send(products);
   } catch (error) {
-    handleError(res, error);
+    if (error instanceof Error) handleError(res, error);
   }
 };
 
@@ -23,7 +23,7 @@ export const getProductByIdController = async (req: Request, res: Response) => {
     const product = await getProductByIdService(+id);
     return res.send(product);
   } catch (error) {
-    handleError(res, error);
+    if (error instanceof Error) handleError(res, error);
   }
 };
 
@@ -37,7 +37,7 @@ export const getProductsStockController = async (
     const result = await getProductsStockService(converted);
     return res.send(result);
   } catch (error) {
-    handleError(res, error);
+    if (error instanceof Error) handleError(res, error);
   }
 };
 
@@ -47,6 +47,6 @@ export const cancelOrderController = async (req: Request, res: Response) => {
     const result = await cancelOrderService(cart);
     return res.send(result);
   } catch (error) {
-    handleError(res, error);
+    if (error instanceof Error) handleError(res, error);
   }
 };

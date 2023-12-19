@@ -14,7 +14,7 @@ export const getOrdersController = async (req: Request, res: Response) => {
     const orders = await getOrdersService();
     return res.status(200).send(orders);
   } catch (error) {
-    handleError(res, error);
+    if (error instanceof Error) handleError(res, error);
   }
 };
 
@@ -27,7 +27,7 @@ export const getOrderByUserIdController = async (
     const orders = await getOrderByUserIdService(id);
     return res.send(orders);
   } catch (error) {
-    handleError(res, error);
+    if (error instanceof Error) handleError(res, error);
   }
 };
 
@@ -39,7 +39,7 @@ export const registerOrderController = async (req: Request, res: Response) => {
     const registeredOrder = await registerOrderService(order);
     res.send(registeredOrder);
   } catch (error) {
-    handleError(res, error);
+    if (error instanceof Error) handleError(res, error);
   }
 };
 
@@ -49,6 +49,6 @@ export const getOrderByIdController = async (req: Request, res: Response) => {
     const order = await getOrderByIdService(id);
     res.send(order);
   } catch (error) {
-    handleError(res, error);
+    if (error instanceof Error) handleError(res, error);
   }
 };
