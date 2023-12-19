@@ -9,7 +9,10 @@ import { connectedToERP } from "./products/dal/productsDal";
 import server from "./graphql/apolloServer";
 import { connectToRedis } from "./redis/redis";
 
-const app = express();
+import BodyParser from "body-parser";
+// import { WebSocketServer } from "ws";
+
+export const app = express();
 
 app.use(cors);
 app.use(handleErrorMiddleware);
@@ -33,7 +36,7 @@ app.listen(PORT, async () => {
     })
     .then(async () => {
       await server.start().then(() => {
-        app.use("/graphql", cors, expressMiddleware(server));
+        app.use("/graphql", cors, BodyParser.json(), expressMiddleware(server));
         app.listen(5000);
         console.log(chalk.bgGreen(`http://localhost:5000/graphql`));
       });
