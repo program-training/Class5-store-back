@@ -3,6 +3,7 @@ import {
   checkProductsInStock,
   getProduct,
   getProducts,
+  productCreated,
 } from "../services/productsServices";
 
 export const productsQueries = {
@@ -12,4 +13,7 @@ export const productsQueries = {
 export const productsMutations = {
   checkProductsInStock,
   cancelProductsInStock,
+};
+export const productsSubscription = {
+  productCreated,
 };

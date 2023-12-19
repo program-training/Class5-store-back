@@ -1,5 +1,6 @@
 import {
   productsTypeDefsMutation,
+  productsTypeDefsSubscription,
   productTypesDefs,
 } from "../products_/typeDefs/productsTypeDefs";
 import { productsTypeDefsQueries } from "../products_/typeDefs/productsTypeDefs";
@@ -27,6 +28,9 @@ const typeDefs = `#graphql
     ${usersTypeDefsMutations}
     ${productsTypeDefsMutation}
     ${ordersTypeMutation}
+  }
+  type Subscription{
+    ${productsTypeDefsSubscription}
   }
 `;
 

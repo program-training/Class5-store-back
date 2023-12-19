@@ -27,6 +27,7 @@ export const productTypesDefs = `
     inStock: [InStock]!
     notInStock: [NotInStock]!
   }
+
 `;
 
 export const productsTypeDefsQueries = `
@@ -39,4 +40,7 @@ export const productsTypeDefsMutation = `
   checkProductsInStock(cart:[ProductToCheck!]): Response
   cancelProductsInStock(cart:[ProductToCheck!]): String!
 
+`;
+export const productsTypeDefsSubscription = `
+  productCreated:Product
 `;
