@@ -7,9 +7,7 @@ import {
   checkStockInDB,
   cancelProductsInOrderInDB,
 } from "../dal/productsDal";
-
 import { CheckQuantity, productToCheck } from "../types/types";
-import { PubSub } from "graphql-subscriptions";
 
 const pubsub = new PubSub();
 export const getProducts = async () => {
