@@ -10,6 +10,7 @@ import {
 import { CheckQuantity, productToCheck } from "../types/types";
 
 const pubsub = new PubSub();
+
 export const getProducts = async () => {
   const cachedProducts = await getCachedProducts();
   if (cachedProducts != null) {
@@ -29,6 +30,9 @@ export const getProducts = async () => {
 export const getProduct = async (_: unknown, { id }: { id: string }) => {
   const cachedProduct = await getCachedProduct(Number(id));
   if (cachedProduct != null) {
+    pubsub.publish("PRODUCT_CREATED", {
+      productCreated: { ...cachedProduct },
+    });
     return cachedProduct;
   } else {
     try {
