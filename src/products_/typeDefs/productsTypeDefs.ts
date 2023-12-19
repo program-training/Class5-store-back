@@ -41,6 +41,7 @@ export const productsTypeDefsMutation = `
   cancelProductsInStock(cart:[ProductToCheck!]): String!
 
 `;
-export const productsTypeDefsSubscription = `
-  productCreated:Product
+export const productsTypeDefsSubscriptions = `
+  productCreated: Product
+
 `;

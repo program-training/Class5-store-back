@@ -9,8 +9,9 @@ import {
 } from "../dal/productsDal";
 
 import { CheckQuantity, productToCheck } from "../types/types";
-const pubsub = new PubSub();
+import { PubSub } from "graphql-subscriptions";
 
+const pubsub = new PubSub();
 export const getProducts = async () => {
   const cachedProducts = await getCachedProducts();
   if (cachedProducts != null) {
@@ -67,8 +68,7 @@ export const cancelProductsInStock = async (
     return null;
   }
 };
+
 export const productCreated = {
-  subscribe: () => {
-    return pubsub.asyncIterator(["PRODUCT_CREATED"]);
-  },
+  subscribe: () => pubsub.asyncIterator(["PRODUCT_CREATED"]),
 };

@@ -5,7 +5,7 @@ import {
 import {
   productsMutations,
   productsQueries,
-  productsSubscription,
+  productsSubscriptions,
 } from "../products_/resolvers/productsResolvers";
 import {
   usersMutations,
@@ -24,7 +24,7 @@ const resolvers = {
     ...OrdersMutation,
   },
   Subscription: {
-    ...productsSubscription,
+    ...productsSubscriptions,
   },
 };
 

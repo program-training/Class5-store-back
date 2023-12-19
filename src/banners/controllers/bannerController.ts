@@ -7,6 +7,6 @@ export const handleGetBanner = async (req: Request, res: Response) => {
     const message = await getBannerService();
     return res.status(200).send(message);
   } catch (error) {
-    handleError(res, error);
+    if (error instanceof Error) handleError(res, error);
   }
 };

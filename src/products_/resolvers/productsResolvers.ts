@@ -14,6 +14,7 @@ export const productsMutations = {
   checkProductsInStock,
   cancelProductsInStock,
 };
-export const productsSubscription = {
+
+export const productsSubscriptions = {
   productCreated,
 };
