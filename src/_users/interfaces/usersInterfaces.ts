@@ -11,4 +11,5 @@ export interface UserResInterface {
   email: string;
   isAdmin: boolean;
   password: string;
+  loginCount?: number;
 }

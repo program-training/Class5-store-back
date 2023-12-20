@@ -46,6 +46,6 @@ export const usersTypeDefsMutations = `
 `;
 
 export const usersTypeDefsSubscriptions = `
-  userRegister: RegisterUser
+  userRegister: User
 
 `;
