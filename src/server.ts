@@ -18,16 +18,17 @@ import apolloLogger from "./graphql/logger/apolloLogger";
 import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
 import typeDefs from "./graphql/typeDefs";
 import resolvers from "./graphql/resolvers";
+import { connectToApolloServer } from "./graphql/apolloServer";
 
 export const app = express();
-export const httpServer = createServer(app);
+const httpServer = createServer(app);
 const wsServer = new WebSocketServer({
   server: httpServer,
   path: "/graphql",
 });
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 const serverCleanup = useServer({ schema }, wsServer);
-const server = new ApolloServer({
+export const server = new ApolloServer({
   schema,
   plugins: [
     apolloLogger,
@@ -44,16 +45,9 @@ const server = new ApolloServer({
   ],
 });
 
-const startApolloServer = async () => {
-  await server.start();
-  app.use(express.json());
-  app.use(cors);
-  app.use("/graphql", cors, BodyParser.json(), expressMiddleware(server));
-  app.use(handleErrorMiddleware);
-  httpServer.listen(5000, () => {
-    console.log(chalk.bgGreen(`http://localhost:5000/graphql`));
-  });
-};
+app.use(express.json());
+app.use(cors);
+app.use(handleErrorMiddleware);
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, async () => {
@@ -61,6 +55,16 @@ app.listen(PORT, async () => {
   //   mailOptions({ to: "wdwdwd", subject: "93eu", text: "diwhwdnb j" })
   // );
   console.log(chalk.blueBright(`Server listening on port: ${PORT}`));
+
+  connectToApolloServer()
+    .then(async (message) => {
+      app.use("/graphql", cors, BodyParser.json(), expressMiddleware(server));
+      httpServer.listen(5000, () => {
+        console.log(chalk.bgGreen(`http://localhost:5000/graphql`));
+      });
+      console.log(chalk.yellowBright(message));
+    })
+    .catch((error) => console.log(error));
 
   connectToRedis()
     .then((data) => console.log(data))
@@ -71,9 +75,10 @@ app.listen(PORT, async () => {
       await connectedToERP();
       console.log(chalk.magentaBright(message));
     })
-    .then(async () => {
-      await startApolloServer();
-    })
+    // .then(async () => {
+    //   await server.start();
+    //   await startApolloServer();
+    // })
     .catch((error) =>
       console.log(chalk.redBright("Connect to mongoDB Error: ", error.message))
     );

@@ -12,22 +12,22 @@ import {
 import { generateToken } from "../../auth/JWT";
 import ServerError from "../../utils/ServerError";
 import { convertUserForSending } from "../utils/usersUtils";
-import { cacheUsers } from "../cache/usersCache";
+// import { cacheUsers } from "../cache/usersCache";
 import { redisClient } from "../../redis/client/client";
 import { PubSub } from "graphql-subscriptions";
 const pubsub = new PubSub();
 export const getUsers = async () => {
   try {
-    const cachedUsers = await cacheUsers();
-    if (cachedUsers) {
-      return cachedUsers;
-    } else {
-      const users = await getUsersFromDB();
-      const stringedJSON = JSON.stringify(users);
-      const fixedUsers = JSON.parse(stringedJSON);
-      redisClient.json.set("users", ".", fixedUsers);
-      return users;
-    }
+    // const cachedUsers = await cacheUsers();
+    // if (cachedUsers) {
+    //   return cachedUsers;
+    // } else {
+    const users = await getUsersFromDB();
+    const stringedJSON = JSON.stringify(users);
+    const fixedUsers = JSON.parse(stringedJSON);
+    redisClient.json.set("users", ".", fixedUsers);
+    return users;
+    // }
   } catch (error) {
     if (error instanceof Error) console.log(error.message);
     return null;

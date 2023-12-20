@@ -1,5 +1,3 @@
-// With God's Help
-
 import { redisClient } from "./client/client";
 
 export const connectToRedis = async () => {
