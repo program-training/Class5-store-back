@@ -6,7 +6,6 @@ import { expressMiddleware } from "@apollo/server/express4";
 import { connectToDatabase } from "./dataAccess/mongoose";
 import { connectedToOMS } from "./Orders/dal/orderDal";
 import { connectedToERP } from "./products/dal/productsDal";
-// import server from "./graphql/apolloServer";
 import { connectToRedis } from "./redis/redis";
 import { createServer } from "http";
 import { WebSocketServer } from "ws";
@@ -51,9 +50,6 @@ app.use(handleErrorMiddleware);
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, async () => {
-  // console.log(
-  //   mailOptions({ to: "wdwdwd", subject: "93eu", text: "diwhwdnb j" })
-  // );
   console.log(chalk.blueBright(`Server listening on port: ${PORT}`));
 
   connectToApolloServer()
@@ -69,16 +65,13 @@ app.listen(PORT, async () => {
   connectToRedis()
     .then((data) => console.log(data))
     .catch((error) => console.log(error));
+
   connectToDatabase()
     .then(async (message) => {
       await connectedToOMS();
       await connectedToERP();
       console.log(chalk.magentaBright(message));
     })
-    // .then(async () => {
-    //   await server.start();
-    //   await startApolloServer();
-    // })
     .catch((error) =>
       console.log(chalk.redBright("Connect to mongoDB Error: ", error.message))
     );
