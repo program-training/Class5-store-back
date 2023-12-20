@@ -68,24 +68,30 @@ export const signUpUser = async (
   args: { input: UserReqInterface }
 ) => {
   try {
-    return register(args.input);
+    const user_register = await register(args.input);
+    pubsub.publish("USER_REGISTER", {
+      userRegister: {
+        ...user_register,
+      },
+    });
+    return user_register;
   } catch (error) {
     if (error instanceof Error) console.log(error.message);
     return null;
   }
 };
-export const signUpAndSignInUser = async (
-  _: ParentNode,
-  args: { input: UserReqInterface }
-) => {
-  try {
-    await register(args.input);
-    return login(args.input);
-  } catch (error) {
-    if (error instanceof Error) console.log(error.message);
-    return null;
-  }
-};
+// export const signUpAndSignInUser = async (
+//   _: ParentNode,
+//   args: { input: UserReqInterface }
+// ) => {
+//   try {
+//     await register(args.input);
+//     return login(args.input);
+//   } catch (error) {
+//     if (error instanceof Error) console.log(error.message);
+//     return null;
+//   }
+// };
 export const SignInUser = async (
   _: ParentNode,
   args: { input: UserReqInterface }

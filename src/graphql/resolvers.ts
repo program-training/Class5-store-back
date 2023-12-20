@@ -10,6 +10,7 @@ import {
 import {
   usersMutations,
   usersQueries,
+  usersSubscriptions,
 } from "../_users/resolvers/usersResolvers";
 
 const resolvers = {
@@ -25,6 +26,7 @@ const resolvers = {
   },
   Subscription: {
     ...productsSubscriptions,
+    ...usersSubscriptions,
   },
 };
 
