@@ -44,3 +44,8 @@ export const usersTypeDefsMutations = `
   SignInUser(input: LoginUserInput): Token
   registerAdmin(input: RegisterUserInput!): RegisterUser
 `;
+
+export const usersTypeDefsSubscriptions = `
+  userRegister: RegisterUser
+
+`;

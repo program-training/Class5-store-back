@@ -42,7 +42,6 @@ export const loginToDB = async (email: string, password: string) => {
 export const userExistInDB = async (email: string) => {
   try {
     const user = await User.find({ email: email });
-    console.log(user[0]);
     return user[0];
   } catch (error) {
     return Promise.reject(error);

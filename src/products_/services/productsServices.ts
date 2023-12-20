@@ -1,4 +1,5 @@
 import { redisClient } from "../../redis/client/client";
+import { PubSub } from "graphql-subscriptions";
 import { getCachedProduct, getCachedProducts } from "../cache/productsCache";
 import {
   getProductsFromDB,
@@ -6,11 +7,10 @@ import {
   checkStockInDB,
   cancelProductsInOrderInDB,
 } from "../dal/productsDal";
-
 import { CheckQuantity, productToCheck } from "../types/types";
-import { PubSub } from "graphql-subscriptions";
 
 const pubsub = new PubSub();
+
 export const getProducts = async () => {
   const cachedProducts = await getCachedProducts();
   if (cachedProducts != null) {
@@ -30,6 +30,9 @@ export const getProducts = async () => {
 export const getProduct = async (_: unknown, { id }: { id: string }) => {
   const cachedProduct = await getCachedProduct(Number(id));
   if (cachedProduct != null) {
+    pubsub.publish("PRODUCT_CREATED", {
+      productCreated: { ...cachedProduct, id: cachedProduct.id },
+    });
     return cachedProduct;
   } else {
     try {

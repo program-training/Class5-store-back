@@ -2,8 +2,9 @@ import {
   getUser,
   getUsers,
   signUpUser,
-  signUpAndSignInUser,
+  // signUpAndSignInUser,
   SignInUser,
+  userRegister,
 } from "../services/usersServices";
 
 export const usersQueries = {
@@ -12,6 +13,9 @@ export const usersQueries = {
 };
 export const usersMutations = {
   signUpUser,
-  signUpAndSignInUser,
+  // signUpAndSignInUser,
   SignInUser,
+};
+export const usersSubscriptions = {
+  userRegister,
 };

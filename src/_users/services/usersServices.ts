@@ -2,7 +2,6 @@ import {
   UserReqInterface,
   UserResInterface,
 } from "../interfaces/usersInterfaces";
-
 import {
   getUserByIdFromDB,
   registerUserToDB,
@@ -15,7 +14,8 @@ import ServerError from "../../utils/ServerError";
 import { convertUserForSending } from "../utils/usersUtils";
 import { cacheUsers } from "../cache/usersCache";
 import { redisClient } from "../../redis/client/client";
-
+import { PubSub } from "graphql-subscriptions";
+const pubsub = new PubSub();
 export const getUsers = async () => {
   try {
     const cachedUsers = await cacheUsers();
@@ -33,7 +33,6 @@ export const getUsers = async () => {
     return null;
   }
 };
-
 export const getUser = async (_: ParentNode, args: { _id: string }) => {
   try {
     const user = await getUserByIdFromDB(args._id);
@@ -43,7 +42,6 @@ export const getUser = async (_: ParentNode, args: { _id: string }) => {
     return null;
   }
 };
-
 const register = async (user: UserReqInterface) => {
   if (await userExistInDB(user.email))
     throw new ServerError(
@@ -55,7 +53,6 @@ const register = async (user: UserReqInterface) => {
     throw new ServerError(401, "did not receive user from db");
   return convertUserForSending(userRegistered as UserResInterface);
 };
-
 const login = async (user: UserReqInterface) => {
   const userLogin = await loginToDB(user.email, user.password);
   if (!userLogin) {
@@ -69,32 +66,35 @@ const login = async (user: UserReqInterface) => {
     return { token: token, isAdmin: user.isAdmin };
   }
 };
-
 export const signUpUser = async (
   _: ParentNode,
   args: { input: UserReqInterface }
 ) => {
   try {
-    return register(args.input);
+    const user_register = await register(args.input);
+    pubsub.publish("USER_REGISTER", {
+      userRegister: {
+        ...user_register,
+      },
+    });
+    return user_register;
   } catch (error) {
     if (error instanceof Error) console.log(error.message);
     return null;
   }
 };
-
-export const signUpAndSignInUser = async (
-  _: ParentNode,
-  args: { input: UserReqInterface }
-) => {
-  try {
-    await register(args.input);
-    return login(args.input);
-  } catch (error) {
-    if (error instanceof Error) console.log(error.message);
-    return null;
-  }
-};
-
+// export const signUpAndSignInUser = async (
+//   _: ParentNode,
+//   args: { input: UserReqInterface }
+// ) => {
+//   try {
+//     await register(args.input);
+//     return login(args.input);
+//   } catch (error) {
+//     if (error instanceof Error) console.log(error.message);
+//     return null;
+//   }
+// };
 export const SignInUser = async (
   _: ParentNode,
   args: { input: UserReqInterface }
@@ -105,4 +105,7 @@ export const SignInUser = async (
     if (error instanceof Error) console.log(error.message);
     return null;
   }
+};
+export const userRegister = {
+  subscribe: () => pubsub.asyncIterator(["USER_REGISTER"]),
 };

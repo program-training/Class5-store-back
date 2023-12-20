@@ -12,6 +12,7 @@ import {
   usersTypeDefsMutations,
   usersTypeDefsQueries,
   usersTypeDefs,
+  usersTypeDefsSubscriptions,
 } from "../_users/typeDefs/userTypeDefs";
 
 const typeDefs = `#graphql   
@@ -31,6 +32,7 @@ const typeDefs = `#graphql
   }
   type Subscription {
   ${productsTypeDefsSubscriptions}
+  ${usersTypeDefsSubscriptions}
   }
 `;
 

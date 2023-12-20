@@ -27,6 +27,7 @@ export const productTypesDefs = `
     inStock: [InStock]!
     notInStock: [NotInStock]!
   }
+
 `;
 
 export const productsTypeDefsQueries = `
