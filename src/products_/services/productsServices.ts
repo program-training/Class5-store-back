@@ -31,7 +31,7 @@ export const getProduct = async (_: unknown, { id }: { id: string }) => {
   const cachedProduct = await getCachedProduct(Number(id));
   if (cachedProduct != null) {
     pubsub.publish("PRODUCT_CREATED", {
-      productCreated: { ...cachedProduct },
+      productCreated: { ...cachedProduct, id: cachedProduct.id },
     });
     return cachedProduct;
   } else {
